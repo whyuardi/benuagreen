@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/sheet";
 import { Menu, ArrowRight, Globe } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
+import { motion } from "framer-motion";
 
 export function Navbar() {
   const pathname = usePathname();
@@ -69,7 +70,7 @@ export function Navbar() {
         </Link>
 
         {/* Navigation Links */}
-        <nav className="hidden md:flex items-center space-x-8">
+        <nav className="hidden md:flex items-center space-x-7">
           {navLinks.map((link) => {
             const isActive =
               link.href === "/"
@@ -79,13 +80,20 @@ export function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
-                className={`text-[13px] tracking-normal transition-colors ${
+                className={`relative text-[13px] py-1 tracking-normal transition-colors duration-200 ${
                   isActive
                     ? "text-neutral-950 font-semibold"
                     : "text-neutral-500 hover:text-neutral-900 font-medium"
                 }`}
               >
-                {link.name}
+                <span>{link.name}</span>
+                {isActive && (
+                  <motion.div
+                    layoutId="activeNavUnderline"
+                    className="absolute -bottom-1 left-0 right-0 h-[1.5px] bg-neutral-900 rounded-full"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
               </Link>
             );
           })}
@@ -94,42 +102,56 @@ export function Navbar() {
         {/* Right Actions */}
         <div className="flex items-center gap-3 sm:gap-4">
           
-          {/* Language Switcher Pill (Desktop) */}
-          <div className="flex items-center bg-neutral-100 p-0.5 rounded-full border border-neutral-200/60 text-[11px] font-medium">
+          {/* Language Switcher Pill (Desktop) with smooth sliding pill */}
+          <div className="relative flex items-center bg-neutral-100 p-0.5 rounded-full border border-neutral-200/60 text-[11px] font-medium">
             <button
               onClick={() => setLanguage("id")}
-              className={`px-2.5 py-0.5 rounded-full transition-all ${
+              className={`relative px-2.5 py-0.5 rounded-full transition-colors duration-200 z-10 ${
                 language === "id"
-                  ? "bg-white text-neutral-950 shadow-sm font-semibold"
+                  ? "text-neutral-950 font-semibold"
                   : "text-neutral-500 hover:text-neutral-900"
               }`}
               title="Bahasa Indonesia"
             >
-              ID
+              {language === "id" && (
+                <motion.div
+                  layoutId="activeLangPill"
+                  className="absolute inset-0 bg-white rounded-full shadow-sm -z-10"
+                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                />
+              )}
+              <span>ID</span>
             </button>
             <button
               onClick={() => setLanguage("en")}
-              className={`px-2.5 py-0.5 rounded-full transition-all ${
+              className={`relative px-2.5 py-0.5 rounded-full transition-colors duration-200 z-10 ${
                 language === "en"
-                  ? "bg-white text-neutral-950 shadow-sm font-semibold"
+                  ? "text-neutral-950 font-semibold"
                   : "text-neutral-500 hover:text-neutral-900"
               }`}
               title="English"
             >
-              EN
+              {language === "en" && (
+                <motion.div
+                  layoutId="activeLangPill"
+                  className="absolute inset-0 bg-white rounded-full shadow-sm -z-10"
+                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                />
+              )}
+              <span>EN</span>
             </button>
           </div>
 
           <Link
             href="/contact"
-            className="hidden sm:inline-flex items-center px-4 py-1.5 rounded-full text-xs font-medium text-neutral-700 hover:text-neutral-950 border border-neutral-200 hover:border-neutral-400 transition-all"
+            className="hidden sm:inline-flex items-center px-4 py-1.5 rounded-full text-xs font-medium text-neutral-700 hover:text-neutral-950 border border-neutral-200 hover:border-neutral-400 transition-all duration-300"
           >
             {t("nav.inquire")}
           </Link>
 
           <Link
             href="/contact?type=quote"
-            className="hidden sm:inline-flex items-center px-4 py-1.5 rounded-full text-xs font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-all"
+            className="hidden sm:inline-flex items-center px-4 py-1.5 rounded-full text-xs font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-all duration-300 shadow-sm hover:shadow-md"
           >
             {t("nav.requestQuote")}
           </Link>

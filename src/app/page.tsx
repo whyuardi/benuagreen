@@ -9,6 +9,7 @@ import { CATEGORIES_DATA, Product } from "@/lib/products";
 import { ArrowRight, LayoutGrid, SlidersHorizontal, SearchX } from "lucide-react";
 import Link from "next/link";
 import { useLanguage, TranslationKey } from "@/lib/i18n";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function HomePage() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -95,7 +96,12 @@ export default function HomePage() {
             </div>
 
             {searchResults.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.4 }}
+                className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+              >
                 {searchResults.map((product) => (
                   <ProductCard
                     key={product.id}
@@ -103,9 +109,13 @@ export default function HomePage() {
                     onSelect={setSelectedProduct}
                   />
                 ))}
-              </div>
+              </motion.div>
             ) : (
-              <div className="text-center py-20 bg-neutral-50 rounded-2xl p-8 border border-neutral-100">
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-center py-20 bg-neutral-50 rounded-2xl p-8 border border-neutral-100"
+              >
                 <SearchX className="w-10 h-10 text-neutral-300 mx-auto mb-3" />
                 <h3 className="text-sm font-medium text-neutral-800 mb-1">
                   {t("catalog.noProducts")}
@@ -119,7 +129,7 @@ export default function HomePage() {
                 >
                   {t("catalog.viewAll")}
                 </button>
-              </div>
+              </motion.div>
             )}
           </div>
         ) : (
@@ -141,7 +151,7 @@ export default function HomePage() {
               <div className="flex items-center gap-1 bg-neutral-100 p-1 rounded-full">
                 <button
                   onClick={() => setViewMode("slider")}
-                  className={`px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1.5 transition-all ${
+                  className={`px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1.5 transition-all duration-200 ${
                     viewMode === "slider"
                       ? "bg-white text-neutral-900 shadow-sm"
                       : "text-neutral-500 hover:text-neutral-900"
@@ -152,7 +162,7 @@ export default function HomePage() {
                 </button>
                 <button
                   onClick={() => setViewMode("grid")}
-                  className={`px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1.5 transition-all ${
+                  className={`px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1.5 transition-all duration-200 ${
                     viewMode === "grid"
                       ? "bg-white text-neutral-900 shadow-sm"
                       : "text-neutral-500 hover:text-neutral-900"
@@ -166,7 +176,13 @@ export default function HomePage() {
 
             {/* Slider View Mode */}
             {viewMode === "slider" ? (
-              <div className="space-y-4">
+              <motion.div
+                key="slider-view"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.4 }}
+                className="space-y-4"
+              >
                 {displayedCategories.map((category) => (
                   <ProductSlider
                     key={category.id}
@@ -174,10 +190,16 @@ export default function HomePage() {
                     onSelectProduct={setSelectedProduct}
                   />
                 ))}
-              </div>
+              </motion.div>
             ) : (
               /* Grid View Mode */
-              <div className="px-6 sm:px-8">
+              <motion.div
+                key="grid-view"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.4 }}
+                className="px-6 sm:px-8"
+              >
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                   {allDisplayedProducts.map((product) => (
                     <ProductCard
@@ -187,13 +209,19 @@ export default function HomePage() {
                     />
                   ))}
                 </div>
-              </div>
+              </motion.div>
             )}
           </div>
         )}
 
-        {/* Minimalist Editorial Story Section */}
-        <section className="my-20 sm:my-28 px-6 sm:px-8 border-t border-neutral-100 pt-16">
+        {/* Minimalist Editorial Story Section with scroll animation */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="my-20 sm:my-28 px-6 sm:px-8 border-t border-neutral-100 pt-16"
+        >
           <div className="max-w-5xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-start">
               
@@ -216,10 +244,10 @@ export default function HomePage() {
                 <div className="pt-3">
                   <Link
                     href="/about"
-                    className="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-900 hover:text-neutral-600 transition-colors"
+                    className="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-900 hover:text-neutral-600 transition-colors group"
                   >
                     <span>{t("story.readMore")}</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </div>
               </div>
@@ -246,10 +274,16 @@ export default function HomePage() {
               </div>
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* Minimalist Inquiry Callout */}
-        <section className="my-12 px-6 sm:px-8">
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="my-12 px-6 sm:px-8"
+        >
           <div className="max-w-5xl mx-auto bg-neutral-50 rounded-2xl p-8 sm:p-12 flex flex-col sm:flex-row items-center justify-between gap-6 border border-neutral-100">
             <div className="space-y-1 text-center sm:text-left">
               <h3 className="text-lg sm:text-xl font-medium text-neutral-900">
@@ -262,14 +296,14 @@ export default function HomePage() {
             <div className="shrink-0">
               <Link
                 href="/contact"
-                className="inline-flex items-center px-5 py-2.5 bg-neutral-900 hover:bg-neutral-800 text-white text-xs font-medium rounded-full transition-all shadow-sm"
+                className="inline-flex items-center px-5 py-2.5 bg-neutral-900 hover:bg-neutral-800 text-white text-xs font-medium rounded-full transition-all duration-300 shadow-sm hover:shadow-md"
               >
                 <span>{t("inquiry.btn")}</span>
                 <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
               </Link>
             </div>
           </div>
-        </section>
+        </motion.section>
 
       </div>
 
@@ -282,6 +316,7 @@ export default function HomePage() {
     </main>
   );
 }
+
 
 
 

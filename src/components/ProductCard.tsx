@@ -4,6 +4,7 @@ import { Product } from "@/lib/products";
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import { useLanguage } from "@/lib/i18n";
+import { motion } from "framer-motion";
 
 interface ProductCardProps {
   product: Product;
@@ -14,9 +15,11 @@ export function ProductCard({ product, onSelect }: ProductCardProps) {
   const { t } = useLanguage();
 
   return (
-    <div
+    <motion.div
       onClick={() => onSelect(product)}
-      className="group cursor-pointer flex flex-col bg-white rounded-2xl overflow-hidden border border-neutral-100 hover:border-neutral-300 transition-all duration-300 p-3 sm:p-4"
+      whileHover={{ y: -4 }}
+      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+      className="group cursor-pointer flex flex-col bg-white rounded-2xl overflow-hidden border border-neutral-100 hover:border-neutral-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 p-3 sm:p-4"
     >
       {/* Product Image Frame */}
       <div className="relative h-60 sm:h-64 w-full bg-[#F8F9FA] rounded-xl flex items-center justify-center p-6 mb-4 overflow-hidden">
@@ -52,9 +55,10 @@ export function ProductCard({ product, onSelect }: ProductCardProps) {
           <ArrowUpRight className="w-3.5 h-3.5 text-neutral-400 group-hover:text-neutral-900 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
+
 
 
 
