@@ -10,6 +10,7 @@ import {
   CheckCircle2,
   Headphones,
 } from "lucide-react";
+import { useLanguage } from "@/lib/i18n";
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -20,6 +21,7 @@ export default function ContactPage() {
     category: "Pumps",
     message: "",
   });
+  const { t } = useLanguage();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,13 +34,13 @@ export default function ContactPage() {
       <section className="mt-[4.25rem] pt-16 pb-12 px-6 sm:px-8 border-b border-neutral-100 bg-white">
         <div className="max-w-4xl mx-auto text-center">
           <span className="text-xs font-semibold tracking-widest text-neutral-400 uppercase mb-3 block">
-            Direct Assistance
+            {t("contact.direct")}
           </span>
           <h1 className="text-3xl sm:text-5xl font-normal tracking-tight text-neutral-900 mb-4">
-            Contact & Inquiries
+            {t("contact.title")}
           </h1>
           <p className="text-neutral-500 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed font-light">
-            Need system sizing assistance, quotation, spare parts dispatch, or warranty support? Our engineers are ready to help.
+            {t("contact.desc")}
           </p>
         </div>
       </section>
@@ -51,22 +53,22 @@ export default function ContactPage() {
             <div className="bg-neutral-50 p-8 rounded-2xl border border-neutral-100 space-y-6">
               <h3 className="text-base font-semibold text-neutral-900 flex items-center gap-2">
                 <Headphones className="w-4 h-4 text-neutral-900" />
-                Office Information
+                {t("contact.officeInfo")}
               </h3>
               
               <div className="space-y-4 text-xs">
                 <div className="flex items-start gap-3">
                   <MapPin className="w-4 h-4 text-neutral-400 shrink-0 mt-0.5" />
                   <div>
-                    <p className="font-semibold text-neutral-900">Headquarters</p>
-                    <p className="text-neutral-500">Jakarta, Indonesia</p>
+                    <p className="font-semibold text-neutral-900">{t("contact.headquarters")}</p>
+                    <p className="text-neutral-500">{t("contact.location")}</p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
                   <Mail className="w-4 h-4 text-neutral-400 shrink-0 mt-0.5" />
                   <div>
-                    <p className="font-semibold text-neutral-900">Email Inquiry</p>
+                    <p className="font-semibold text-neutral-900">{t("contact.emailInquiry")}</p>
                     <a href="mailto:info@benuagreen.com" className="text-neutral-500 hover:text-neutral-900">
                       info@benuagreen.com
                     </a>
@@ -76,7 +78,7 @@ export default function ContactPage() {
                 <div className="flex items-start gap-3">
                   <Phone className="w-4 h-4 text-neutral-400 shrink-0 mt-0.5" />
                   <div>
-                    <p className="font-semibold text-neutral-900">Official Portal</p>
+                    <p className="font-semibold text-neutral-900">{t("contact.officialPortal")}</p>
                     <a href="https://benuagreen.com" target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-neutral-900">
                       benuagreen.com
                     </a>
@@ -86,17 +88,17 @@ export default function ContactPage() {
                 <div className="flex items-start gap-3">
                   <Clock className="w-4 h-4 text-neutral-400 shrink-0 mt-0.5" />
                   <div>
-                    <p className="font-semibold text-neutral-900">Operating Hours</p>
-                    <p className="text-neutral-500">Monday – Friday: 08:00 – 17:00</p>
+                    <p className="font-semibold text-neutral-900">{t("contact.operatingHours")}</p>
+                    <p className="text-neutral-500">{t("contact.hours")}</p>
                   </div>
                 </div>
               </div>
             </div>
 
             <div className="bg-neutral-900 text-white p-8 rounded-2xl space-y-2">
-              <h4 className="font-medium text-sm">Direct WhatsApp Channel</h4>
+              <h4 className="font-medium text-sm">{t("contact.waTitle")}</h4>
               <p className="text-xs text-neutral-400 leading-relaxed font-light">
-                Connect directly with our applications engineering department for instant technical sizing.
+                {t("contact.waDesc")}
               </p>
               <div className="pt-2">
                 <a
@@ -105,7 +107,7 @@ export default function ContactPage() {
                   rel="noopener noreferrer"
                   className="inline-block text-xs font-medium text-white border-b border-white pb-0.5 hover:text-neutral-300 transition-colors"
                 >
-                  Start WhatsApp Chat →
+                  {t("contact.waBtn")}
                 </a>
               </div>
             </div>
@@ -114,26 +116,26 @@ export default function ContactPage() {
           {/* Form */}
           <div className="lg:col-span-7">
             <div className="bg-white p-8 sm:p-10 rounded-2xl border border-neutral-100">
-              <h3 className="text-lg font-medium text-neutral-900 mb-1">Send a Message</h3>
+              <h3 className="text-lg font-medium text-neutral-900 mb-1">{t("contact.formTitle")}</h3>
               <p className="text-xs text-neutral-400 mb-8 font-light">
-                Fill in your project details below and we will respond promptly.
+                {t("contact.formDesc")}
               </p>
 
               {submitted ? (
                 <div className="p-8 text-center bg-neutral-50 rounded-2xl border border-neutral-100 space-y-3">
                   <CheckCircle2 className="w-10 h-10 text-neutral-900 mx-auto" />
-                  <h4 className="text-base font-medium text-neutral-900">Message Received</h4>
+                  <h4 className="text-base font-medium text-neutral-900">{t("contact.receivedTitle")}</h4>
                   <p className="text-xs text-neutral-500 max-w-sm mx-auto font-light">
-                    Thank you, <span className="font-medium text-neutral-900">{formData.name}</span>. We will review your specifications and contact you shortly.
+                    {t("contact.receivedDesc")}
                   </p>
                   <button
                     onClick={() => {
                       setSubmitted(false);
                       setFormData({ name: "", email: "", phone: "", category: "Pumps", message: "" });
                     }}
-                    className="mt-4 bg-neutral-900 text-white rounded-full px-5 py-2 text-xs font-medium"
+                    className="mt-4 bg-neutral-900 text-white rounded-full px-5 py-2 text-xs font-medium hover:bg-neutral-800 transition-colors"
                   >
-                    Send Another Message
+                    {t("contact.sendAnother")}
                   </button>
                 </div>
               ) : (
@@ -141,7 +143,7 @@ export default function ContactPage() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-1.5">
                       <label className="text-[11px] font-medium text-neutral-600 uppercase tracking-wider">
-                        Full Name *
+                        {t("contact.nameLabel")}
                       </label>
                       <input
                         required
@@ -154,7 +156,7 @@ export default function ContactPage() {
                     </div>
                     <div className="space-y-1.5">
                       <label className="text-[11px] font-medium text-neutral-600 uppercase tracking-wider">
-                        Email Address *
+                        {t("contact.emailLabel")}
                       </label>
                       <input
                         required
@@ -170,7 +172,7 @@ export default function ContactPage() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-1.5">
                       <label className="text-[11px] font-medium text-neutral-600 uppercase tracking-wider">
-                        Phone / WhatsApp
+                        {t("contact.phoneLabel")}
                       </label>
                       <input
                         type="tel"
@@ -182,7 +184,7 @@ export default function ContactPage() {
                     </div>
                     <div className="space-y-1.5">
                       <label className="text-[11px] font-medium text-neutral-600 uppercase tracking-wider">
-                        Equipment Category
+                        {t("contact.categoryLabel")}
                       </label>
                       <select
                         value={formData.category}
@@ -201,12 +203,12 @@ export default function ContactPage() {
 
                   <div className="space-y-1.5">
                     <label className="text-[11px] font-medium text-neutral-600 uppercase tracking-wider">
-                      Message / Project Details *
+                      {t("contact.messageLabel")}
                     </label>
                     <textarea
                       required
                       rows={4}
-                      placeholder="Please specify flow rate (m3/h), total head (m), or specific equipment requirements..."
+                      placeholder={t("contact.messagePlaceholder")}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       className="w-full px-3.5 py-2.5 rounded-lg border border-neutral-200 text-xs focus:outline-none focus:border-neutral-400"
@@ -218,7 +220,7 @@ export default function ContactPage() {
                     className="w-full sm:w-auto px-6 py-2.5 bg-neutral-900 hover:bg-neutral-800 text-white font-medium rounded-full text-xs flex items-center justify-center gap-2 transition-colors"
                   >
                     <Send className="w-3.5 h-3.5" />
-                    <span>Submit Inquiry</span>
+                    <span>{t("contact.submitBtn")}</span>
                   </button>
                 </form>
               )}
@@ -230,4 +232,5 @@ export default function ContactPage() {
     </main>
   );
 }
+
 

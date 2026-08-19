@@ -3,6 +3,7 @@
 import { Product } from "@/lib/products";
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
+import { useLanguage } from "@/lib/i18n";
 
 interface ProductCardProps {
   product: Product;
@@ -10,6 +11,8 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product, onSelect }: ProductCardProps) {
+  const { t } = useLanguage();
+
   return (
     <div
       onClick={() => onSelect(product)}
@@ -44,7 +47,7 @@ export function ProductCard({ product, onSelect }: ProductCardProps) {
 
         <div className="pt-4 mt-auto flex items-center justify-between border-t border-neutral-100">
           <span className="text-xs text-neutral-500 font-medium group-hover:text-neutral-900 transition-colors">
-            View Details
+            {t("catalog.viewDetails")}
           </span>
           <ArrowUpRight className="w-3.5 h-3.5 text-neutral-400 group-hover:text-neutral-900 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
         </div>
@@ -52,6 +55,7 @@ export function ProductCard({ product, onSelect }: ProductCardProps) {
     </div>
   );
 }
+
 
 
 

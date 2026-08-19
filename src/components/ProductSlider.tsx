@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { CategoryGroup, Product } from "@/lib/products";
 import { ProductCard } from "@/components/ProductCard";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { useLanguage, TranslationKey } from "@/lib/i18n";
 
 interface ProductSliderProps {
   category: CategoryGroup;
@@ -12,6 +13,20 @@ interface ProductSliderProps {
 
 export function ProductSlider({ category, onSelectProduct }: ProductSliderProps) {
   const sliderRef = useRef<HTMLDivElement>(null);
+  const { t } = useLanguage();
+
+  const getCategoryName = (slug: string, fallback: string) => {
+    const keyMap: Record<string, TranslationKey> = {
+      pumps: "cat.pumps",
+      "solar-drives": "cat.solarDrives",
+      ppr: "cat.ppr",
+      inverter: "cat.inverter",
+      "starters-and-controllers": "cat.starters",
+      "rms-dongle": "cat.rms",
+    };
+    const key = keyMap[slug];
+    return key ? t(key) : fallback;
+  };
 
   const slideLeft = () => {
     if (sliderRef.current) {
@@ -32,14 +47,14 @@ export function ProductSlider({ category, onSelectProduct }: ProductSliderProps)
         <div>
           <div className="flex items-center gap-2">
             <h2 className="text-xl sm:text-2xl font-medium tracking-tight text-neutral-900">
-              {category.name}
+              {getCategoryName(category.slug, category.name)}
             </h2>
             <span className="text-xs text-neutral-400 font-normal">
               ({category.products.length})
             </span>
           </div>
           {category.description && (
-            <p className="text-xs text-neutral-500 mt-1 max-w-md">
+            <p className="text-xs text-neutral-500 mt-1 max-w-md font-light">
               {category.description}
             </p>
           )}
@@ -87,4 +102,5 @@ export function ProductSlider({ category, onSelectProduct }: ProductSliderProps)
     </section>
   );
 }
+
 

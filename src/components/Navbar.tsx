@@ -11,12 +11,14 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Menu, ArrowRight } from "lucide-react";
+import { Menu, ArrowRight, Globe } from "lucide-react";
+import { useLanguage } from "@/lib/i18n";
 
 export function Navbar() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { language, setLanguage, t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,11 +29,11 @@ export function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: "Products", href: "/" },
-    { name: "Pumps", href: "/pumps" },
-    { name: "PPR & Piping", href: "/ppr" },
-    { name: "About", href: "/about" },
-    { name: "Contact", href: "/contact" },
+    { name: t("nav.products"), href: "/" },
+    { name: t("nav.pumps"), href: "/pumps" },
+    { name: t("nav.ppr"), href: "/ppr" },
+    { name: t("nav.about"), href: "/about" },
+    { name: t("nav.contact"), href: "/contact" },
   ];
 
   return (
@@ -61,7 +63,7 @@ export function Navbar() {
               Benua Green
             </span>
             <span className="text-[10px] text-neutral-400 tracking-wider font-medium uppercase mt-0.5">
-              Energy & Water
+              {t("nav.tagline")}
             </span>
           </div>
         </Link>
@@ -92,18 +94,44 @@ export function Navbar() {
         {/* Right Actions */}
         <div className="flex items-center gap-3 sm:gap-4">
           
+          {/* Language Switcher Pill (Desktop) */}
+          <div className="flex items-center bg-neutral-100 p-0.5 rounded-full border border-neutral-200/60 text-[11px] font-medium">
+            <button
+              onClick={() => setLanguage("id")}
+              className={`px-2.5 py-0.5 rounded-full transition-all ${
+                language === "id"
+                  ? "bg-white text-neutral-950 shadow-sm font-semibold"
+                  : "text-neutral-500 hover:text-neutral-900"
+              }`}
+              title="Bahasa Indonesia"
+            >
+              ID
+            </button>
+            <button
+              onClick={() => setLanguage("en")}
+              className={`px-2.5 py-0.5 rounded-full transition-all ${
+                language === "en"
+                  ? "bg-white text-neutral-950 shadow-sm font-semibold"
+                  : "text-neutral-500 hover:text-neutral-900"
+              }`}
+              title="English"
+            >
+              EN
+            </button>
+          </div>
+
           <Link
             href="/contact"
             className="hidden sm:inline-flex items-center px-4 py-1.5 rounded-full text-xs font-medium text-neutral-700 hover:text-neutral-950 border border-neutral-200 hover:border-neutral-400 transition-all"
           >
-            Inquire
+            {t("nav.inquire")}
           </Link>
 
           <Link
             href="/contact?type=quote"
             className="hidden sm:inline-flex items-center px-4 py-1.5 rounded-full text-xs font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-all"
           >
-            Request Quote
+            {t("nav.requestQuote")}
           </Link>
 
           {/* Mobile Sheet */}
@@ -118,19 +146,45 @@ export function Navbar() {
               >
                 <div>
                   <SheetHeader className="text-left pb-4 border-b border-neutral-100">
-                    <SheetTitle className="flex items-center gap-2.5">
-                      <div className="relative w-7 h-7">
-                        <Image
-                          src="https://benuagreen.com/storage/img/logo.png"
-                          alt="Benua Green"
-                          fill
-                          className="object-contain"
-                          unoptimized
-                        />
+                    <SheetTitle className="flex items-center justify-between">
+                      <div className="flex items-center gap-2.5">
+                        <div className="relative w-7 h-7">
+                          <Image
+                            src="https://benuagreen.com/storage/img/logo.png"
+                            alt="Benua Green"
+                            fill
+                            className="object-contain"
+                            unoptimized
+                          />
+                        </div>
+                        <span className="font-semibold text-sm text-neutral-900">
+                          Benua Green
+                        </span>
                       </div>
-                      <span className="font-semibold text-sm text-neutral-900">
-                        Benua Green
-                      </span>
+
+                      {/* Mobile Language Switcher */}
+                      <div className="flex items-center bg-neutral-100 p-0.5 rounded-full border border-neutral-200 text-[10px] font-medium">
+                        <button
+                          onClick={() => setLanguage("id")}
+                          className={`px-2 py-0.5 rounded-full transition-all ${
+                            language === "id"
+                              ? "bg-white text-neutral-900 shadow-sm font-semibold"
+                              : "text-neutral-500"
+                          }`}
+                        >
+                          ID
+                        </button>
+                        <button
+                          onClick={() => setLanguage("en")}
+                          className={`px-2 py-0.5 rounded-full transition-all ${
+                            language === "en"
+                              ? "bg-white text-neutral-900 shadow-sm font-semibold"
+                              : "text-neutral-500"
+                          }`}
+                        >
+                          EN
+                        </button>
+                      </div>
                     </SheetTitle>
                   </SheetHeader>
 
@@ -165,14 +219,14 @@ export function Navbar() {
                     onClick={() => setMobileOpen(false)}
                     className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-neutral-900 text-white text-xs font-medium rounded-lg"
                   >
-                    Request Quote
+                    {t("nav.requestQuote")}
                   </Link>
                   <Link
                     href="/contact"
                     onClick={() => setMobileOpen(false)}
                     className="w-full flex items-center justify-center gap-2 px-4 py-2.5 border border-neutral-200 text-neutral-700 text-xs font-medium rounded-lg"
                   >
-                    Contact Us
+                    {t("nav.contact")}
                   </Link>
                 </div>
               </SheetContent>
@@ -184,6 +238,7 @@ export function Navbar() {
     </header>
   );
 }
+
 
 
 

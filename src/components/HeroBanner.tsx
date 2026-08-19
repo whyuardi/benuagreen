@@ -2,6 +2,7 @@
 
 import { Search } from "lucide-react";
 import { CATEGORIES_DATA } from "@/lib/products";
+import { useLanguage, TranslationKey } from "@/lib/i18n";
 
 interface HeroBannerProps {
   searchQuery: string;
@@ -16,7 +17,21 @@ export function HeroBanner({
   selectedCategory,
   onSelectCategory,
 }: HeroBannerProps) {
+  const { t } = useLanguage();
   const totalCount = CATEGORIES_DATA.reduce((acc, c) => acc + c.products.length, 0);
+
+  const getCategoryName = (slug: string, fallback: string) => {
+    const keyMap: Record<string, TranslationKey> = {
+      pumps: "cat.pumps",
+      "solar-drives": "cat.solarDrives",
+      ppr: "cat.ppr",
+      inverter: "cat.inverter",
+      "starters-and-controllers": "cat.starters",
+      "rms-dongle": "cat.rms",
+    };
+    const key = keyMap[slug];
+    return key ? t(key) : fallback;
+  };
 
   return (
     <section className="mt-[4.25rem] pt-14 pb-10 sm:pt-20 sm:pb-14 px-6 sm:px-8 border-b border-neutral-100 bg-white">
@@ -24,19 +39,19 @@ export function HeroBanner({
         
         {/* Subtle Label */}
         <span className="text-xs font-semibold tracking-widest text-neutral-400 uppercase mb-4">
-          Sustainable Pumping & Energy Systems
+          {t("hero.badge")}
         </span>
 
         {/* Minimalist Heading */}
         <h1 className="text-3xl sm:text-5xl md:text-6xl font-normal tracking-tight text-neutral-900 mb-5 leading-[1.15]">
-          Simplicity in engineering, <br className="hidden sm:inline" />
+          {t("hero.title1")} <br className="hidden sm:inline" />
           <span className="font-serif italic font-normal text-neutral-800">
-            reliability in energy.
+            {t("hero.title2")}
           </span>
         </h1>
 
-        <p className="text-neutral-500 text-sm sm:text-base max-w-xl leading-relaxed mb-10">
-          Curated catalog of high-efficiency solar submersible pumps, intelligent variable speed drives, pure sine inverters, and certified PPR infrastructure.
+        <p className="text-neutral-500 text-sm sm:text-base max-w-xl leading-relaxed mb-10 font-light">
+          {t("hero.subtitle")}
         </p>
 
         {/* Minimalist Search Input */}
@@ -45,7 +60,7 @@ export function HeroBanner({
             <Search className="absolute left-4 w-4 h-4 text-neutral-400 pointer-events-none" />
             <input
               type="text"
-              placeholder="Search products or equipment series..."
+              placeholder={t("hero.searchPlaceholder")}
               value={searchQuery}
               onChange={(e) => onSearchChange(e.target.value)}
               className="w-full pl-11 pr-12 py-2.5 rounded-full bg-neutral-50 border border-neutral-200 text-neutral-900 placeholder:text-neutral-400 text-xs sm:text-sm focus:outline-none focus:bg-white focus:border-neutral-400 transition-all shadow-none"
@@ -55,7 +70,7 @@ export function HeroBanner({
                 onClick={() => onSearchChange("")}
                 className="absolute right-3 text-[11px] font-medium text-neutral-400 hover:text-neutral-900 px-2 py-0.5 rounded transition-colors"
               >
-                Clear
+                {t("hero.clear")}
               </button>
             )}
           </div>
@@ -71,7 +86,7 @@ export function HeroBanner({
                 : "text-neutral-500 hover:text-neutral-900 hover:bg-neutral-100"
             }`}
           >
-            All ({totalCount})
+            {t("hero.all")} ({totalCount})
           </button>
           {CATEGORIES_DATA.map((cat) => (
             <button
@@ -83,7 +98,7 @@ export function HeroBanner({
                   : "text-neutral-500 hover:text-neutral-900 hover:bg-neutral-100"
               }`}
             >
-              {cat.name}
+              {getCategoryName(cat.slug, cat.name)}
             </button>
           ))}
         </div>
@@ -92,6 +107,7 @@ export function HeroBanner({
     </section>
   );
 }
+
 
 
 

@@ -8,12 +8,27 @@ import { ProductCard } from "@/components/ProductCard";
 import { CATEGORIES_DATA, Product } from "@/lib/products";
 import { ArrowRight, LayoutGrid, SlidersHorizontal, SearchX } from "lucide-react";
 import Link from "next/link";
+import { useLanguage, TranslationKey } from "@/lib/i18n";
 
 export default function HomePage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [viewMode, setViewMode] = useState<"slider" | "grid">("slider");
+  const { t } = useLanguage();
+
+  const getCategoryName = (slug: string, fallback: string) => {
+    const keyMap: Record<string, TranslationKey> = {
+      pumps: "cat.pumps",
+      "solar-drives": "cat.solarDrives",
+      ppr: "cat.ppr",
+      inverter: "cat.inverter",
+      "starters-and-controllers": "cat.starters",
+      "rms-dongle": "cat.rms",
+    };
+    const key = keyMap[slug];
+    return key ? t(key) : fallback;
+  };
 
   // Filtered categories based on selected category tab
   const displayedCategories = useMemo(() => {
@@ -65,17 +80,17 @@ export default function HomePage() {
             <div className="flex items-center justify-between mb-8 pb-3 border-b border-neutral-100">
               <div>
                 <h2 className="text-lg font-medium text-neutral-900">
-                  Search results for &ldquo;{searchQuery}&rdquo;
+                  {t("catalog.searchResults")} &ldquo;{searchQuery}&rdquo;
                 </h2>
                 <p className="text-xs text-neutral-400 mt-0.5">
-                  {searchResults.length} {searchResults.length === 1 ? "product" : "products"} found
+                  {searchResults.length} {t("catalog.productsFound")}
                 </p>
               </div>
               <button
                 onClick={() => setSearchQuery("")}
                 className="text-xs text-neutral-500 hover:text-neutral-900 border border-neutral-200 px-3 py-1 rounded-full transition-colors"
               >
-                Clear Search
+                {t("catalog.clearSearch")}
               </button>
             </div>
 
@@ -93,16 +108,16 @@ export default function HomePage() {
               <div className="text-center py-20 bg-neutral-50 rounded-2xl p-8 border border-neutral-100">
                 <SearchX className="w-10 h-10 text-neutral-300 mx-auto mb-3" />
                 <h3 className="text-sm font-medium text-neutral-800 mb-1">
-                  No products matched
+                  {t("catalog.noProducts")}
                 </h3>
-                <p className="text-xs text-neutral-500 max-w-sm mx-auto mb-5">
-                  We couldn&apos;t find any items matching &ldquo;{searchQuery}&rdquo;.
+                <p className="text-xs text-neutral-500 max-w-sm mx-auto mb-5 font-light">
+                  {t("catalog.noProductsDesc")}
                 </p>
                 <button
                   onClick={() => setSearchQuery("")}
                   className="bg-neutral-900 hover:bg-neutral-800 text-white rounded-full px-5 py-2 text-xs font-medium transition-colors"
                 >
-                  View All Products
+                  {t("catalog.viewAll")}
                 </button>
               </div>
             )}
@@ -113,12 +128,12 @@ export default function HomePage() {
             <div className="px-6 sm:px-8 mb-8 flex items-center justify-between">
               <div>
                 <span className="text-[11px] font-medium text-neutral-400 uppercase tracking-wider block">
-                  Collection
+                  {t("catalog.collection")}
                 </span>
                 <h2 className="text-xl sm:text-2xl font-medium tracking-tight text-neutral-900">
                   {selectedCategory === "all"
-                    ? "Complete Catalog"
-                    : `${displayedCategories[0]?.name}`}
+                    ? t("catalog.allProducts")
+                    : getCategoryName(displayedCategories[0]?.slug, displayedCategories[0]?.name)}
                 </h2>
               </div>
 
@@ -133,7 +148,7 @@ export default function HomePage() {
                   }`}
                 >
                   <SlidersHorizontal className="w-3 h-3" />
-                  <span className="hidden sm:inline">Carousel</span>
+                  <span className="hidden sm:inline">{t("catalog.carousel")}</span>
                 </button>
                 <button
                   onClick={() => setViewMode("grid")}
@@ -144,7 +159,7 @@ export default function HomePage() {
                   }`}
                 >
                   <LayoutGrid className="w-3 h-3" />
-                  <span className="hidden sm:inline">Grid</span>
+                  <span className="hidden sm:inline">{t("catalog.grid")}</span>
                 </button>
               </div>
             </div>
@@ -184,27 +199,26 @@ export default function HomePage() {
               
               <div className="md:col-span-5">
                 <span className="text-xs font-medium text-neutral-400 uppercase tracking-wider block mb-2">
-                  Our Philosophy
+                  {t("story.label")}
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-normal text-neutral-900 tracking-tight leading-snug">
-                  Designed for longevity, <br />
-                  built for the future.
+                  {t("story.title")}
                 </h3>
               </div>
 
               <div className="md:col-span-7 space-y-4 text-neutral-500 text-sm sm:text-base leading-relaxed font-light">
                 <p>
-                  PT Benua Green Energy delivers high-performance solar water pumping solutions, variable frequency drives, and precision PPR irrigation infrastructure engineered to thrive in demanding environments.
+                  {t("story.p1")}
                 </p>
                 <p>
-                  Every system is curated for maximum hydraulic efficiency, seamless hybrid solar integration, and long-term durability across agricultural, municipal, and commercial installations.
+                  {t("story.p2")}
                 </p>
                 <div className="pt-3">
                   <Link
                     href="/about"
                     className="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-900 hover:text-neutral-600 transition-colors"
                   >
-                    <span>Read company story</span>
+                    <span>{t("story.readMore")}</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
@@ -216,19 +230,19 @@ export default function HomePage() {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 pt-16 mt-16 border-t border-neutral-100">
               <div>
                 <p className="text-3xl sm:text-4xl font-light text-neutral-900 tracking-tight">40+</p>
-                <p className="text-xs text-neutral-400 mt-1">Product Models</p>
+                <p className="text-xs text-neutral-400 mt-1">{t("metrics.models")}</p>
               </div>
               <div>
                 <p className="text-3xl sm:text-4xl font-light text-neutral-900 tracking-tight">99%</p>
-                <p className="text-xs text-neutral-400 mt-1">MPPT Tracking</p>
+                <p className="text-xs text-neutral-400 mt-1">{t("metrics.mppt")}</p>
               </div>
               <div>
                 <p className="text-3xl sm:text-4xl font-light text-neutral-900 tracking-tight">50+ Yrs</p>
-                <p className="text-xs text-neutral-400 mt-1">PPR Material Life</p>
+                <p className="text-xs text-neutral-400 mt-1">{t("metrics.life")}</p>
               </div>
               <div>
                 <p className="text-3xl sm:text-4xl font-light text-neutral-900 tracking-tight">24/7</p>
-                <p className="text-xs text-neutral-400 mt-1">Dedicated Support</p>
+                <p className="text-xs text-neutral-400 mt-1">{t("metrics.support")}</p>
               </div>
             </div>
           </div>
@@ -239,10 +253,10 @@ export default function HomePage() {
           <div className="max-w-5xl mx-auto bg-neutral-50 rounded-2xl p-8 sm:p-12 flex flex-col sm:flex-row items-center justify-between gap-6 border border-neutral-100">
             <div className="space-y-1 text-center sm:text-left">
               <h3 className="text-lg sm:text-xl font-medium text-neutral-900">
-                Need customized system sizing or quotation?
+                {t("inquiry.title")}
               </h3>
-              <p className="text-xs sm:text-sm text-neutral-500">
-                Our application engineers provide head calculations, pipe friction loss audits, and product estimates.
+              <p className="text-xs sm:text-sm text-neutral-500 font-light">
+                {t("inquiry.desc")}
               </p>
             </div>
             <div className="shrink-0">
@@ -250,7 +264,7 @@ export default function HomePage() {
                 href="/contact"
                 className="inline-flex items-center px-5 py-2.5 bg-neutral-900 hover:bg-neutral-800 text-white text-xs font-medium rounded-full transition-all shadow-sm"
               >
-                <span>Contact Engineering Team</span>
+                <span>{t("inquiry.btn")}</span>
                 <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
               </Link>
             </div>
@@ -268,6 +282,7 @@ export default function HomePage() {
     </main>
   );
 }
+
 
 
 

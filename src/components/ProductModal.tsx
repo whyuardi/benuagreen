@@ -10,6 +10,7 @@ import {
 import { Product } from "@/lib/products";
 import { Check, MessageSquare, X } from "lucide-react";
 import Image from "next/image";
+import { useLanguage } from "@/lib/i18n";
 
 interface ProductModalProps {
   product: Product | null;
@@ -18,7 +19,12 @@ interface ProductModalProps {
 }
 
 export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
+  const { t, language } = useLanguage();
   if (!product) return null;
+
+  const waMessage = language === "id"
+    ? `Halo Benua Green, saya ingin meminta penawaran harga untuk produk: ${product.name}`
+    : `Hello Benua Green, I would like to request a quotation for: ${product.name}`;
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
@@ -50,7 +56,7 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
                 <DialogTitle className="text-xl font-semibold text-neutral-900 leading-tight">
                   {product.name}
                 </DialogTitle>
-                <DialogDescription className="text-xs text-neutral-500 leading-relaxed pt-2">
+                <DialogDescription className="text-xs text-neutral-500 leading-relaxed pt-2 font-light">
                   {product.description || "High-performance energy and water management equipment engineered for reliability."}
                 </DialogDescription>
               </DialogHeader>
@@ -58,7 +64,7 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
               {product.features && product.features.length > 0 && (
                 <div className="space-y-2 mt-5">
                   <h4 className="text-[11px] font-semibold text-neutral-900 uppercase tracking-wider">
-                    Specifications & Features
+                    {t("modal.specs")}
                   </h4>
                   <ul className="space-y-1.5">
                     {product.features.map((feature, idx) => (
@@ -74,19 +80,19 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
 
             <div className="pt-6 mt-6 border-t border-neutral-100 flex items-center gap-3">
               <a
-                href={`https://wa.me/6281234567890?text=${encodeURIComponent(`Hello Benua Green, I would like to request a quotation for: ${product.name}`)}`}
+                href={`https://wa.me/6281234567890?text=${encodeURIComponent(waMessage)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1 bg-neutral-900 hover:bg-neutral-800 text-white font-medium rounded-full py-2.5 px-4 transition-colors flex items-center justify-center gap-2 text-xs text-center"
               >
                 <MessageSquare className="w-3.5 h-3.5" />
-                <span>Request Price Quotation</span>
+                <span>{t("modal.requestQuote")}</span>
               </a>
               <button
                 onClick={onClose}
                 className="px-4 py-2.5 rounded-full border border-neutral-200 text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50 text-xs font-medium transition-colors"
               >
-                Close
+                {t("modal.close")}
               </button>
             </div>
 
@@ -96,6 +102,7 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
     </Dialog>
   );
 }
+
 
 
 

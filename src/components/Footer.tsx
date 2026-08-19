@@ -3,8 +3,24 @@
 import Link from "next/link";
 import Image from "next/image";
 import { CATEGORIES_DATA } from "@/lib/products";
+import { useLanguage, TranslationKey } from "@/lib/i18n";
 
 export function Footer() {
+  const { t } = useLanguage();
+
+  const getCategoryName = (slug: string, fallback: string) => {
+    const keyMap: Record<string, TranslationKey> = {
+      pumps: "cat.pumps",
+      "solar-drives": "cat.solarDrives",
+      ppr: "cat.ppr",
+      inverter: "cat.inverter",
+      "starters-and-controllers": "cat.starters",
+      "rms-dongle": "cat.rms",
+    };
+    const key = keyMap[slug];
+    return key ? t(key) : fallback;
+  };
+
   return (
     <footer className="bg-white border-t border-neutral-100 text-neutral-500 pt-16 pb-12">
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
@@ -29,7 +45,7 @@ export function Footer() {
             </Link>
 
             <p className="text-xs text-neutral-400 leading-relaxed max-w-sm font-light">
-              High-efficiency solar pumping, variable frequency drives, and precision PPR irrigation infrastructure built for long-term reliability.
+              {t("footer.desc")}
             </p>
 
             <p className="text-xs text-neutral-400 pt-1">
@@ -40,15 +56,15 @@ export function Footer() {
           {/* Quick Links (3 Cols) */}
           <div className="md:col-span-3 space-y-3">
             <h4 className="text-xs font-semibold text-neutral-900 uppercase tracking-wider">
-              Navigation
+              {t("footer.navigation")}
             </h4>
             <ul className="space-y-2 text-xs">
               {[
-                { name: "All Products", href: "/" },
-                { name: "Pumps Catalog", href: "/pumps" },
-                { name: "PPR & Piping Solutions", href: "/ppr" },
-                { name: "About the Company", href: "/about" },
-                { name: "Contact & Inquiries", href: "/contact" },
+                { name: t("footer.allProducts"), href: "/" },
+                { name: t("footer.pumpsCatalog"), href: "/pumps" },
+                { name: t("footer.pprSolutions"), href: "/ppr" },
+                { name: t("footer.aboutCompany"), href: "/about" },
+                { name: t("footer.contactInquiries"), href: "/contact" },
               ].map((item) => (
                 <li key={item.name}>
                   <Link
@@ -65,7 +81,7 @@ export function Footer() {
           {/* Equipment (3 Cols) */}
           <div className="md:col-span-3 space-y-3">
             <h4 className="text-xs font-semibold text-neutral-900 uppercase tracking-wider">
-              Product Categories
+              {t("footer.categories")}
             </h4>
             <ul className="space-y-2 text-xs">
               {CATEGORIES_DATA.slice(0, 5).map((cat) => (
@@ -74,7 +90,7 @@ export function Footer() {
                     href={`/?category=${cat.slug}#catalog`}
                     className="text-neutral-500 hover:text-neutral-900 transition-colors"
                   >
-                    {cat.name}
+                    {getCategoryName(cat.slug, cat.name)}
                   </Link>
                 </li>
               ))}
@@ -84,10 +100,10 @@ export function Footer() {
           {/* Direct Inquiry (2 Cols) */}
           <div className="md:col-span-2 space-y-3">
             <h4 className="text-xs font-semibold text-neutral-900 uppercase tracking-wider">
-              Assistance
+              {t("footer.assistance")}
             </h4>
             <p className="text-xs text-neutral-400 font-light leading-relaxed">
-              Have technical questions or need a quotation?
+              {t("footer.assistanceDesc")}
             </p>
             <a
               href="https://wa.me/6281234567890?text=Hello%20Benua%20Green,%20I%20would%20like%20to%20inquire%20about%20your%20products"
@@ -95,7 +111,7 @@ export function Footer() {
               rel="noopener noreferrer"
               className="inline-block text-xs font-medium text-neutral-900 hover:text-neutral-600 transition-colors border-b border-neutral-900 pb-0.5"
             >
-              Chat on WhatsApp →
+              {t("footer.chatWa")}
             </a>
           </div>
 
@@ -103,16 +119,16 @@ export function Footer() {
 
         {/* Bottom */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-neutral-400 gap-4">
-          <p>© {new Date().getFullYear()} PT Benua Green Energy. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} PT Benua Green Energy. {t("footer.rights")}</p>
           <div className="flex items-center gap-6">
             <Link href="/about" className="hover:text-neutral-700 transition-colors">
-              Privacy
+              {t("footer.privacy")}
             </Link>
             <Link href="/contact" className="hover:text-neutral-700 transition-colors">
-              Terms
+              {t("footer.terms")}
             </Link>
             <Link href="/contact" className="hover:text-neutral-700 transition-colors">
-              Support
+              {t("footer.support")}
             </Link>
           </div>
         </div>
@@ -121,5 +137,6 @@ export function Footer() {
     </footer>
   );
 }
+
 
 
