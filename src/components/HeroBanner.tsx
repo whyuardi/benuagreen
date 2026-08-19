@@ -101,29 +101,22 @@ export function HeroBanner({
           </div>
         </motion.div>
 
-        {/* Minimalist Clean Category Tabs with Smooth sliding layoutId indicator */}
+        {/* Minimalist Clean Category Tabs with Smooth Active State */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2"
+          className="flex flex-wrap items-center justify-center gap-2"
         >
           <button
             onClick={() => onSelectCategory("all")}
-            className={`relative px-3.5 py-1.5 rounded-full text-xs transition-colors duration-200 ${
+            className={`px-4 py-2 rounded-full text-xs font-medium transition-all duration-200 border cursor-pointer ${
               selectedCategory === "all"
-                ? "text-white font-medium"
-                : "text-neutral-500 hover:text-neutral-900 hover:bg-neutral-100"
+                ? "bg-neutral-900 text-white border-neutral-900 shadow-sm"
+                : "bg-white text-neutral-600 hover:text-neutral-950 border-neutral-200 hover:border-neutral-400 hover:bg-neutral-50"
             }`}
           >
-            {selectedCategory === "all" && (
-              <motion.div
-                layoutId="activeCategoryPill"
-                className="absolute inset-0 bg-neutral-900 rounded-full -z-10 shadow-sm"
-                transition={{ type: "spring", stiffness: 380, damping: 30 }}
-              />
-            )}
-            <span className="relative z-10">{t("hero.all")} ({totalCount})</span>
+            {t("hero.all")} ({totalCount})
           </button>
           {CATEGORIES_DATA.map((cat) => {
             const isSelected = selectedCategory === cat.slug;
@@ -131,20 +124,13 @@ export function HeroBanner({
               <button
                 key={cat.id}
                 onClick={() => onSelectCategory(cat.slug)}
-                className={`relative px-3.5 py-1.5 rounded-full text-xs transition-colors duration-200 ${
+                className={`px-4 py-2 rounded-full text-xs font-medium transition-all duration-200 border cursor-pointer ${
                   isSelected
-                    ? "text-white font-medium"
-                    : "text-neutral-500 hover:text-neutral-900 hover:bg-neutral-100"
+                    ? "bg-neutral-900 text-white border-neutral-900 shadow-sm"
+                    : "bg-white text-neutral-600 hover:text-neutral-950 border-neutral-200 hover:border-neutral-400 hover:bg-neutral-50"
                 }`}
               >
-                {isSelected && (
-                  <motion.div
-                    layoutId="activeCategoryPill"
-                    className="absolute inset-0 bg-neutral-900 rounded-full -z-10 shadow-sm"
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                  />
-                )}
-                <span className="relative z-10">{getCategoryName(cat.slug, cat.name)}</span>
+                {getCategoryName(cat.slug, cat.name)}
               </button>
             );
           })}

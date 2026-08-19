@@ -74,7 +74,7 @@ export default function PumpsPage() {
           </div>
 
           {/* Quick Filters */}
-          <div className="flex flex-wrap items-center gap-1.5 w-full md:w-auto">
+          <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
             {[
               { id: "all", label: t("pumps.allPumps") },
               { id: "solar", label: t("pumps.solar") },
@@ -86,10 +86,10 @@ export default function PumpsPage() {
               <button
                 key={tab.id}
                 onClick={() => setFilterType(tab.id)}
-                className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
+                className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-200 border cursor-pointer ${
                   filterType === tab.id
-                    ? "bg-neutral-900 text-white shadow-sm"
-                    : "text-neutral-500 hover:text-neutral-900 hover:bg-neutral-100"
+                    ? "bg-neutral-900 text-white border-neutral-900 shadow-sm"
+                    : "bg-white text-neutral-600 hover:text-neutral-950 border-neutral-200 hover:border-neutral-400 hover:bg-neutral-50"
                 }`}
               >
                 {tab.label}
