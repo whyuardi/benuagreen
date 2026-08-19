@@ -5,19 +5,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { User, LogIn, UserPlus, Menu, ArrowRight } from "lucide-react";
+import { Menu, ArrowRight } from "lucide-react";
 
 export function Navbar() {
   const pathname = usePathname();
@@ -107,42 +101,10 @@ export function Navbar() {
 
           <Link
             href="/contact?type=quote"
-            className="hidden md:inline-flex items-center px-4 py-1.5 rounded-full text-xs font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-all"
+            className="hidden sm:inline-flex items-center px-4 py-1.5 rounded-full text-xs font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-all"
           >
             Request Quote
           </Link>
-
-          {/* Account */}
-          <div className="hidden md:block">
-            <DropdownMenu>
-              <DropdownMenuTrigger className="w-8 h-8 rounded-full border border-neutral-200 flex items-center justify-center text-neutral-600 hover:text-neutral-950 hover:border-neutral-400 transition-colors cursor-pointer">
-                <User className="w-3.5 h-3.5" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent
-                align="end"
-                className="w-48 bg-white rounded-xl p-1 shadow-lg border border-neutral-100"
-              >
-                <DropdownMenuItem className="p-0">
-                  <Link
-                    href="/login"
-                    className="w-full flex items-center gap-2 px-3 py-2 text-xs text-neutral-700 hover:bg-neutral-50 rounded-lg transition-colors font-medium"
-                  >
-                    <LogIn className="w-3.5 h-3.5 text-neutral-400" />
-                    <span>Sign In</span>
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem className="p-0">
-                  <Link
-                    href="/login?tab=register"
-                    className="w-full flex items-center gap-2 px-3 py-2 text-xs text-neutral-500 hover:bg-neutral-50 rounded-lg transition-colors font-medium"
-                  >
-                    <UserPlus className="w-3.5 h-3.5 text-neutral-400" />
-                    <span>Create Account</span>
-                  </Link>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
 
           {/* Mobile Sheet */}
           <div className="md:hidden">
@@ -199,11 +161,11 @@ export function Navbar() {
 
                 <div className="space-y-2 pt-4 border-t border-neutral-100">
                   <Link
-                    href="/login"
+                    href="/contact"
                     onClick={() => setMobileOpen(false)}
                     className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-neutral-900 text-white text-xs font-medium rounded-lg"
                   >
-                    Customer Sign In
+                    Request Quote
                   </Link>
                   <Link
                     href="/contact"
@@ -222,6 +184,7 @@ export function Navbar() {
     </header>
   );
 }
+
 
 
 
