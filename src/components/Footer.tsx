@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { CATEGORIES_DATA } from "@/lib/products";
 import { useLanguage, TranslationKey } from "@/lib/i18n";
+import { SocialLinks } from "@/components/SocialLinks";
 
 export function Footer() {
   const { t } = useLanguage();
@@ -51,6 +52,11 @@ export function Footer() {
             <p className="text-xs text-neutral-400 pt-1">
               Jakarta, Indonesia • info@benuagreen.com
             </p>
+
+            {/* Social Media Links */}
+            <div className="pt-2">
+              <SocialLinks className="flex items-center gap-2" iconClassName="w-8 h-8" />
+            </div>
           </div>
 
           {/* Quick Links (3 Cols) */}

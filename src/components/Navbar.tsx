@@ -14,6 +14,7 @@ import {
 import { Menu, ArrowRight, Globe } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
 import { motion } from "framer-motion";
+import { SocialLinks } from "@/components/SocialLinks";
 
 export function Navbar() {
   const pathname = usePathname();
@@ -235,11 +236,11 @@ export function Navbar() {
                   </div>
                 </div>
 
-                <div className="space-y-2 pt-4 border-t border-neutral-100">
+                <div className="space-y-3 pt-4 border-t border-neutral-100">
                   <Link
                     href="/contact"
                     onClick={() => setMobileOpen(false)}
-                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-neutral-900 text-white text-xs font-medium rounded-lg"
+                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-neutral-900 text-white text-xs font-medium rounded-lg shadow-sm"
                   >
                     {t("nav.requestQuote")}
                   </Link>
@@ -250,6 +251,14 @@ export function Navbar() {
                   >
                     {t("nav.contact")}
                   </Link>
+
+                  {/* Mobile Social Media Icons */}
+                  <div className="pt-2">
+                    <p className="text-[10px] uppercase font-semibold tracking-wider text-neutral-400 mb-2.5 text-center">
+                      Sosial Media / Connect
+                    </p>
+                    <SocialLinks className="flex items-center justify-center gap-2.5" iconClassName="w-8 h-8" />
+                  </div>
                 </div>
               </SheetContent>
             </Sheet>

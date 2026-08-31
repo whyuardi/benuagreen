@@ -11,6 +11,7 @@ import {
   Headphones,
 } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
+import { SocialLinks } from "@/components/SocialLinks";
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -91,6 +92,13 @@ export default function ContactPage() {
                     <p className="font-semibold text-neutral-900">{t("contact.operatingHours")}</p>
                     <p className="text-neutral-500">{t("contact.hours")}</p>
                   </div>
+                </div>
+
+                <div className="pt-4 border-t border-neutral-100">
+                  <p className="text-[11px] font-semibold text-neutral-400 uppercase tracking-wider mb-2.5">
+                    Sosial Media / Social Channels
+                  </p>
+                  <SocialLinks className="flex items-center gap-2.5" iconClassName="w-8 h-8" />
                 </div>
               </div>
             </div>
