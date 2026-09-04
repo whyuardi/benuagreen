@@ -1,35 +1,45 @@
 export type RentalStatus = "available" | "rented" | "reserved";
 export type RentalCategory = "submersible" | "booster" | "solar-package" | "drainage" | "ppr-rig";
 
+export interface LocalizedText {
+  id: string;
+  en: string;
+}
+
+export interface LocalizedList {
+  id: string[];
+  en: string[];
+}
+
 export interface RentalUnit {
   id: string;
   name: string;
   category: RentalCategory;
-  categoryName: string;
+  categoryName: LocalizedText;
   image: string;
   status: RentalStatus;
-  availableFrom?: string; // e.g. "Ready Today" or "15 Sep 2026"
-  locationHub: string;
+  availableFrom?: LocalizedText;
+  locationHub: LocalizedText;
   
   // Specifications
-  flowRate: string; // e.g. "15 - 35 m³/jam"
-  headMax: string;  // e.g. "120 meter"
-  powerKw: number;  // e.g. 5.5
-  powerHp: number;  // e.g. 7.5
-  powerType: string; // e.g. "Solar PV / 380V 3-Phase"
+  flowRate: LocalizedText;
+  headMax: LocalizedText;
+  powerKw: number;
+  powerHp: number;
+  powerType: LocalizedText;
   minDepth: number; // for wizard matching (meter)
   maxDepth: number;
   minFlow: number;  // for wizard matching (m3/h)
   maxFlow: number;
 
   // Rental Pricing
-  rateDaily: string;
-  rateMonthly: string;
+  rateDaily: LocalizedText;
+  rateMonthly: LocalizedText;
   minDays: number;
   
   // Features & Package Includes
-  includes: string[];
-  description: string;
+  includes: LocalizedList;
+  description: LocalizedText;
 }
 
 export interface RentalFAQItem {
@@ -44,175 +54,385 @@ export const RENTAL_UNITS: RentalUnit[] = [
     id: "rent-deepwell-55",
     name: "Submersible Deep Well Solar Pump 5.5kW",
     category: "submersible",
-    categoryName: "Pompa Sumur Dalam",
+    categoryName: {
+      id: "Pompa Sumur Dalam",
+      en: "Deep Well Submersible Pump"
+    },
     image: "https://benuagreen.com/storage/img/produk/1769003114_6970d86a03fe5.png",
     status: "available",
-    availableFrom: "Ready Stock (Siap Kirim)",
-    locationHub: "Jakarta & Surabaya Hub",
-    flowRate: "10 - 25 m³/jam",
-    headMax: "140 meter",
+    availableFrom: {
+      id: "Ready Stock (Siap Kirim)",
+      en: "Ready Stock (Ready to Dispatch)"
+    },
+    locationHub: {
+      id: "Jakarta & Surabaya Hub",
+      en: "Jakarta & Surabaya Hub"
+    },
+    flowRate: {
+      id: "10 - 25 m³/jam",
+      en: "10 - 25 m³/hr"
+    },
+    headMax: {
+      id: "140 meter",
+      en: "140 meters"
+    },
     powerKw: 5.5,
     powerHp: 7.5,
-    powerType: "Solar PV / 3-Phase 380V",
+    powerType: {
+      id: "Solar PV / 3-Phase 380V",
+      en: "Solar PV / 3-Phase 380V"
+    },
     minDepth: 40,
     maxDepth: 140,
     minFlow: 10,
     maxFlow: 25,
-    rateDaily: "Rp 550.000 / hari",
-    rateMonthly: "Rp 9.800.000 / bulan",
+    rateDaily: {
+      id: "Rp 550.000 / hari",
+      en: "IDR 550,000 / day"
+    },
+    rateMonthly: {
+      id: "Rp 9.800.000 / bulan",
+      en: "IDR 9,800,000 / month"
+    },
     minDays: 3,
-    includes: [
-      "Kabel Submersible Tahan Air 100m",
-      "Panel Smart Controller / VFD Inverter",
-      "Sensor Level Air Dry-Run Protection",
-      "Garansi Unit Pengganti < 24 Jam"
-    ],
-    description: "Pompa sumur dalam kapasitas tinggi tahan pasir halus untuk kebutuhan irigasi perkebunan dan suplai air bersih proyek konstruksi."
+    includes: {
+      id: [
+        "Kabel Submersible Tahan Air 100m",
+        "Panel Smart Controller / VFD Inverter",
+        "Sensor Level Air Dry-Run Protection",
+        "Garansi Unit Pengganti < 24 Jam"
+      ],
+      en: [
+        "100m Waterproof Submersible Cable",
+        "Smart Controller / VFD Inverter Panel",
+        "Dry-Run Water Level Sensors",
+        "< 24h Replacement Unit Guarantee"
+      ]
+    },
+    description: {
+      id: "Pompa sumur dalam kapasitas tinggi tahan pasir halus untuk kebutuhan irigasi perkebunan dan suplai air bersih proyek konstruksi.",
+      en: "High-capacity deep well borehole pump engineered for agricultural irrigation and construction clean water supply."
+    }
   },
   {
     id: "rent-solar-pkg-75",
     name: "Paket Mobile Solar Pumping Rig 7.5kW",
     category: "solar-package",
-    categoryName: "Paket Pompa Tenaga Surya",
+    categoryName: {
+      id: "Paket Pompa Tenaga Surya",
+      en: "Solar Pumping Package"
+    },
     image: "https://benuagreen.com/storage/img/produk/1769003584_6970da40b616a.png",
     status: "available",
-    availableFrom: "Ready Stock (Siap Kirim)",
-    locationHub: "Jakarta Hub",
-    flowRate: "20 - 45 m³/jam",
-    headMax: "110 meter",
+    availableFrom: {
+      id: "Ready Stock (Siap Kirim)",
+      en: "Ready Stock (Ready to Dispatch)"
+    },
+    locationHub: {
+      id: "Jakarta Hub",
+      en: "Jakarta Hub"
+    },
+    flowRate: {
+      id: "20 - 45 m³/jam",
+      en: "20 - 45 m³/hr"
+    },
+    headMax: {
+      id: "110 meter",
+      en: "110 meters"
+    },
     powerKw: 7.5,
     powerHp: 10,
-    powerType: "100% Off-Grid Solar PV + Hybrid Inverter",
+    powerType: {
+      id: "100% Off-Grid Solar PV + Hybrid Inverter",
+      en: "100% Off-Grid Solar PV + Hybrid Inverter"
+    },
     minDepth: 30,
     maxDepth: 110,
     minFlow: 20,
     maxFlow: 45,
-    rateDaily: "Rp 950.000 / hari",
-    rateMonthly: "Rp 17.500.000 / bulan",
+    rateDaily: {
+      id: "Rp 950.000 / hari",
+      en: "IDR 950,000 / day"
+    },
+    rateMonthly: {
+      id: "Rp 17.500.000 / bulan",
+      en: "IDR 17,500,000 / month"
+    },
     minDays: 7,
-    includes: [
-      "Rig Panel Surya Lipat Portabel 8 kWp",
-      "Hybrid Inverter & MPPT Controller IP65",
-      "Kabel & Selang Distribusi 100m",
-      "Supervisi & Pemasangan Awal oleh Teknisi"
-    ],
-    description: "Sistem pompa mandiri 100% tanpa listrik PLN / bahan bakar minyak, sangat ideal untuk eksplorasi tambang dan lahan pertanian terpencil."
+    includes: {
+      id: [
+        "Rig Panel Surya Lipat Portabel 8 kWp",
+        "Hybrid Inverter & MPPT Controller IP65",
+        "Kabel & Selang Distribusi 100m",
+        "Supervisi & Pemasangan Awal oleh Teknisi"
+      ],
+      en: [
+        "8 kWp Portable Foldable Solar PV Rig",
+        "Hybrid Inverter & MPPT Controller IP65",
+        "100m Cable & Layflat Distribution Hose",
+        "On-Site Setup Supervision by Certified Technician"
+      ]
+    },
+    description: {
+      id: "Sistem pompa mandiri 100% tanpa listrik PLN / bahan bakar minyak, sangat ideal untuk eksplorasi tambang dan lahan pertanian terpencil.",
+      en: "100% autonomous pumping system without fuel or grid electricity, ideal for remote exploration and agricultural sites."
+    }
   },
   {
     id: "rent-booster-multi-11",
     name: "Sero Vertical Multistage Booster Pump 11kW",
     category: "booster",
-    categoryName: "Booster Tekanan Tinggi",
+    categoryName: {
+      id: "Booster Tekanan Tinggi",
+      en: "High-Pressure Booster"
+    },
     image: "https://benuagreen.com/storage/img/produk/1769003131_6970d87bf23a6.png",
     status: "rented",
-    availableFrom: "Tersedia 18 Sep 2026 (Bookable)",
-    locationHub: "Surabaya Hub",
-    flowRate: "30 - 60 m³/jam",
-    headMax: "180 meter",
+    availableFrom: {
+      id: "Tersedia 18 Sep 2026 (Bookable)",
+      en: "Available 18 Sep 2026 (Bookable)"
+    },
+    locationHub: {
+      id: "Surabaya Hub",
+      en: "Surabaya Hub"
+    },
+    flowRate: {
+      id: "30 - 60 m³/jam",
+      en: "30 - 60 m³/hr"
+    },
+    headMax: {
+      id: "180 meter",
+      en: "180 meters"
+    },
     powerKw: 11,
     powerHp: 15,
-    powerType: "380V 3-Phase",
+    powerType: {
+      id: "380V 3-Phase",
+      en: "380V 3-Phase"
+    },
     minDepth: 0,
     maxDepth: 30,
     minFlow: 30,
     maxFlow: 60,
-    rateDaily: "Rp 750.000 / hari",
-    rateMonthly: "Rp 13.500.000 / bulan",
+    rateDaily: {
+      id: "Rp 750.000 / hari",
+      en: "IDR 750,000 / day"
+    },
+    rateMonthly: {
+      id: "Rp 13.500.000 / bulan",
+      en: "IDR 13,500,000 / month"
+    },
     minDays: 3,
-    includes: [
-      "Impeller Stainless Steel SS304",
-      "Panel Soft Starter & Overload Relay",
-      "Manifold & Pressure Gauge Kit",
-      "Layanan Maintenance Berkala Gratis"
-    ],
-    description: "Pompa booster tekanan tinggi multistage vertikal untuk hydro-testing pipa, transfer air gedung bertingkat, dan suplai industri."
+    includes: {
+      id: [
+        "Impeller Stainless Steel SS304",
+        "Panel Soft Starter & Overload Relay",
+        "Manifold & Pressure Gauge Kit",
+        "Layanan Maintenance Berkala Gratis"
+      ],
+      en: [
+        "Stainless Steel SS304 Impellers",
+        "Soft Starter Panel & Overload Relay",
+        "Manifold & High Pressure Gauge Kit",
+        "Free Monthly Scheduled Maintenance"
+      ]
+    },
+    description: {
+      id: "Pompa booster tekanan tinggi multistage vertikal untuk hydro-testing pipa, transfer air gedung bertingkat, dan suplai industri.",
+      en: "Vertical multistage high-pressure booster pump for pipeline hydro-testing, high-rise transfer, and industrial processing."
+    }
   },
   {
     id: "rent-dewatering-sdw-4",
     name: "SDW Heavy-Duty Submersible Dewatering 4kW",
     category: "drainage",
-    categoryName: "Drainase & Dewatering",
+    categoryName: {
+      id: "Drainase & Dewatering",
+      en: "Drainage & Dewatering"
+    },
     image: "https://benuagreen.com/storage/img/produk/1769004038_6970dc067a051.png",
     status: "available",
-    availableFrom: "Ready Stock (Siap Kirim)",
-    locationHub: "Jakarta & Balikpapan Hub",
-    flowRate: "40 - 90 m³/jam",
-    headMax: "35 meter",
+    availableFrom: {
+      id: "Ready Stock (Siap Kirim)",
+      en: "Ready Stock (Ready to Dispatch)"
+    },
+    locationHub: {
+      id: "Jakarta & Balikpapan Hub",
+      en: "Jakarta & Balikpapan Hub"
+    },
+    flowRate: {
+      id: "40 - 90 m³/jam",
+      en: "40 - 90 m³/hr"
+    },
+    headMax: {
+      id: "35 meter",
+      en: "35 meters"
+    },
     powerKw: 4,
     powerHp: 5.5,
-    powerType: "380V 3-Phase / Genset Ready",
+    powerType: {
+      id: "380V 3-Phase / Genset Ready",
+      en: "380V 3-Phase / Genset Ready"
+    },
     minDepth: 0,
     maxDepth: 25,
     minFlow: 40,
     maxFlow: 90,
-    rateDaily: "Rp 400.000 / hari",
-    rateMonthly: "Rp 7.200.000 / bulan",
+    rateDaily: {
+      id: "Rp 400.000 / hari",
+      en: "IDR 400,000 / day"
+    },
+    rateMonthly: {
+      id: "Rp 7.200.000 / bulan",
+      en: "IDR 7,200,000 / month"
+    },
     minDays: 2,
-    includes: [
-      "Impeller Anti-Sumbat (Vortex Type)",
-      "Selang Buang Layflat Heavy Duty 50m",
-      "Panel Starter Portabel IP65",
-      "Unit Cadangan Standby"
-    ],
-    description: "Pompa dewatering lumpur dan air kotor proyek galian basement, saluran tambang, serta penanganan banjir konstruksi."
+    includes: {
+      id: [
+        "Impeller Anti-Sumbat (Vortex Type)",
+        "Selang Buang Layflat Heavy Duty 50m",
+        "Panel Starter Portabel IP65",
+        "Unit Cadangan Standby"
+      ],
+      en: [
+        "Non-Clogging Vortex Impeller",
+        "50m Heavy-Duty Layflat Discharge Hose",
+        "Portable IP65 Starter Panel",
+        "Standby Replacement Unit"
+      ]
+    },
+    description: {
+      id: "Pompa dewatering lumpur dan air kotor proyek galian basement, saluran tambang, serta penanganan banjir konstruksi.",
+      en: "Sludge and dirty water dewatering pump for basement excavation, mine drainage, and civil flood management."
+    }
   },
   {
     id: "rent-ppr-welding-rig",
     name: "Mesin Penyambung Pipa PPR & Electrofusion Rig",
     category: "ppr-rig",
-    categoryName: "Alat Instalasi PPR",
+    categoryName: {
+      id: "Alat Instalasi PPR",
+      en: "PPR Piping Rig"
+    },
     image: "https://benuagreen.com/storage/img/produk/1769003848_6970db48ed186.png",
     status: "available",
-    availableFrom: "Ready Stock (Siap Kirim)",
-    locationHub: "Jakarta, Surabaya, Medan",
-    flowRate: "Diameter 20mm - 160mm",
-    headMax: "PN 10 / PN 16 / PN 20",
+    availableFrom: {
+      id: "Ready Stock (Siap Kirim)",
+      en: "Ready Stock (Ready to Dispatch)"
+    },
+    locationHub: {
+      id: "Jakarta, Surabaya, Medan",
+      en: "Jakarta, Surabaya, Medan"
+    },
+    flowRate: {
+      id: "Diameter 20mm - 160mm",
+      en: "Pipe OD 20mm - 160mm"
+    },
+    headMax: {
+      id: "PN 10 / PN 16 / PN 20",
+      en: "PN 10 / PN 16 / PN 20"
+    },
     powerKw: 2.2,
     powerHp: 3,
-    powerType: "220V 1-Phase / Genset",
+    powerType: {
+      id: "220V 1-Phase / Genset",
+      en: "220V 1-Phase / Genset"
+    },
     minDepth: 0,
     maxDepth: 0,
     minFlow: 0,
     maxFlow: 0,
-    rateDaily: "Rp 250.000 / hari",
-    rateMonthly: "Rp 4.500.000 / bulan",
+    rateDaily: {
+      id: "Rp 250.000 / hari",
+      en: "IDR 250,000 / day"
+    },
+    rateMonthly: {
+      id: "Rp 4.500.000 / bulan",
+      en: "IDR 4,500,000 / month"
+    },
     minDays: 2,
-    includes: [
-      "Heating Plate Digital 20mm - 160mm",
-      "Pemotong Pipa Presisi & Scraper",
-      "Manual Book & Safety Kit",
-      "Training Singkat Pengoperasian"
-    ],
-    description: "Perangkat pemanas butt-fusion & socket welding standar internasional untuk instalasi jaringan pipa air bersih dan air panas."
+    includes: {
+      id: [
+        "Heating Plate Digital 20mm - 160mm",
+        "Pemotong Pipa Presisi & Scraper",
+        "Manual Book & Safety Kit",
+        "Training Singkat Pengoperasian"
+      ],
+      en: [
+        "20mm - 160mm Digital Heating Plate",
+        "Precision Pipe Cutter & Pipe Scraper",
+        "Operation Manual & Safety Gear",
+        "Brief Operator Briefing & Training"
+      ]
+    },
+    description: {
+      id: "Perangkat pemanas butt-fusion & socket welding standar internasional untuk instalasi jaringan pipa air bersih dan air panas.",
+      en: "Butt-fusion and socket welding rig for professional potable water and industrial hot water pipeline installations."
+    }
   },
   {
     id: "rent-deepwell-solar-3",
     name: "Submersible Borehole Solar Pump 3.0kW",
     category: "submersible",
-    categoryName: "Pompa Sumur Dalam",
+    categoryName: {
+      id: "Pompa Sumur Dalam",
+      en: "Deep Well Submersible Pump"
+    },
     image: "https://benuagreen.com/storage/img/produk/1769002917_6970d7a5ef081.png",
     status: "available",
-    availableFrom: "Ready Stock (Siap Kirim)",
-    locationHub: "Jakarta & Makassar Hub",
-    flowRate: "5 - 15 m³/jam",
-    headMax: "90 meter",
+    availableFrom: {
+      id: "Ready Stock (Siap Kirim)",
+      en: "Ready Stock (Ready to Dispatch)"
+    },
+    locationHub: {
+      id: "Jakarta & Makassar Hub",
+      en: "Jakarta & Makassar Hub"
+    },
+    flowRate: {
+      id: "5 - 15 m³/jam",
+      en: "5 - 15 m³/hr"
+    },
+    headMax: {
+      id: "90 meter",
+      en: "90 meters"
+    },
     powerKw: 3.0,
     powerHp: 4.0,
-    powerType: "Solar DC Brushless / Solar Inverter",
+    powerType: {
+      id: "Solar DC Brushless / Solar Inverter",
+      en: "Solar DC Brushless / Solar Inverter"
+    },
     minDepth: 20,
     maxDepth: 90,
     minFlow: 5,
     maxFlow: 15,
-    rateDaily: "Rp 380.000 / hari",
-    rateMonthly: "Rp 6.800.000 / bulan",
+    rateDaily: {
+      id: "Rp 380.000 / hari",
+      en: "IDR 380,000 / day"
+    },
+    rateMonthly: {
+      id: "Rp 6.800.000 / bulan",
+      en: "IDR 6,800,000 / month"
+    },
     minDays: 3,
-    includes: [
-      "Kabel Submersible 70m",
-      "Solar Pump Drive / Inverter MPPT",
-      "Water Level Probe Kit",
-      "Konsultasi Setting Tekanan"
-    ],
-    description: "Solusi hemat energi untuk sumur bor menengah perkebunan, peternakan, dan irigasi tetes."
+    includes: {
+      id: [
+        "Kabel Submersible 70m",
+        "Solar Pump Drive / Inverter MPPT",
+        "Water Level Probe Kit",
+        "Konsultasi Setting Tekanan"
+      ],
+      en: [
+        "70m Submersible Cable",
+        "Solar Pump MPPT Drive Inverter",
+        "Water Level Sensor Probe Kit",
+        "Pressure Calibration Consultation"
+      ]
+    },
+    description: {
+      id: "Solusi hemat energi untuk sumur bor menengah perkebunan, peternakan, dan irigasi tetes.",
+      en: "Cost-effective solar pumping solution for medium boreholes, livestock farming, and drip irrigation."
+    }
   }
 ];
 
@@ -266,7 +486,7 @@ export interface WizardRecommendation {
   recommendedHead: number; // in meters
   estimatedKw: number;
   recommendedUnits: RentalUnit[];
-  explanation: string;
+  explanation: { id: string; en: string };
 }
 
 export function calculateWizardRecommendation(inputs: WizardInputs): WizardRecommendation {
@@ -311,6 +531,9 @@ export function calculateWizardRecommendation(inputs: WizardInputs): WizardRecom
     recommendedHead: Math.round(headEstimate),
     estimatedKw: approxKw,
     recommendedUnits: matched.length > 0 ? matched.slice(0, 3) : RENTAL_UNITS.slice(0, 2),
-    explanation: `Berdasarkan kedalaman ${inputs.depthMeters}m dan kebutuhan debit ${inputs.flowRequirement}, sistem memerlukan pompa dengan kapasitas Head minimal ${Math.round(headEstimate)}m dan estimasi daya motor ±${approxKw} kW.`
+    explanation: {
+      id: `Berdasarkan kedalaman ${inputs.depthMeters}m dan kebutuhan debit ${inputs.flowRequirement}, sistem memerlukan pompa dengan kapasitas Head minimal ${Math.round(headEstimate)}m dan estimasi daya motor ±${approxKw} kW.`,
+      en: `Based on depth ${inputs.depthMeters}m and flow demand ${inputs.flowRequirement}, your system requires a minimum Head of ${Math.round(headEstimate)}m and an estimated motor power of ±${approxKw} kW.`
+    }
   };
 }

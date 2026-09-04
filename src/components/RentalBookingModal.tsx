@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { RentalUnit } from "@/lib/rental";
 import { useLanguage } from "@/lib/i18n";
 import { X, Check, Calendar, MapPin, Clock, MessageSquare } from "lucide-react";
-import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { SafeProductImage } from "@/components/SafeProductImage";
 
@@ -20,19 +19,23 @@ export function RentalBookingModal({
   unit,
   isOpen,
   onClose,
-  defaultLocation = "Jabodetabek / Jawa Barat",
-  defaultDuration = "Bulanan (30 Hari)"
+  defaultLocation,
+  defaultDuration
 }: RentalBookingModalProps) {
   const { t, language } = useLanguage();
-  const [location, setLocation] = useState(defaultLocation);
-  const [duration, setDuration] = useState(defaultDuration);
+  
+  const initialLocation = defaultLocation || (language === "id" ? "Jabodetabek / Jawa Barat" : "Greater Jakarta / West Java");
+  const initialDuration = defaultDuration || (language === "id" ? "Bulanan (30 Hari)" : "Monthly (30 Days)");
+
+  const [location, setLocation] = useState(initialLocation);
+  const [duration, setDuration] = useState(initialDuration);
   const [startDate, setStartDate] = useState(new Date().toISOString().split("T")[0]);
   const [companyName, setCompanyName] = useState("");
   const [notes, setNotes] = useState("");
 
   useEffect(() => {
-    setLocation(defaultLocation);
-    setDuration(defaultDuration);
+    if (defaultLocation) setLocation(defaultLocation);
+    if (defaultDuration) setDuration(defaultDuration);
   }, [defaultLocation, defaultDuration, unit]);
 
   useEffect(() => {
@@ -57,7 +60,7 @@ export function RentalBookingModal({
     const text = language === "id"
       ? `Halo Benua Green Energy,\nSaya ingin melakukan SEWA LANGSUNG untuk unit rental:\n\n` +
         `• *Unit:* ${unit?.name}\n` +
-        `• *Kategori:* ${unit?.categoryName}\n` +
+        `• *Kategori:* ${unit?.categoryName.id}\n` +
         `• *Lokasi Proyek:* ${location}\n` +
         `• *Rencana Mulai:* ${startDate}\n` +
         `• *Estimasi Durasi:* ${duration}\n` +
@@ -66,7 +69,7 @@ export function RentalBookingModal({
         `\nMohon konfirmasi ketersediaan unit dan pengiriman proposal penawaran resminya. Terima kasih.`
       : `Hello Benua Green Energy,\nI would like to request DIRECT RENTAL for:\n\n` +
         `• *Unit:* ${unit?.name}\n` +
-        `• *Category:* ${unit?.categoryName}\n` +
+        `• *Category:* ${unit?.categoryName.en}\n` +
         `• *Project Hub / Location:* ${location}\n` +
         `• *Start Date:* ${startDate}\n` +
         `• *Duration:* ${duration}\n` +
@@ -103,7 +106,7 @@ export function RentalBookingModal({
             {/* Close Button */}
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-600 hover:text-neutral-900 flex items-center justify-center transition-colors"
+              className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-600 hover:text-neutral-900 flex items-center justify-center transition-colors cursor-pointer"
             >
               <X className="w-4 h-4" />
             </button>
@@ -123,21 +126,23 @@ export function RentalBookingModal({
                 <div className="flex-1 pr-6">
                   <div className="flex items-center gap-2 mb-1">
                     <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-800">
-                      {unit.categoryName}
+                      {unit.categoryName[language]}
                     </span>
                     <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
                       unit.status === "available"
                         ? "bg-emerald-50 text-emerald-800 border border-emerald-200"
                         : "bg-amber-50 text-amber-800 border border-amber-200"
                     }`}>
-                      {unit.status === "available" ? "🟢 Siap Kirim" : "🟡 Sedang Disewa"}
+                      {unit.status === "available"
+                        ? (language === "id" ? "🟢 Siap Kirim" : "🟢 Ready to Dispatch")
+                        : (language === "id" ? "🟡 Sedang Disewa" : "🟡 On Rent")}
                     </span>
                   </div>
                   <h3 className="text-base sm:text-lg font-bold text-neutral-900 leading-snug">
                     {unit.name}
                   </h3>
                   <p className="text-xs text-neutral-500 mt-1">
-                    Tarif: <span className="font-semibold text-neutral-900">{unit.rateMonthly}</span> • {unit.rateDaily}
+                    {language === "id" ? "Tarif:" : "Rate:"} <span className="font-semibold text-neutral-900">{unit.rateMonthly[language]}</span> • {unit.rateDaily[language]}
                   </p>
                 </div>
               </div>
@@ -154,14 +159,26 @@ export function RentalBookingModal({
                   <select
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
-                    className="w-full text-xs bg-neutral-50 border border-neutral-200 rounded-xl px-3 py-2.5 text-neutral-900 focus:outline-none focus:border-neutral-900 transition-colors"
+                    className="w-full text-xs bg-neutral-50 border border-neutral-200 rounded-xl px-3 py-2.5 text-neutral-900 focus:outline-none focus:border-neutral-900 transition-colors cursor-pointer"
                   >
-                    <option value="Jabodetabek / Jawa Barat">Jabodetabek / Jawa Barat</option>
-                    <option value="Jawa Tengah & DI Yogyakarta">Jawa Tengah & DI Yogyakarta</option>
-                    <option value="Jawa Timur (Surabaya Hub)">Jawa Timur (Surabaya Hub)</option>
-                    <option value="Sumatera (Medan / Palembang)">Sumatera (Medan / Palembang)</option>
-                    <option value="Kalimantan (Balikpapan Hub)">Kalimantan (Balikpapan Hub)</option>
-                    <option value="Sulawesi & Indonesia Timur">Sulawesi & Indonesia Timur</option>
+                    <option value={language === "id" ? "Jabodetabek / Jawa Barat" : "Greater Jakarta / West Java"}>
+                      {language === "id" ? "Jabodetabek / Jawa Barat" : "Greater Jakarta / West Java"}
+                    </option>
+                    <option value={language === "id" ? "Jawa Tengah & DI Yogyakarta" : "Central Java & DI Yogyakarta"}>
+                      {language === "id" ? "Jawa Tengah & DI Yogyakarta" : "Central Java & DI Yogyakarta"}
+                    </option>
+                    <option value={language === "id" ? "Jawa Timur (Surabaya Hub)" : "East Java (Surabaya Hub)"}>
+                      {language === "id" ? "Jawa Timur (Surabaya Hub)" : "East Java (Surabaya Hub)"}
+                    </option>
+                    <option value={language === "id" ? "Sumatera (Medan / Palembang)" : "Sumatra (Medan / Palembang Hub)"}>
+                      {language === "id" ? "Sumatera (Medan / Palembang)" : "Sumatra (Medan / Palembang Hub)"}
+                    </option>
+                    <option value={language === "id" ? "Kalimantan (Balikpapan Hub)" : "Kalimantan (Balikpapan Hub)"}>
+                      {language === "id" ? "Kalimantan (Balikpapan Hub)" : "Kalimantan (Balikpapan Hub)"}
+                    </option>
+                    <option value={language === "id" ? "Sulawesi & Indonesia Timur" : "Sulawesi & Eastern Indonesia"}>
+                      {language === "id" ? "Sulawesi & Indonesia Timur" : "Sulawesi & Eastern Indonesia"}
+                    </option>
                   </select>
                 </div>
 
@@ -174,12 +191,20 @@ export function RentalBookingModal({
                   <select
                     value={duration}
                     onChange={(e) => setDuration(e.target.value)}
-                    className="w-full text-xs bg-neutral-50 border border-neutral-200 rounded-xl px-3 py-2.5 text-neutral-900 focus:outline-none focus:border-neutral-900 transition-colors"
+                    className="w-full text-xs bg-neutral-50 border border-neutral-200 rounded-xl px-3 py-2.5 text-neutral-900 focus:outline-none focus:border-neutral-900 transition-colors cursor-pointer"
                   >
-                    <option value="Harian (3 - 6 Hari)">Harian (3 - 6 Hari)</option>
-                    <option value="Mingguan (1 - 3 Minggu)">Mingguan (1 - 3 Minggu)</option>
-                    <option value="Bulanan (30 Hari)">Bulanan (30 Hari)</option>
-                    <option value="Proyek Panjang (3 - 12 Bulan)">Proyek Panjang (3 - 12 Bulan)</option>
+                    <option value={language === "id" ? "Harian (3 - 6 Hari)" : "Daily (3 - 6 Days)"}>
+                      {language === "id" ? "Harian (3 - 6 Hari)" : "Daily (3 - 6 Days)"}
+                    </option>
+                    <option value={language === "id" ? "Mingguan (1 - 3 Minggu)" : "Weekly (1 - 3 Weeks)"}>
+                      {language === "id" ? "Mingguan (1 - 3 Minggu)" : "Weekly (1 - 3 Weeks)"}
+                    </option>
+                    <option value={language === "id" ? "Bulanan (30 Hari)" : "Monthly (30 Days)"}>
+                      {language === "id" ? "Bulanan (30 Hari)" : "Monthly (30 Days)"}
+                    </option>
+                    <option value={language === "id" ? "Proyek Panjang (3 - 12 Bulan)" : "Long-term Project (3 - 12 Months)"}>
+                      {language === "id" ? "Proyek Panjang (3 - 12 Bulan)" : "Long-term Project (3 - 12 Months)"}
+                    </option>
                   </select>
                 </div>
 
@@ -193,18 +218,18 @@ export function RentalBookingModal({
                     type="date"
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
-                    className="w-full text-xs bg-neutral-50 border border-neutral-200 rounded-xl px-3 py-2.5 text-neutral-900 focus:outline-none focus:border-neutral-900 transition-colors"
+                    className="w-full text-xs bg-neutral-50 border border-neutral-200 rounded-xl px-3 py-2.5 text-neutral-900 focus:outline-none focus:border-neutral-900 transition-colors cursor-pointer"
                   />
                 </div>
 
                 {/* Company / Client Name */}
                 <div className="space-y-1.5">
                   <label className="text-xs font-semibold text-neutral-700">
-                    Nama Perusahaan / PIC Proyek
+                    {language === "id" ? "Nama Perusahaan / PIC Proyek" : "Company Name / Project PIC"}
                   </label>
                   <input
                     type="text"
-                    placeholder="PT / CV / Nama Kontraktor"
+                    placeholder={language === "id" ? "PT / CV / Nama Kontraktor" : "Company / Contractor / PIC Name"}
                     value={companyName}
                     onChange={(e) => setCompanyName(e.target.value)}
                     className="w-full text-xs bg-neutral-50 border border-neutral-200 rounded-xl px-3 py-2.5 text-neutral-900 focus:outline-none focus:border-neutral-900 transition-colors"
@@ -214,11 +239,11 @@ export function RentalBookingModal({
                 {/* Notes */}
                 <div className="sm:col-span-2 space-y-1.5">
                   <label className="text-xs font-semibold text-neutral-700">
-                    Catatan Kebutuhan Khusus / Target Debit (Opsional)
+                    {language === "id" ? "Catatan Kebutuhan Khusus / Target Debit (Opsional)" : "Special Requirements / Flow Target (Optional)"}
                   </label>
                   <input
                     type="text"
-                    placeholder="Contoh: Butuh kabel tambahan 50m, instalasi panel di lokasi"
+                    placeholder={language === "id" ? "Contoh: Butuh kabel tambahan 50m, instalasi panel di lokasi" : "e.g., Need 50m extra cable, on-site panel setup"}
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
                     className="w-full text-xs bg-neutral-50 border border-neutral-200 rounded-xl px-3 py-2.5 text-neutral-900 focus:outline-none focus:border-neutral-900 transition-colors"
@@ -233,7 +258,7 @@ export function RentalBookingModal({
                   {t("rental.includedAccessories")}
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  {unit.includes.map((inc, i) => (
+                  {unit.includes[language].map((inc, i) => (
                     <div key={i} className="flex items-center gap-2 text-xs text-neutral-600">
                       <Check className="w-3.5 h-3.5 text-neutral-900 shrink-0" />
                       <span>{inc}</span>
@@ -249,13 +274,13 @@ export function RentalBookingModal({
                   className="w-full sm:flex-1 bg-neutral-900 hover:bg-neutral-800 text-white font-medium py-3 px-6 rounded-full text-xs flex items-center justify-center gap-2 transition-all shadow-sm hover:shadow-md cursor-pointer"
                 >
                   <MessageSquare className="w-4 h-4" />
-                  <span>Kirim Pengajuan Sewa via WhatsApp</span>
+                  <span>{language === "id" ? "Kirim Pengajuan Sewa via WhatsApp" : "Submit Rental Inquiry via WhatsApp"}</span>
                 </button>
                 <button
                   onClick={onClose}
                   className="w-full sm:w-auto px-6 py-3 rounded-full border border-neutral-200 text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50 text-xs font-medium transition-colors cursor-pointer"
                 >
-                  Batal
+                  {language === "id" ? "Batal" : "Cancel"}
                 </button>
               </div>
 
@@ -267,3 +292,4 @@ export function RentalBookingModal({
     </AnimatePresence>
   );
 }
+

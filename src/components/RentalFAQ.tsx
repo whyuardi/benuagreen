@@ -7,7 +7,7 @@ import { ChevronDown, HelpCircle, Shield, Clock, Truck, Wrench, FileText } from 
 import { motion, AnimatePresence } from "framer-motion";
 
 export function RentalFAQ() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [openId, setOpenId] = useState<string | null>(RENTAL_FAQS[0].id);
 
   const toggleFAQ = (id: string) => {
@@ -39,7 +39,7 @@ export function RentalFAQ() {
         <div className="text-center max-w-xl mx-auto mb-12">
           <span className="text-xs font-semibold tracking-widest text-neutral-400 uppercase inline-flex items-center gap-1.5 mb-3">
             <HelpCircle className="w-3.5 h-3.5 text-neutral-800" />
-            <span>Tanya Jawab & Ketentuan</span>
+            <span>{language === "id" ? "Tanya Jawab & Ketentuan" : "FAQ & Rental Terms"}</span>
           </span>
           <h2 className="text-2xl sm:text-4xl font-normal tracking-tight text-neutral-900 mb-3">
             {t("faq.title")}
@@ -100,9 +100,13 @@ export function RentalFAQ() {
         {/* Quick Assistance Callout */}
         <div className="mt-10 p-6 rounded-2xl bg-white border border-neutral-200 text-center flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="text-center sm:text-left">
-            <h4 className="text-xs font-bold text-neutral-900">Punya Pertanyaan Spesifik Terkait Proyek Anda?</h4>
+            <h4 className="text-xs font-bold text-neutral-900">
+              {language === "id" ? "Punya Pertanyaan Spesifik Terkait Proyek Anda?" : "Have Specific Questions for Your Project?"}
+            </h4>
             <p className="text-[11px] text-neutral-500 font-light mt-0.5">
-              Konsultasikan kebutuhan debit, survei lokasi, dan estimasi biaya bersama tim teknis Benua Green.
+              {language === "id"
+                ? "Konsultasikan kebutuhan debit, survei lokasi, dan estimasi biaya bersama tim teknis Benua Green."
+                : "Consult flow requirements, site assessments, and cost estimates directly with Benua Green engineers."}
             </p>
           </div>
           <a
@@ -111,7 +115,7 @@ export function RentalFAQ() {
             rel="noopener noreferrer"
             className="px-5 py-2.5 rounded-full bg-neutral-900 hover:bg-neutral-800 text-white text-xs font-medium shrink-0 transition-colors shadow-sm"
           >
-            Hubungi Tim Rental
+            {language === "id" ? "Hubungi Tim Rental" : "Contact Rental Team"}
           </a>
         </div>
 
@@ -119,3 +123,4 @@ export function RentalFAQ() {
     </section>
   );
 }
+

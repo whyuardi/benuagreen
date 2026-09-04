@@ -4,13 +4,12 @@ import { useState } from "react";
 import { useLanguage } from "@/lib/i18n";
 import { calculateWizardRecommendation, WizardInputs, RentalUnit } from "@/lib/rental";
 import { Compass, Waves, Gauge, SunMedium, ArrowRight, ArrowLeft, Check, Sparkles, Zap, ShieldCheck } from "lucide-react";
-import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { RentalBookingModal } from "@/components/RentalBookingModal";
 import { SafeProductImage } from "@/components/SafeProductImage";
 
 export function UnitSelectionWizard() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [selectedUnitForBooking, setSelectedUnitForBooking] = useState<RentalUnit | null>(null);
 
@@ -76,7 +75,7 @@ export function UnitSelectionWizard() {
                       {isCompleted ? <Check className="w-3 h-3" /> : step.num}
                     </span>
                     <span className="text-[11px] font-semibold text-neutral-900 hidden sm:inline">
-                      Langkah {step.num}
+                      {language === "id" ? `Langkah ${step.num}` : `Step ${step.num}`}
                     </span>
                   </div>
                   <p className="text-[11px] text-neutral-600 font-medium truncate">
@@ -102,18 +101,30 @@ export function UnitSelectionWizard() {
                 <div>
                   <h3 className="text-sm font-semibold text-neutral-900 mb-1 flex items-center gap-2">
                     <Waves className="w-4 h-4 text-neutral-700" />
-                    <span>Pilih Sumber Air Utama:</span>
+                    <span>{language === "id" ? "Pilih Sumber Air Utama:" : "Select Primary Water Source:"}</span>
                   </h3>
                   <p className="text-xs text-neutral-500 font-light">
-                    Tentukan titik intake atau jenis sumber air yang akan dipompa.
+                    {language === "id" ? "Tentukan titik intake atau jenis sumber air yang akan dipompa." : "Define the intake point or water source to be pumped."}
                   </p>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   {[
-                    { id: "deepwell", label: t("wizard.sourceDeepwell"), desc: "Sumur bor dalam, casing 4-8 inch" },
-                    { id: "river-lake", label: t("wizard.sourceRiver"), desc: "Pengambilan permukaan / intake terbuka" },
-                    { id: "groundtank", label: t("wizard.sourceTank"), desc: "Bak penampung / booster transfer" },
+                    {
+                      id: "deepwell",
+                      label: t("wizard.sourceDeepwell"),
+                      desc: language === "id" ? "Sumur bor dalam, casing 4-8 inch" : "Deep borehole well, 4-8 inch casing"
+                    },
+                    {
+                      id: "river-lake",
+                      label: t("wizard.sourceRiver"),
+                      desc: language === "id" ? "Pengambilan permukaan / intake terbuka" : "Surface intake / open water source"
+                    },
+                    {
+                      id: "groundtank",
+                      label: t("wizard.sourceTank"),
+                      desc: language === "id" ? "Bak penampung / booster transfer" : "Storage tank / transfer booster"
+                    },
                   ].map((src) => {
                     const isSelected = inputs.waterSource === src.id;
                     return (
@@ -147,7 +158,7 @@ export function UnitSelectionWizard() {
                         {t("wizard.depthLabel")}
                       </label>
                       <span className="text-sm font-bold text-neutral-900 px-3 py-1 bg-neutral-100 rounded-full">
-                        {inputs.depthMeters} Meter
+                        {inputs.depthMeters} {language === "id" ? "Meter" : "Meters"}
                       </span>
                     </div>
                     <input
@@ -160,10 +171,10 @@ export function UnitSelectionWizard() {
                       className="w-full accent-neutral-900 cursor-pointer"
                     />
                     <div className="flex justify-between text-[10px] text-neutral-400 font-medium">
-                      <span>10m (Dangkal)</span>
-                      <span>60m (Standar)</span>
-                      <span>120m (Dalam)</span>
-                      <span>180m (Sangat Dalam)</span>
+                      <span>10m ({language === "id" ? "Dangkal" : "Shallow"})</span>
+                      <span>60m ({language === "id" ? "Standar" : "Standard"})</span>
+                      <span>120m ({language === "id" ? "Dalam" : "Deep"})</span>
+                      <span>180m ({language === "id" ? "Sangat Dalam" : "Very Deep"})</span>
                     </div>
                   </div>
                 )}
@@ -183,19 +194,35 @@ export function UnitSelectionWizard() {
                 <div>
                   <h3 className="text-sm font-semibold text-neutral-900 mb-1 flex items-center gap-2">
                     <Gauge className="w-4 h-4 text-neutral-700" />
-                    <span>Tentukan Kebutuhan Volume / Debit Air:</span>
+                    <span>{language === "id" ? "Tentukan Kebutuhan Volume / Debit Air:" : "Determine Required Flow Rate / Capacity:"}</span>
                   </h3>
                   <p className="text-xs text-neutral-500 font-light">
-                    Kapasitas aliran air yang dibutuhkan per jam untuk aplikasi Anda.
+                    {language === "id" ? "Kapasitas aliran air yang dibutuhkan per jam untuk aplikasi Anda." : "Required flow rate capacity per hour for your application."}
                   </p>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {[
-                    { id: "low", title: "Kecil (5 - 15 m³/jam)", desc: "Kebun holtikultura, perumahan, peternakan kecil" },
-                    { id: "medium", title: "Menengah (15 - 35 m³/jam)", desc: "Irigasi kebun sawit/jagung, suplai proyek konstruksi" },
-                    { id: "high", title: "Besar (35 - 70 m³/jam)", desc: "Dewatering galian, pengurasan tambang, intake perkebunan luas" },
-                    { id: "commercial", title: "Komersial (50 - 100+ m³/jam)", desc: "Pabrik, kawasan industri, PDAM & municipal water" },
+                    {
+                      id: "low",
+                      title: language === "id" ? "Kecil (5 - 15 m³/jam)" : "Low (5 - 15 m³/hr)",
+                      desc: language === "id" ? "Kebun holtikultura, perumahan, peternakan kecil" : "Horticulture, residential, livestock"
+                    },
+                    {
+                      id: "medium",
+                      title: language === "id" ? "Menengah (15 - 35 m³/jam)" : "Medium (15 - 35 m³/hr)",
+                      desc: language === "id" ? "Irigasi kebun sawit/jagung, suplai proyek konstruksi" : "Plantation irrigation, construction supply"
+                    },
+                    {
+                      id: "high",
+                      title: language === "id" ? "Besar (35 - 70 m³/jam)" : "High (35 - 70 m³/hr)",
+                      desc: language === "id" ? "Dewatering galian, pengurasan tambang, intake perkebunan luas" : "Excavation dewatering, mine drainage, large intake"
+                    },
+                    {
+                      id: "commercial",
+                      title: language === "id" ? "Komersial (50 - 100+ m³/jam)" : "Commercial (50 - 100+ m³/hr)",
+                      desc: language === "id" ? "Pabrik, kawasan industri, PDAM & municipal water" : "Industrial plants, commercial complexes, municipal"
+                    },
                   ].map((fl) => {
                     const isSelected = inputs.flowRequirement === fl.id;
                     return (
@@ -235,18 +262,30 @@ export function UnitSelectionWizard() {
                 <div>
                   <h3 className="text-sm font-semibold text-neutral-900 mb-1 flex items-center gap-2">
                     <SunMedium className="w-4 h-4 text-neutral-700" />
-                    <span>Pilih Sumber Energi Penggerak:</span>
+                    <span>{language === "id" ? "Pilih Sumber Energi Penggerak:" : "Select Power Energy Source:"}</span>
                   </h3>
                   <p className="text-xs text-neutral-500 font-light">
-                    Metode pasokan daya yang tersedia di lokasi proyek Anda.
+                    {language === "id" ? "Metode pasokan daya yang tersedia di lokasi proyek Anda." : "Available power supply methods at your project site."}
                   </p>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   {[
-                    { id: "solar", title: "100% Tenaga Surya (Solar PV)", desc: "Tanpa biaya BBM/listrik, off-grid mandiri 100%" },
-                    { id: "hybrid", title: "Hybrid (Solar + PLN/Genset)", desc: "Siang tenaga surya, malam beralih otomatis ke PLN/Genset" },
-                    { id: "grid", title: "Listrik PLN 3-Phase / Genset", desc: "Tegangan industri 380V konvensional" },
+                    {
+                      id: "solar",
+                      title: language === "id" ? "100% Tenaga Surya (Solar PV)" : "100% Solar PV (Off-Grid)",
+                      desc: language === "id" ? "Tanpa biaya BBM/listrik, off-grid mandiri 100%" : "Zero fuel/grid costs, 100% self-sustained off-grid"
+                    },
+                    {
+                      id: "hybrid",
+                      title: language === "id" ? "Hybrid (Solar + PLN/Genset)" : "Hybrid (Solar + Grid/Genset)",
+                      desc: language === "id" ? "Siang tenaga surya, malam beralih otomatis ke PLN/Genset" : "Daytime solar, auto-switch to grid/genset at night"
+                    },
+                    {
+                      id: "grid",
+                      title: language === "id" ? "Listrik PLN 3-Phase / Genset" : "3-Phase Grid / Genset",
+                      desc: language === "id" ? "Tegangan industri 380V konvensional" : "Standard 380V industrial grid supply"
+                    },
                   ].map((pw) => {
                     const isSelected = inputs.powerSource === pw.id;
                     return (
@@ -301,7 +340,7 @@ export function UnitSelectionWizard() {
             ) : (
               <span className="text-xs font-semibold text-emerald-800 flex items-center gap-1">
                 <Check className="w-4 h-4" />
-                Kalkulasi Selesai
+                {language === "id" ? "Kalkulasi Selesai" : "Calculation Complete"}
               </span>
             )}
           </div>
@@ -327,9 +366,11 @@ export function UnitSelectionWizard() {
                 {t("wizard.estHead")}
               </span>
               <p className="text-2xl font-bold text-neutral-900">
-                ± {recommendation.recommendedHead} <span className="text-sm font-normal text-neutral-500">Meter</span>
+                ± {recommendation.recommendedHead} <span className="text-sm font-normal text-neutral-500">{language === "id" ? "Meter" : "Meters"}</span>
               </p>
-              <p className="text-[10px] text-neutral-400 mt-1">Termasuk friksi pipa & tekanan kerja</p>
+              <p className="text-[10px] text-neutral-400 mt-1">
+                {language === "id" ? "Termasuk friksi pipa & tekanan kerja" : "Includes pipe friction & working pressure"}
+              </p>
             </div>
 
             <div className="p-4 bg-neutral-50 rounded-2xl border border-neutral-100">
@@ -340,17 +381,21 @@ export function UnitSelectionWizard() {
                 {recommendation.estimatedKw} <span className="text-sm font-normal text-neutral-500">kW</span>
                 <span className="text-xs text-neutral-400 font-normal ml-1">({Math.round(recommendation.estimatedKw * 1.34)} HP)</span>
               </p>
-              <p className="text-[10px] text-neutral-400 mt-1">Daya motor pompa minimal</p>
+              <p className="text-[10px] text-neutral-400 mt-1">
+                {language === "id" ? "Daya motor pompa minimal" : "Minimum recommended pump motor power"}
+              </p>
             </div>
 
             <div className="p-4 bg-neutral-50 rounded-2xl border border-neutral-100">
               <span className="text-[10px] uppercase font-bold text-neutral-400 block mb-1">
-                Sistem Penggerak
+                {language === "id" ? "Sistem Penggerak" : "Drive System"}
               </span>
               <p className="text-sm font-bold text-neutral-900 mt-1">
                 {inputs.powerSource === "solar" ? "Solar MPPT Inverter IP65" : inputs.powerSource === "hybrid" ? "Hybrid Auto-Switching VFD" : "Direct On-Line / Soft Starter"}
               </p>
-              <p className="text-[10px] text-neutral-400 mt-1">100% Proteksi Overload & Dry-Run</p>
+              <p className="text-[10px] text-neutral-400 mt-1">
+                {language === "id" ? "100% Proteksi Overload & Dry-Run" : "100% Overload & Dry-Run Protection"}
+              </p>
             </div>
           </div>
 
@@ -375,13 +420,13 @@ export function UnitSelectionWizard() {
                   </div>
                   <div className="flex-1 pr-2">
                     <span className="text-[9px] uppercase font-bold text-neutral-400 block">
-                      {unit.categoryName}
+                      {unit.categoryName[language]}
                     </span>
                     <h5 className="text-xs font-bold text-neutral-900 leading-snug">
                       {unit.name}
                     </h5>
                     <p className="text-[11px] text-neutral-500 mt-0.5 font-light">
-                      {unit.flowRate} • Head {unit.headMax}
+                      {unit.flowRate[language]} • Head {unit.headMax[language]}
                     </p>
                   </div>
                   <button
@@ -408,3 +453,4 @@ export function UnitSelectionWizard() {
     </section>
   );
 }
+
