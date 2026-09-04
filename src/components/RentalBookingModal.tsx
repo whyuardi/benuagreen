@@ -6,6 +6,7 @@ import { useLanguage } from "@/lib/i18n";
 import { X, Check, Calendar, MapPin, Clock, MessageSquare } from "lucide-react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { SafeProductImage } from "@/components/SafeProductImage";
 
 interface RentalBookingModalProps {
   unit: RentalUnit | null;
@@ -111,13 +112,12 @@ export function RentalBookingModal({
               
               {/* Header */}
               <div className="flex items-start gap-4 pb-6 border-b border-neutral-100">
-                <div className="relative w-20 h-20 bg-neutral-50 rounded-2xl shrink-0 p-2 border border-neutral-100">
-                  <Image
+                <div className="relative w-20 h-20 bg-neutral-50 rounded-2xl shrink-0 p-2 border border-neutral-100 overflow-hidden">
+                  <SafeProductImage
                     src={unit.image}
                     alt={unit.name}
                     fill
                     className="object-contain p-1"
-                    unoptimized
                   />
                 </div>
                 <div className="flex-1 pr-6">

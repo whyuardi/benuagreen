@@ -7,6 +7,7 @@ import { AvailabilityChecker } from "@/components/AvailabilityChecker";
 import { UnitSelectionWizard } from "@/components/UnitSelectionWizard";
 import { RentalFAQ } from "@/components/RentalFAQ";
 import { RentalBookingModal } from "@/components/RentalBookingModal";
+import { SafeProductImage } from "@/components/SafeProductImage";
 import { ShieldCheck, Truck, RefreshCw, Wrench, Sparkles, ArrowRight, Check, Search, Filter } from "lucide-react";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -205,13 +206,12 @@ export default function RentalPage() {
                     </div>
 
                     {/* Image */}
-                    <div className="relative h-48 w-full bg-[#F8F9FA] rounded-xl flex items-center justify-center p-4 mb-4">
-                      <Image
+                    <div className="relative h-48 w-full bg-[#F8F9FA] rounded-xl flex items-center justify-center p-4 mb-4 overflow-hidden">
+                      <SafeProductImage
                         src={unit.image}
                         alt={unit.name}
                         fill
                         className="object-contain p-2"
-                        unoptimized
                       />
                     </div>
 

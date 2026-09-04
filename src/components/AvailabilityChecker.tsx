@@ -7,6 +7,7 @@ import { Search, MapPin, Calendar, Clock, CheckCircle2, ArrowRight, Sparkles, Fi
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { RentalBookingModal } from "@/components/RentalBookingModal";
+import { SafeProductImage } from "@/components/SafeProductImage";
 
 interface AvailabilityCheckerProps {
   embedded?: boolean;
@@ -186,12 +187,11 @@ export function AvailabilityChecker({ embedded = false }: AvailabilityCheckerPro
 
                   {/* Image */}
                   <div className="relative h-44 w-full bg-[#F8F9FA] rounded-xl flex items-center justify-center p-4 mb-4 overflow-hidden">
-                    <Image
+                    <SafeProductImage
                       src={unit.image}
                       alt={unit.name}
                       fill
                       className="object-contain p-2 group-hover:scale-105 transition-transform duration-500"
-                      unoptimized
                     />
                   </div>
 

@@ -7,6 +7,7 @@ import { Compass, Waves, Gauge, SunMedium, ArrowRight, ArrowLeft, Check, Sparkle
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { RentalBookingModal } from "@/components/RentalBookingModal";
+import { SafeProductImage } from "@/components/SafeProductImage";
 
 export function UnitSelectionWizard() {
   const { t } = useLanguage();
@@ -364,13 +365,12 @@ export function UnitSelectionWizard() {
                   key={unit.id}
                   className="bg-neutral-50 rounded-2xl p-4 border border-neutral-200 flex items-center justify-between gap-4"
                 >
-                  <div className="relative w-16 h-16 bg-white rounded-xl shrink-0 p-1 border border-neutral-100">
-                    <Image
+                  <div className="relative w-16 h-16 bg-white rounded-xl shrink-0 p-1 border border-neutral-100 overflow-hidden">
+                    <SafeProductImage
                       src={unit.image}
                       alt={unit.name}
                       fill
                       className="object-contain p-1"
-                      unoptimized
                     />
                   </div>
                   <div className="flex-1 pr-2">
