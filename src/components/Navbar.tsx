@@ -32,6 +32,7 @@ export function Navbar() {
 
   const navLinks = [
     { name: t("nav.products"), href: "/" },
+    { name: t("nav.rental"), href: "/rental" },
     { name: t("nav.pumps"), href: "/pumps" },
     { name: t("nav.ppr"), href: "/ppr" },
     { name: t("nav.about"), href: "/about" },

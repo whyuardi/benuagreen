@@ -536,6 +536,263 @@ export const dictionary = {
     id: "Hak cipta dilindungi undang-undang.",
     en: "All rights reserved.",
   },
+  // Navbar
+  "nav.rental": {
+    id: "Rental Pompa",
+    en: "Pump Rental",
+  },
+
+  // Availability Checker
+  "checker.badge": {
+    id: "Cek Ketersediaan Real-Time",
+    en: "Real-Time Availability Checker",
+  },
+  "checker.title": {
+    id: "Cek Ketersediaan Pompa & Peralatan",
+    en: "Check Pump & Equipment Availability",
+  },
+  "checker.subtitle": {
+    id: "Pilih jenis unit dan lokasi proyek untuk melihat armada pompa yang siap kirim hari ini.",
+    en: "Select equipment type and project hub to verify instant ready-to-dispatch pump inventory.",
+  },
+  "checker.category": {
+    id: "Kategori Unit",
+    en: "Equipment Category",
+  },
+  "checker.location": {
+    id: "Lokasi Hub Proyek",
+    en: "Project Hub Location",
+  },
+  "checker.duration": {
+    id: "Durasi Sewa",
+    en: "Rental Duration",
+  },
+  "checker.startDate": {
+    id: "Mulai Sewa",
+    en: "Start Date",
+  },
+  "checker.searchBtn": {
+    id: "Cek Ketersediaan",
+    en: "Check Availability",
+  },
+  "checker.availableNow": {
+    id: "Tersedia & Siap Kirim",
+    en: "In Stock & Ready to Dispatch",
+  },
+  "checker.rentedNow": {
+    id: "Sedang Beroperasi",
+    en: "Currently On Rent",
+  },
+  "checker.unitsFound": {
+    id: "Unit Ditemukan",
+    en: "Units Available",
+  },
+
+  // Wizard
+  "wizard.badge": {
+    id: "Kalkulator & Panduan Cerdas",
+    en: "Smart Selection Wizard",
+  },
+  "wizard.title": {
+    id: "Panduan Pilih Unit Pompa",
+    en: "Pump Selection Wizard",
+  },
+  "wizard.subtitle": {
+    id: "Dapatkan rekomendasi tipe pompa, kalkulasi daya (kW/HP), dan kapasitas yang tepat hanya dalam 3 langkah.",
+    en: "Get tailored pump recommendations, kW/HP power estimates, and exact capacities in 3 simple steps.",
+  },
+  "wizard.step1": {
+    id: "1. Sumber Air & Kedalaman",
+    en: "1. Water Source & Depth",
+  },
+  "wizard.step2": {
+    id: "2. Kebutuhan Debit Air",
+    en: "2. Flow Rate Demand",
+  },
+  "wizard.step3": {
+    id: "3. Sumber Daya Energi",
+    en: "3. Power Source",
+  },
+  "wizard.sourceDeepwell": {
+    id: "Sumur Bor Dalam (Borehole)",
+    en: "Deep Borehole Well",
+  },
+  "wizard.sourceRiver": {
+    id: "Sungai / Waduk / Kolam",
+    en: "River / Reservoir / Lake",
+  },
+  "wizard.sourceTank": {
+    id: "Ground Tank / Penampungan",
+    en: "Ground Tank / Reservoir",
+  },
+  "wizard.depthLabel": {
+    id: "Kedalaman Sumur / Head Statis (Meter)",
+    en: "Well Depth / Static Head (Meters)",
+  },
+  "wizard.flowLow": {
+    id: "Kecil (5 - 15 m³/jam) — Perkebunan Ringan",
+    en: "Low (5 - 15 m³/hr) — Small Farm",
+  },
+  "wizard.flowMedium": {
+    id: "Menengah (15 - 35 m³/jam) — Irigasi / Proyek",
+    en: "Medium (15 - 35 m³/hr) — Irrigation / Site",
+  },
+  "wizard.flowHigh": {
+    id: "Besar (35 - 70 m³/jam) — Dewatering / Tambang",
+    en: "High (35 - 70 m³/hr) — Dewatering / Mining",
+  },
+  "wizard.flowComm": {
+    id: "Komersial (50 - 100+ m³/jam) — Pabrik / Kawasan",
+    en: "Commercial (50 - 100+ m³/hr) — Industrial",
+  },
+  "wizard.powerSolar": {
+    id: "100% Tenaga Surya (Solar PV Mandiri)",
+    en: "100% Solar PV Powered (Off-Grid)",
+  },
+  "wizard.powerHybrid": {
+    id: "Hybrid (Solar + PLN/Genset Cadangan)",
+    en: "Hybrid (Solar + Grid/Genset Backup)",
+  },
+  "wizard.powerGrid": {
+    id: "Listrik PLN 3-Phase 380V / Genset",
+    en: "3-Phase 380V Grid / Genset Only",
+  },
+  "wizard.calcResult": {
+    id: "Hasil Rekomendasi Teknis",
+    en: "Technical Recommendation",
+  },
+  "wizard.estHead": {
+    id: "Estimasi Total Head",
+    en: "Estimated Total Head",
+  },
+  "wizard.estPower": {
+    id: "Estimasi Daya Motor",
+    en: "Estimated Motor Power",
+  },
+  "wizard.matchedUnits": {
+    id: "Pilihan Unit Rental yang Cocok",
+    en: "Recommended Matching Rental Units",
+  },
+  "wizard.rentNow": {
+    id: "Sewa Unit Ini",
+    en: "Rent This Unit",
+  },
+  "wizard.prevStep": {
+    id: "Kembali",
+    en: "Back",
+  },
+  "wizard.nextStep": {
+    id: "Lanjut",
+    en: "Next",
+  },
+
+  // Rental Catalog
+  "rental.title": {
+    id: "Katalog Rental Pompa & Energi",
+    en: "Pump & Energy Rental Catalog",
+  },
+  "rental.subtitle": {
+    id: "Sewa pompa sumur dalam tenaga surya, booster multistage, dan mesin pipa PPR untuk proyek B2B, pertanian, dan konstruksi.",
+    en: "Industrial & solar pump rental with guaranteed replacement units, technical supervision, and flexible project terms.",
+  },
+  "rental.allStatus": {
+    id: "Semua Status",
+    en: "All Status",
+  },
+  "rental.onlyAvailable": {
+    id: "Tersedia (Ready Stock)",
+    en: "Available (Ready)",
+  },
+  "rental.onlyRented": {
+    id: "Sedang Disewa",
+    en: "On Rent",
+  },
+  "rental.daily": {
+    id: "Harian",
+    en: "Daily",
+  },
+  "rental.monthly": {
+    id: "Bulanan",
+    en: "Monthly",
+  },
+  "rental.rentDirect": {
+    id: "Sewa Langsung",
+    en: "Rent Now",
+  },
+  "rental.viewSpecs": {
+    id: "Spesifikasi & Paket",
+    en: "Specs & Package",
+  },
+  "rental.includedAccessories": {
+    id: "Termasuk Dalam Paket Sewa:",
+    en: "Included in Rental Package:",
+  },
+  "rental.modalTitle": {
+    id: "Formulir Sewa Unit Langsung",
+    en: "Direct Rental Booking",
+  },
+  "rental.modalDesc": {
+    id: "Isi detail lokasi dan durasi untuk terhubung langsung ke WhatsApp divisi rental.",
+    en: "Provide project location and duration to connect directly with our rental team via WhatsApp.",
+  },
+
+  // FAQ
+  "faq.title": {
+    id: "FAQ & Ketentuan Rental",
+    en: "Rental FAQ & Policies",
+  },
+  "faq.subtitle": {
+    id: "Informasi lengkap mengenai garansi kerusakan, perpanjangan sewa, pengiriman, dan dukungan teknis.",
+    en: "Clear operational policies on damage warranty, rental extension, nationwide delivery, and technician support.",
+  },
+  "faq.damage.q": {
+    id: "Bagaimana jika unit pompa mengalami kerusakan saat masa sewa?",
+    en: "What happens if a pump suffers a breakdown during the rental period?",
+  },
+  "faq.damage.a": {
+    id: "Benua Green memberikan Garansi Penggantian Unit < 24 Jam untuk kerusakan wajar (wear & tear operasional) tanpa biaya tambahan. Tim teknisi kami akan segera mengirim unit pengganti setara atau melakukan perbaikan langsung di lokasi proyek.",
+    en: "Benua Green provides a <24h Unit Replacement Guarantee for standard operational wear and tear at no extra charge. Our technicians will promptly deploy an equivalent replacement unit or perform on-site troubleshooting.",
+  },
+  "faq.extension.q": {
+    id: "Bagaimana prosedur jika proyek membutuhkan perpanjangan waktu sewa (extend)?",
+    en: "How can we extend our rental duration if the project timeline expands?",
+  },
+  "faq.extension.a": {
+    id: "Perpanjangan masa sewa dapat dilakukan dengan mudah cukup menginformasikan tim representatif kami minimal 3 hari sebelum masa sewa berakhir. Tarif sewa otomatis disesuaikan ke skema bulanan yang lebih hemat.",
+    en: "Rental extensions can be requested anytime by notifying our representative at least 3 days before the contract expiry. Rates will automatically adjust to discounted monthly tiers.",
+  },
+  "faq.delivery.q": {
+    id: "Apakah melayani pengiriman unit ke luar kota dan luar pulau Jawa?",
+    en: "Do you provide mobilization and delivery outside Java island?",
+  },
+  "faq.delivery.a": {
+    id: "Ya, kami melayani mobilisasi armada rental ke seluruh wilayah Indonesia (Sumatera, Kalimantan, Sulawesi, NTT, Papua) melalui jaringan logistik ekspedisi terpercaya atau depo hub terdekat kami di Jakarta, Surabaya, dan Balikpapan.",
+    en: "Yes, we dispatch rental units nationwide across Indonesia through trusted freight partners and our regional hubs in Jakarta, Surabaya, and Balikpapan.",
+  },
+  "faq.installation.q": {
+    id: "Apakah biaya sewa sudah termasuk instalasi dan kabel kelistrikan?",
+    en: "Are electrical cables, control panels, and installation included?",
+  },
+  "faq.installation.a": {
+    id: "Setiap paket sewa unit pompa sudah dilengkapi dengan kabel submersible (50-100m), panel starter/inverter IP65, dan sensor proteksi. Untuk paket tertentu, kami juga menyediakan supervisi instalasi awal oleh teknisi bersertifikat.",
+    en: "Every pump rental package comes complete with 50-100m submersible cable, IP65 VFD/starter panel, and dry-run sensors. Initial setup supervision by certified technicians is also available.",
+  },
+  "faq.documents.q": {
+    id: "Dokumen apa saja yang dibutuhkan untuk pengajuan sewa B2B / Perusahaan?",
+    en: "What documents are required for corporate / B2B rental agreements?",
+  },
+  "faq.documents.a": {
+    id: "Untuk klien B2B / kontraktor, persyaratan cukup menyertakan Purchase Order (PO) / SPK resmi, NPWP Perusahaan, serta identitas PIC penanggung jawab proyek.",
+    en: "For corporate clients and contractors, requirements are simple: official Purchase Order (PO) / Contract, Company Tax ID (NPWP), and the designated project PIC credentials.",
+  },
+  "faq.maintenance.q": {
+    id: "Apakah ada layanan servis berkala selama masa sewa jangka panjang?",
+    en: "Is periodic maintenance provided for long-term project rentals?",
+  },
+  "faq.maintenance.a": {
+    id: "Untuk sewa bulanan dan tahunan, tim servis Benua Green melakukan inspeksi dan perawatan berkala setiap bulan untuk memastikan performa debit dan efisiensi energi tetap maksimal.",
+    en: "For monthly and annual rentals, our service crew conducts routine monthly inspections to ensure continuous flow rate performance and peak energy efficiency.",
+  },
 };
 
 export type TranslationKey = keyof typeof dictionary;
