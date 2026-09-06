@@ -295,13 +295,10 @@ export default function RentalPage() {
                   <div className="pt-4 border-t border-neutral-100 flex items-center justify-between gap-3 mt-2">
                     <div>
                       <span className="text-[10px] text-neutral-400 block">
-                        {language === "id" ? "Mulai Dari" : "Starting From"}
+                        {language === "id" ? "Skema Penawaran" : "Quotation Scheme"}
                       </span>
-                      <p className="text-sm font-bold text-neutral-900">
-                        {unit.rateMonthly[language].split("/")[0]}
-                        <span className="text-[10px] font-normal text-neutral-500">
-                          {language === "id" ? "/bln" : "/mo"}
-                        </span>
+                      <p className="text-xs font-semibold text-neutral-900">
+                        {language === "id" ? "Hubungi untuk Penawaran" : "Request Official Quote"}
                       </p>
                     </div>
 

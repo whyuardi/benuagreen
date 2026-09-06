@@ -142,7 +142,7 @@ export function RentalBookingModal({
                     {unit.name}
                   </h3>
                   <p className="text-xs text-neutral-500 mt-1">
-                    {language === "id" ? "Tarif:" : "Rate:"} <span className="font-semibold text-neutral-900">{unit.rateMonthly[language]}</span> • {unit.rateDaily[language]}
+                    {language === "id" ? "Skema Sewa:" : "Rental Scheme:"} <span className="font-semibold text-neutral-900">{language === "id" ? "Penawaran Khusus Proyek (B2B)" : "Custom Project Quotation (B2B)"}</span>
                   </p>
                 </div>
               </div>

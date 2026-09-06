@@ -175,7 +175,7 @@ export function AvailabilityChecker({ embedded = false }: AvailabilityCheckerPro
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
             <p className="text-xs font-semibold text-neutral-900">
-              {availableUnits.length} {t("checker.unitsFound")}
+              {language === "id" ? "Armada Siap Mobilisasi Proyek" : "Fleet Ready for Project Mobilization"}
             </p>
           </div>
           <span className="text-xs text-neutral-400 font-light">
@@ -257,17 +257,14 @@ export function AvailabilityChecker({ embedded = false }: AvailabilityCheckerPro
                   </div>
                 </div>
 
-                {/* Footer Price & Action */}
+                {/* Footer Quote & Action */}
                 <div className="pt-4 border-t border-neutral-100 flex items-center justify-between gap-3">
                   <div>
                     <span className="text-[10px] text-neutral-400 block uppercase font-medium">
-                      {language === "id" ? "Tarif Sewa" : "Rental Rate"}
+                      {language === "id" ? "Skema Sewa" : "Rental Scheme"}
                     </span>
-                    <p className="text-xs font-bold text-neutral-900">
-                      {unit.rateMonthly[language].split("/")[0]}
-                      <span className="text-[10px] font-normal text-neutral-400">
-                        {language === "id" ? "/bln" : "/mo"}
-                      </span>
+                    <p className="text-xs font-semibold text-neutral-900">
+                      {language === "id" ? "Sesuai Proyek" : "Project Based"}
                     </p>
                   </div>
 
