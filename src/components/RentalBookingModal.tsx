@@ -128,15 +128,6 @@ export function RentalBookingModal({
                     <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-800">
                       {unit.categoryName[language]}
                     </span>
-                    <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
-                      unit.status === "available"
-                        ? "bg-emerald-50 text-emerald-800 border border-emerald-200"
-                        : "bg-amber-50 text-amber-800 border border-amber-200"
-                    }`}>
-                      {unit.status === "available"
-                        ? (language === "id" ? "🟢 Siap Kirim" : "🟢 Ready to Dispatch")
-                        : (language === "id" ? "🟡 Sedang Disewa" : "🟡 On Rent")}
-                    </span>
                   </div>
                   <h3 className="text-base sm:text-lg font-bold text-neutral-900 leading-snug">
                     {unit.name}

@@ -196,20 +196,10 @@ export function AvailabilityChecker({ embedded = false }: AvailabilityCheckerPro
                 className="bg-white rounded-2xl border border-neutral-200 hover:border-neutral-400 p-5 flex flex-col justify-between transition-all shadow-sm hover:shadow-md group"
               >
                 <div>
-                  {/* Status & Category Bar */}
+                  {/* Category Bar */}
                   <div className="flex items-center justify-between mb-3">
                     <span className="text-[10px] uppercase font-bold tracking-wider text-neutral-400">
                       {unit.categoryName[language]}
-                    </span>
-                    <span
-                      className={`text-[10px] font-semibold px-2.5 py-1 rounded-full flex items-center gap-1.5 ${
-                        isReady
-                          ? "bg-emerald-50 text-emerald-800 border border-emerald-200"
-                          : "bg-amber-50 text-amber-800 border border-amber-200"
-                      }`}
-                    >
-                      <span className={`w-1.5 h-1.5 rounded-full ${isReady ? "bg-emerald-500" : "bg-amber-500"}`} />
-                      <span>{isReady ? t("checker.availableNow") : t("checker.rentedNow")}</span>
                     </span>
                   </div>
 

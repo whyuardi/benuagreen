@@ -21,10 +21,6 @@ export default function RentalPage() {
   // Filtered units
   const displayedUnits = useMemo(() => {
     return RENTAL_UNITS.filter((unit) => {
-      // Status filter
-      if (statusFilter !== "all" && unit.status !== statusFilter) {
-        return false;
-      }
       // Category filter
       if (categoryFilter !== "all" && unit.category !== categoryFilter) {
         return false;
@@ -42,7 +38,7 @@ export default function RentalPage() {
       }
       return true;
     });
-  }, [statusFilter, categoryFilter, searchQuery]);
+  }, [categoryFilter, searchQuery]);
 
   return (
     <main className="flex-grow bg-white pb-20">
@@ -163,30 +159,8 @@ export default function RentalPage() {
             </div>
           </div>
 
-          {/* Filter Pills */}
+          {/* Category Filter Pills */}
           <div className="flex flex-wrap items-center gap-2 mb-8 pb-4 border-b border-neutral-100">
-            {/* Status Filter */}
-            {[
-              { id: "all", label: language === "id" ? "Semua Unit" : "All Units" },
-              { id: "available", label: language === "id" ? "🟢 Siap Kirim (Tersedia)" : "🟢 Ready to Dispatch" },
-              { id: "rented", label: language === "id" ? "🟡 Sedang Beroperasi" : "🟡 Currently On Rent" },
-            ].map((st) => (
-              <button
-                key={st.id}
-                onClick={() => setStatusFilter(st.id)}
-                className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-200 border cursor-pointer ${
-                  statusFilter === st.id
-                    ? "bg-neutral-900 text-white border-neutral-900 shadow-sm"
-                    : "bg-white text-neutral-600 border-neutral-200 hover:border-neutral-400 hover:bg-neutral-50"
-                }`}
-              >
-                {st.label}
-              </button>
-            ))}
-
-            <div className="w-[1px] h-5 bg-neutral-200 mx-2 hidden sm:block" />
-
-            {/* Category Filter */}
             {[
               { id: "all", label: language === "id" ? "Semua Kategori" : "All Categories" },
               { id: "submersible", label: language === "id" ? "Sumur Dalam" : "Deep Well" },
@@ -212,28 +186,16 @@ export default function RentalPage() {
           {/* Unit Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {displayedUnits.map((unit) => {
-              const isAvailable = unit.status === "available";
               return (
                 <div
                   key={unit.id}
                   className="bg-white rounded-2xl border border-neutral-200 hover:border-neutral-400 p-6 flex flex-col justify-between transition-all shadow-sm hover:shadow-md"
                 >
                   <div>
-                    {/* Top Status */}
+                    {/* Top Category */}
                     <div className="flex items-center justify-between mb-4">
                       <span className="text-[10px] uppercase font-bold tracking-wider text-neutral-400">
                         {unit.categoryName[language]}
-                      </span>
-                      <span
-                        className={`text-[10px] font-semibold px-2.5 py-1 rounded-full ${
-                          isAvailable
-                            ? "bg-emerald-50 text-emerald-800 border border-emerald-200"
-                            : "bg-amber-50 text-amber-800 border border-amber-200"
-                        }`}
-                      >
-                        {isAvailable
-                          ? (language === "id" ? "🟢 Siap Kirim" : "🟢 Ready to Dispatch")
-                          : (language === "id" ? "🟡 Sedang Disewa" : "🟡 On Rent")}
                       </span>
                     </div>
 
