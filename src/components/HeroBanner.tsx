@@ -65,39 +65,10 @@ export function HeroBanner({
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="text-neutral-500 text-sm sm:text-base max-w-2xl leading-relaxed mb-8 font-light"
+          className="text-neutral-500 text-sm sm:text-base max-w-2xl leading-relaxed mb-10 font-light"
         >
           {t("hero.subtitle")}
         </motion.p>
-
-        {/* Action Buttons inspired by benuagreenenergy.com */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.22, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-wrap items-center justify-center gap-3 mb-10"
-        >
-          <a
-            href="#catalog"
-            className="px-6 py-2.5 rounded-full bg-neutral-900 text-white text-xs sm:text-sm font-semibold hover:bg-neutral-800 transition-all shadow-sm hover:shadow-md cursor-pointer"
-          >
-            {t("hero.exploreProducts")}
-          </a>
-          <a
-            href="/rental"
-            className="px-6 py-2.5 rounded-full bg-neutral-100 text-neutral-800 hover:bg-neutral-200 text-xs sm:text-sm font-semibold transition-all border border-neutral-200 cursor-pointer"
-          >
-            {t("hero.exploreRental")}
-          </a>
-          <a
-            href="https://wa.me/628176779719?text=Halo%20Benua%20Green%20Energy,%20saya%20ingin%20meminta%20penawaran%20harga%20resmi%20untuk%20produk%20dan%20layanan."
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-6 py-2.5 rounded-full bg-white text-neutral-900 hover:text-neutral-950 text-xs sm:text-sm font-semibold transition-all border border-neutral-300 hover:border-neutral-500 cursor-pointer"
-          >
-            {t("hero.getQuote")}
-          </a>
-        </motion.div>
 
         {/* Minimalist Search Input */}
         <motion.div
