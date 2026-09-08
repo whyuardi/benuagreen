@@ -6,7 +6,7 @@ import { ProductSlider } from "@/components/ProductSlider";
 import { ProductModal } from "@/components/ProductModal";
 import { ProductCard } from "@/components/ProductCard";
 import { CATEGORIES_DATA, Product } from "@/lib/products";
-import { ArrowRight, LayoutGrid, SlidersHorizontal, SearchX } from "lucide-react";
+import { ArrowRight, LayoutGrid, SlidersHorizontal, SearchX, Sparkles, ShieldCheck, Layers } from "lucide-react";
 import Link from "next/link";
 import { useLanguage, TranslationKey } from "@/lib/i18n";
 import { motion } from "framer-motion";
@@ -73,7 +73,56 @@ export default function HomePage() {
       />
 
       {/* Main Content Area */}
-      <div className="max-w-7xl mx-auto pt-8">
+      <div className="max-w-7xl mx-auto pt-4" id="catalog">
+        
+        {/* 3 Corporate Pillars (inspired by benuagreenenergy.com) */}
+        {!searchQuery && (
+          <div className="px-6 sm:px-8 mb-12">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="p-5 rounded-2xl bg-neutral-50/80 border border-neutral-100 hover:border-neutral-200 transition-all">
+                <div className="w-8 h-8 rounded-full bg-neutral-900 text-white flex items-center justify-center mb-3">
+                  <Sparkles className="w-4 h-4" />
+                </div>
+                <h3 className="text-sm font-bold text-neutral-900 mb-1">
+                  {language === "id" ? "Sistem Pompa Tenaga Surya" : "Solar & High-Efficiency Pumping"}
+                </h3>
+                <p className="text-xs text-neutral-500 font-light leading-relaxed">
+                  {language === "id"
+                    ? "Inverter MPPT efisiensi 99% dan motor tahan pasir untuk irigasi, perkebunan, dan suplai air bersih tanpa biaya listrik."
+                    : "99% MPPT efficiency inverters and sand-resistant submersible motors for off-grid irrigation and water supply."}
+                </p>
+              </div>
+
+              <div className="p-5 rounded-2xl bg-neutral-50/80 border border-neutral-100 hover:border-neutral-200 transition-all">
+                <div className="w-8 h-8 rounded-full bg-neutral-900 text-white flex items-center justify-center mb-3">
+                  <ShieldCheck className="w-4 h-4" />
+                </div>
+                <h3 className="text-sm font-bold text-neutral-900 mb-1">
+                  {language === "id" ? "Garansi & Layanan Cepat" : "Technical Support & Warranty"}
+                </h3>
+                <p className="text-xs text-neutral-500 font-light leading-relaxed">
+                  {language === "id"
+                    ? "Jaminan unit pengganti < 24 jam, supervisi instalasi di lokasi, serta depo logistik aktif di Jakarta, Surabaya, dan Balikpapan."
+                    : "Guaranteed < 24h replacement units, on-site commissioning, and regional depot hubs in Jakarta, Surabaya, Balikpapan."}
+                </p>
+              </div>
+
+              <div className="p-5 rounded-2xl bg-neutral-50/80 border border-neutral-100 hover:border-neutral-200 transition-all">
+                <div className="w-8 h-8 rounded-full bg-neutral-900 text-white flex items-center justify-center mb-3">
+                  <Layers className="w-4 h-4" />
+                </div>
+                <h3 className="text-sm font-bold text-neutral-900 mb-1">
+                  {language === "id" ? "Pipa PPR & Infrastruktur 50+ Thn" : "PPR Piping & Industrial Infrastructure"}
+                </h3>
+                <p className="text-xs text-neutral-500 font-light leading-relaxed">
+                  {language === "id"
+                    ? "Material food-grade higienis tahan tekanan tinggi dan korosi dengan usia pakai pipa lebih dari 50 tahun."
+                    : "Certified food-grade corrosion-free piping rated for high pressures with an engineered 50+ year operational life."}
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
         
         {/* If user is actively searching */}
         {searchQuery.trim() ? (

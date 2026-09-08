@@ -41,32 +41,44 @@ export const dictionary = {
 
   // Hero Banner
   "hero.badge": {
-    id: "Sistem Pompa Tenaga Surya & Pengolahan Air",
-    en: "Sustainable Pumping & Energy Systems",
+    id: "PT Benua Green Energy",
+    en: "PT Benua Green Energy",
   },
   "hero.title1": {
-    id: "Kesederhanaan dalam rekayasa,",
-    en: "Simplicity in engineering,",
+    id: "Menghubungkan Masa Depan",
+    en: "Connecting The Green",
   },
   "hero.title2": {
-    id: "keandalan dalam energi.",
-    en: "reliability in energy.",
+    id: "Energi Hijau & Air Berkelanjutan.",
+    en: "Energy & Water Future.",
   },
   "hero.subtitle": {
-    id: "Katalog pilihan pompa celup tenaga surya berefisiensi tinggi, variable frequency drive pintar, inverter gelombang sinus murni, dan pipa PPR bersertifikasi.",
-    en: "Curated catalog of high-efficiency solar submersible pumps, intelligent variable speed drives, pure sine inverters, and certified PPR infrastructure.",
+    id: "Di Benua Green Energy, kami menyediakan solusi komprehensif sistem pompa efisiensi tinggi, inverter tenaga surya, dan infrastruktur perpipaan berkualitas tinggi untuk kebutuhan industri dan proyek Anda.",
+    en: "At Benua Green Energy, we provide a full spectrum of high-efficiency water pumping, solar energy, and sustainable infrastructure solutions engineered for project reliability.",
+  },
+  "hero.exploreProducts": {
+    id: "Jelajahi Produk",
+    en: "Explore Products",
+  },
+  "hero.exploreRental": {
+    id: "Layanan & Rental Pompa",
+    en: "Rental Services",
+  },
+  "hero.getQuote": {
+    id: "Minta Penawaran (WhatsApp)",
+    en: "Get A Quote",
   },
   "hero.searchPlaceholder": {
     id: "Cari model pompa atau seri produk...",
-    en: "Search products or equipment series...",
-  },
-  "hero.clear": {
-    id: "Hapus",
-    en: "Clear",
+    en: "Search pump models, drives or series...",
   },
   "hero.all": {
-    id: "Semua",
-    en: "All",
+    id: "Semua Kategori",
+    en: "All Categories",
+  },
+  "hero.clear": {
+    id: "Bersihkan",
+    en: "Clear",
   },
 
   // Categories
