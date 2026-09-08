@@ -6,11 +6,10 @@ import { ProductSlider } from "@/components/ProductSlider";
 import { ProductModal } from "@/components/ProductModal";
 import { ProductCard } from "@/components/ProductCard";
 import { CATEGORIES_DATA, Product } from "@/lib/products";
-import { ArrowRight, LayoutGrid, SlidersHorizontal, SearchX, Compass, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowRight, LayoutGrid, SlidersHorizontal, SearchX } from "lucide-react";
 import Link from "next/link";
 import { useLanguage, TranslationKey } from "@/lib/i18n";
-import { motion, AnimatePresence } from "framer-motion";
-import { AvailabilityChecker } from "@/components/AvailabilityChecker";
+import { motion } from "framer-motion";
 
 export default function HomePage() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -215,71 +214,7 @@ export default function HomePage() {
           </div>
         )}
 
-        {/* Feature 1: Availability Checker on Homepage */}
-        <div className="mt-16 border-t border-neutral-100">
-          <AvailabilityChecker embedded={false} />
-        </div>
-
-        {/* Feature 2 Teaser: Unit Selection Wizard & Rental Catalog Quick Banner */}
-        <section className="my-12 px-6 sm:px-8">
-          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-            
-            {/* Wizard Teaser Card */}
-            <div className="bg-neutral-900 text-white rounded-3xl p-8 flex flex-col justify-between shadow-sm">
-              <div>
-                <span className="text-[10px] uppercase font-bold tracking-widest text-neutral-400 inline-flex items-center gap-1.5 mb-3">
-                  <Compass className="w-3.5 h-3.5 text-white" />
-                  <span>{language === "id" ? "Panduan Pintar" : "Smart Selection Guide"}</span>
-                </span>
-                <h3 className="text-xl sm:text-2xl font-bold mb-2">
-                  {language === "id" ? "Bingung Menentukan Tipe Pompa?" : "Unsure Which Pump Sizing You Need?"}
-                </h3>
-                <p className="text-xs text-neutral-400 leading-relaxed font-light mb-6">
-                  {language === "id"
-                    ? "Gunakan Wizard Cerdas Benua Green untuk menghitung perkiraan Head, Debit, dan Daya Motor pompa (kW/HP) sesuai sumur atau sumber air Anda."
-                    : "Use Benua Green's Smart Wizard to calculate estimated Head, Flow Rate, and Motor Power (kW/HP) matched to your well or water source."}
-                </p>
-              </div>
-              <div>
-                <Link
-                  href="/rental#unit-wizard"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-neutral-900 text-xs font-semibold hover:bg-neutral-100 transition-colors"
-                >
-                  <span>{language === "id" ? "Buka Panduan Pilih Unit" : "Launch Selection Wizard"}</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
-              </div>
-            </div>
-
-            {/* Rental Catalog Teaser Card */}
-            <div className="bg-neutral-50 border border-neutral-200 rounded-3xl p-8 flex flex-col justify-between shadow-sm">
-              <div>
-                <span className="text-[10px] uppercase font-bold tracking-widest text-neutral-500 inline-flex items-center gap-1.5 mb-3">
-                  <ShieldCheck className="w-3.5 h-3.5 text-neutral-900" />
-                  <span>{language === "id" ? "Katalog Rental B2B" : "B2B Rental Catalog"}</span>
-                </span>
-                <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 mb-2">
-                  {language === "id" ? "Sewa Pompa Tenaga Surya & Booster" : "Solar & Booster Pump Rental"}
-                </h3>
-                <p className="text-xs text-neutral-500 leading-relaxed font-light mb-6">
-                  {language === "id"
-                    ? "Armada unit siap kirim dengan Garansi Penggantian Unit < 24 Jam, paket aksesoris lengkap, dan supervisi teknisi di seluruh Indonesia."
-                    : "Ready-to-dispatch fleet with < 24h Unit Replacement Guarantee, complete accessories package, and on-site technical supervision."}
-                </p>
-              </div>
-              <div>
-                <Link
-                  href="/rental#katalog-rental"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-neutral-900 text-white text-xs font-semibold hover:bg-neutral-800 transition-colors"
-                >
-                  <span>{language === "id" ? "Lihat Katalog Rental & Status Unit" : "View Rental Catalog & Availability"}</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
-              </div>
-            </div>
-
-          </div>
-        </section>
+        {/* Product Detail Modal */}
 
         {/* Minimalist Editorial Story Section with scroll animation */}
         <motion.section
