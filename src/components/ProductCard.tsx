@@ -23,15 +23,12 @@ export function ProductCard({ product, onSelect }: ProductCardProps) {
     >
       {/* Product Image Frame */}
       <div className="relative h-60 sm:h-64 w-full bg-[#F8F9FA] rounded-xl flex items-center justify-center p-6 mb-4 overflow-hidden">
-        <div className="relative w-full h-full">
-          <Image
-            src={product.image}
-            alt={product.name}
-            fill
-            className="object-contain transition-transform duration-500 ease-out group-hover:scale-105"
-            unoptimized
-          />
-        </div>
+        <img
+          src={product.image}
+          alt={product.name}
+          className="w-full h-full object-contain transition-transform duration-500 ease-out group-hover:scale-105"
+          loading="lazy"
+        />
       </div>
 
       {/* Product Meta */}

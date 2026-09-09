@@ -72,13 +72,11 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
               
               {/* Product Image Area */}
               <div className="relative bg-[#F8F9FA] p-8 flex items-center justify-center min-h-[260px] md:min-h-[360px] border-b md:border-b-0 md:border-r border-neutral-100">
-                <div className="relative w-full h-56 md:h-64">
-                  <Image
+                <div className="relative w-full h-56 md:h-64 flex items-center justify-center">
+                  <img
                     src={product.image}
                     alt={product.name}
-                    fill
-                    className="object-contain"
-                    unoptimized
+                    className="max-h-full max-w-full object-contain"
                   />
                 </div>
                 <div className="absolute top-4 left-4">
