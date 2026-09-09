@@ -86,7 +86,7 @@ export default function HomePage() {
         {/* Catalog Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-neutral-200/80 gap-4">
           <div>
-            <span className="text-xs font-bold tracking-widest text-emerald-700 uppercase block mb-1">
+            <span className="text-[11px] font-semibold tracking-widest text-neutral-400 uppercase block mb-1">
               {language === "id" ? "PORTFOLIO SISTEM & PERALATAN" : "PRODUCTS & ENGINEERING SYSTEMS"}
             </span>
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900">

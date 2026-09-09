@@ -3,14 +3,13 @@
 import { useState } from "react";
 import { MAJOR_PROJECTS, ProjectReference } from "@/lib/projects";
 import { useLanguage } from "@/lib/i18n";
-import { motion, AnimatePresence } from "framer-motion";
-import { Building2, Factory, FileText, Utensils, MapPin, CheckCircle2, ArrowRight, Sparkles } from "lucide-react";
-import Image from "next/image";
+import { motion } from "framer-motion";
+import { Building2, Factory, FileText, Utensils, MapPin, CheckCircle2, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export function ProjectShowcase() {
-  const { t, language } = useLanguage();
+  const { language } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const [selectedProject, setSelectedProject] = useState<ProjectReference | null>(null);
 
   const categories = [
     { id: "all", label: language === "id" ? "Semua Proyek" : "All Projects", icon: Building2 },
@@ -25,33 +24,30 @@ export function ProjectShowcase() {
     : MAJOR_PROJECTS.filter((p) => p.category === selectedCategory);
 
   return (
-    <section className="py-16 sm:py-24 px-6 sm:px-8 bg-neutral-900 text-white rounded-3xl my-12 max-w-7xl mx-auto overflow-hidden relative" id="projects">
-      {/* Background Subtle Gradient & Grid Accent */}
-      <div className="absolute inset-0 bg-[radial-gradient(#ffffff0a_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
-      <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
-      
-      <div className="relative z-10">
+    <section className="py-16 sm:py-20 px-6 sm:px-8 bg-white border-t border-neutral-100 my-8 max-w-7xl mx-auto" id="projects">
+      <div>
         
-        {/* Header */}
-        <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/10 text-xs font-semibold tracking-wider text-emerald-400 uppercase mb-3">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>{language === "id" ? "Portofolio Klien Utama" : "Major Client References"}</span>
+        {/* Header: Simple, Monochromatic, Elegant */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-4 border-b border-neutral-100 gap-4">
+          <div>
+            <span className="text-[11px] font-semibold tracking-widest text-neutral-400 uppercase block mb-1">
+              {language === "id" ? "PORTOFOLIO PROYEK & REFERENSI" : "PROJECT PORTFOLIO & REFERENCES"}
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-medium tracking-tight text-neutral-900 leading-tight">
+              {language === "id"
+                ? "Instalasi Sistem Pendingin & Energi Skala Besar"
+                : "Large-Scale Industrial & Commercial Installations"}
+            </h2>
           </div>
-          <h2 className="text-2xl sm:text-4xl md:text-5xl font-normal tracking-tight leading-tight mb-4">
+          <p className="text-xs sm:text-sm text-neutral-500 max-w-md font-light leading-relaxed md:text-right">
             {language === "id"
-              ? "Dipercaya oleh Industri Terkemuka & Superblock Nasional"
-              : "Trusted by Major Industrial Enterprises & Commercial Superblocks"}
-          </h2>
-          <p className="text-sm sm:text-base text-neutral-400 font-light leading-relaxed">
-            {language === "id"
-              ? "Solusi terintegrasi sistem pendingin Chiller, Cooling Tower, Pipa PPR, dan Pompa Efisiensi Tinggi yang terpasang di berbagai fasilitas manufaktur dan gedung komersial prestisius di Indonesia."
-              : "Integrated chillers, cooling towers, industrial PPR piping, and high-efficiency pumping infrastructure operating across premier industrial manufacturing plants and commercial properties in Indonesia."}
+              ? "Solusi Absorption Chiller, Cooling Tower, Pipa PPR-CT, dan Pompa Industri terpasang di berbagai pabrik manufaktur dan superblok terkemuka di Indonesia."
+              : "Integrated Absorption Chillers, cooling towers, PPR-CT piping, and industrial pumps operating across premier factories and superblocks in Indonesia."}
           </p>
         </div>
 
-        {/* Filter Pills */}
-        <div className="flex flex-wrap items-center gap-2 mb-10 pb-4 border-b border-white/10">
+        {/* Filter Pills: Clean Monochrome */}
+        <div className="flex flex-wrap items-center gap-2 mb-10 pb-4 border-b border-neutral-100">
           {categories.map((cat) => {
             const Icon = cat.icon;
             const isSelected = selectedCategory === cat.id;
@@ -59,10 +55,10 @@ export function ProjectShowcase() {
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`px-4 py-2 rounded-full text-xs font-medium flex items-center gap-2 transition-all duration-200 border cursor-pointer ${
+                className={`px-3.5 py-1.5 rounded-full text-xs font-medium flex items-center gap-1.5 transition-all duration-200 border cursor-pointer ${
                   isSelected
-                    ? "bg-white text-neutral-900 border-white shadow-md font-semibold"
-                    : "bg-white/5 text-neutral-400 hover:text-white border-white/10 hover:border-white/20 hover:bg-white/10"
+                    ? "bg-neutral-900 text-white border-neutral-900 shadow-xs font-semibold"
+                    : "bg-neutral-50 text-neutral-600 hover:text-neutral-900 border-neutral-200 hover:border-neutral-300 hover:bg-white"
                 }`}
               >
                 <Icon className="w-3.5 h-3.5" />
@@ -72,7 +68,7 @@ export function ProjectShowcase() {
           })}
         </div>
 
-        {/* Projects Grid */}
+        {/* Projects Grid: Simple, Clean & Elegant Cards */}
         <motion.div
           layout
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
@@ -81,78 +77,77 @@ export function ProjectShowcase() {
             <motion.div
               layout
               key={project.id}
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
-              className="bg-neutral-800/80 rounded-2xl p-6 border border-white/10 hover:border-emerald-500/50 flex flex-col justify-between transition-all duration-300 group hover:shadow-2xl hover:shadow-emerald-950/30"
+              transition={{ duration: 0.3 }}
+              className="bg-white rounded-xl p-6 border border-neutral-200/80 hover:border-neutral-900 flex flex-col justify-between transition-all duration-200 shadow-xs hover:shadow-sm"
             >
               <div>
-                {/* Client Label & Category */}
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-[10px] uppercase font-bold tracking-widest text-emerald-400 bg-emerald-950/60 border border-emerald-800/40 px-2.5 py-1 rounded-full">
+                {/* Client Label & Location */}
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-[10px] uppercase font-semibold tracking-wider text-neutral-600 bg-neutral-100 px-2.5 py-0.5 rounded-full">
                     {project.categoryLabel[language]}
                   </span>
                   <div className="flex items-center gap-1 text-[11px] text-neutral-400">
-                    <MapPin className="w-3 h-3 text-neutral-500" />
+                    <MapPin className="w-3 h-3 text-neutral-400" />
                     <span>{project.location.split(",")[0]}</span>
                   </div>
                 </div>
 
                 {/* Client Name */}
-                <h3 className="text-lg font-bold text-white group-hover:text-emerald-300 transition-colors leading-snug mb-2">
+                <h3 className="text-base font-semibold text-neutral-900 leading-snug mb-1">
                   {project.clientName}
                 </h3>
-
-                {/* Scope of Work */}
-                <p className="text-xs text-neutral-300 font-medium mb-4 pb-3 border-b border-white/10">
-                  {project.scopeOfWork[language]}
+                <p className="text-xs text-neutral-500 font-light mb-4">
+                  {project.location}
                 </p>
 
-                {/* Key Highlights */}
-                <div className="space-y-2 mb-6">
-                  {project.keyHighlights[language].map((highlight, idx) => (
-                    <div key={idx} className="flex items-start gap-2 text-xs text-neutral-400 font-light">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                {/* Scope of Work */}
+                <div className="mb-4 pb-4 border-b border-neutral-100">
+                  <span className="text-[10px] uppercase font-semibold text-neutral-400 block mb-1">
+                    {language === "id" ? "Lingkup Pekerjaan" : "Scope of Work"}
+                  </span>
+                  <p className="text-xs font-medium text-neutral-800 leading-relaxed">
+                    {project.scopeOfWork[language]}
+                  </p>
+                </div>
+
+                {/* Technical Highlights */}
+                <div className="space-y-1.5 mb-5">
+                  <span className="text-[10px] uppercase font-semibold text-neutral-400 block mb-1">
+                    {language === "id" ? "Spesifikasi Sistem" : "Key Highlights"}
+                  </span>
+                  {project.keyHighlights[language].map((highlight: string, idx: number) => (
+                    <div key={idx} className="flex items-start gap-2 text-xs text-neutral-600 font-light">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-neutral-400 shrink-0 mt-0.5" />
                       <span>{highlight}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* Impact Box */}
-              <div className="p-3.5 rounded-xl bg-white/5 border border-white/5 text-[11px] text-neutral-300 leading-relaxed font-light">
-                <span className="text-white font-semibold block mb-0.5">
-                  {language === "id" ? "Hasil & Dampak:" : "Project Result:"}
-                </span>
-                {project.impact[language]}
+              {/* Bottom Impact Box */}
+              <div className="pt-3 border-t border-neutral-100 flex items-center justify-between">
+                <div>
+                  <span className="text-[10px] uppercase font-medium text-neutral-400 block">
+                    {language === "id" ? "Dampak Efisiensi" : "Operational Impact"}
+                  </span>
+                  <span className="text-xs font-semibold text-neutral-900">
+                    {project.impact[language]}
+                  </span>
+                </div>
+
+                <Link
+                  href="/contact"
+                  className="w-7 h-7 rounded-full bg-neutral-100 hover:bg-neutral-900 text-neutral-600 hover:text-white flex items-center justify-center transition-colors"
+                  title="Inquire"
+                >
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
               </div>
             </motion.div>
           ))}
         </motion.div>
-
-        {/* Client Logos Banner Strip */}
-        <div className="mt-14 pt-10 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div>
-            <span className="text-xs font-semibold uppercase tracking-widest text-neutral-400 block mb-1">
-              {language === "id" ? "Kemitraan Jangka Panjang" : "Long-Term Partnerships"}
-            </span>
-            <p className="text-xs text-neutral-500 font-light">
-              {language === "id"
-                ? "Didukung layanan purna jual, suku cadang siap pasang, dan garansi operasional."
-                : "Backed by guaranteed spare parts availability, technician supervision, and warranty support."}
-            </p>
-          </div>
-
-          <a
-            href="https://wa.me/628176779719?text=Halo%20Benua%20Green%20Energy,%20saya%20tertarik%20melihat%20studi%20kasus%20dan%20proposal%20rekayasa%20proyek%20serupa."
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white text-neutral-900 text-xs font-bold hover:bg-neutral-100 transition-all cursor-pointer shrink-0"
-          >
-            <span>{language === "id" ? "Konsultasi Kebutuhan Proyek" : "Consult Project Engineering"}</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </a>
-        </div>
 
       </div>
     </section>
