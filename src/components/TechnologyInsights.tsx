@@ -3,58 +3,58 @@
 import { useState } from "react";
 import { useLanguage } from "@/lib/i18n";
 import { motion, AnimatePresence } from "framer-motion";
-import { Flame, Droplets, Wind, Leaf, Activity, ArrowUpRight, Check, Zap } from "lucide-react";
+import { Flame, Droplets, Wind, Leaf, Check, ArrowRight, Gauge, ShieldCheck, Zap } from "lucide-react";
 
 export function TechnologyInsights() {
-  const { t, language } = useLanguage();
+  const { language } = useLanguage();
   const [activeTab, setActiveTab] = useState<"absorption" | "coolingtower" | "biomass" | "carbon">("absorption");
 
   const topics = [
     {
       id: "absorption",
-      title: language === "id" ? "Cara Kerja Absorption Chiller" : "Absorption Chiller Technology",
-      subtitle: language === "id" ? "Pendingin Termal Bebas Freon Listrik" : "Fluorocarbon-Free Thermal Cooling",
+      title: language === "id" ? "Cara Kerja Absorption Chiller" : "Absorption Chiller Working Principle",
+      subtitle: language === "id" ? "Pendingin Termal Bebas Kompresor Listrik" : "Fluorocarbon-Free Thermal Cooling",
       icon: Flame,
     },
     {
       id: "coolingtower",
       title: language === "id" ? "Termodinamika Cooling Tower" : "Cooling Tower Thermodynamics",
-      subtitle: language === "id" ? "Evaporatif Efisiensi Tinggi" : "High-Efficiency Heat Rejection",
+      subtitle: language === "id" ? "Pembuangan Kalor Evaporatif Efisiensi Tinggi" : "High-Efficiency Heat Rejection",
       icon: Wind,
     },
     {
       id: "biomass",
-      title: language === "id" ? "Biomass Boiler & Heat Recovery" : "Biomass Boiler & Heat Recovery",
-      subtitle: language === "id" ? "Pemanfaatan Energi Limbah Panas" : "Waste Steam to Clean Power",
+      title: language === "id" ? "Biomass Boiler & Waste Steam" : "Biomass Boiler & Waste Steam",
+      subtitle: language === "id" ? "Sirkularitas Energi Panas Pabrik" : "Waste Steam to Clean Cooling",
       icon: Droplets,
     },
     {
       id: "carbon",
-      title: language === "id" ? "Mitigasi Emisi CO2 & ESG" : "CO2 Mitigation & ESG Impact",
-      subtitle: language === "id" ? "Standar Gedung Hijau Ramah Lingkungan" : "Net-Zero & Green Building",
+      title: language === "id" ? "Global Warming & Reduksi CO2" : "Global Warming & CO2 Reduction",
+      subtitle: language === "id" ? "Dekarbonisasi & Standar Green Building" : "Net-Zero & Green Building Standards",
       icon: Leaf,
     },
   ];
 
   return (
-    <section className="py-16 sm:py-24 px-6 sm:px-8 max-w-7xl mx-auto my-8" id="technology">
+    <section className="py-16 sm:py-24 px-6 sm:px-8 max-w-7xl mx-auto my-6" id="technology">
       
       {/* Top Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 pb-6 border-b border-neutral-100">
+      <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 pb-6 border-b border-neutral-200/80">
         <div>
-          <span className="text-xs font-semibold tracking-widest text-neutral-400 uppercase block mb-1">
-            {language === "id" ? "Wawasan Rekayasa & Teknologi" : "Engineering & Technology Insights"}
+          <span className="text-xs font-bold tracking-widest text-emerald-700 uppercase block mb-1">
+            {language === "id" ? "REKAYASA TEKNIK & EFISIENSI TERMAL" : "THERMAL ENGINEERING & EFFICIENCY"}
           </span>
-          <h2 className="text-2xl sm:text-4xl font-normal tracking-tight text-neutral-900 leading-tight">
+          <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-neutral-900 leading-tight">
             {language === "id"
-              ? "Prinsip Kerja & Efisiensi Energi Berkelanjutan"
-              : "Working Principles & Sustainable Energy Efficiency"}
+              ? "Prinsip Kerja Teknologi Pendingin & Energi Ramah Lingkungan"
+              : "Working Principles: Sustainable Cooling & Clean Energy Engineering"}
           </h2>
         </div>
-        <p className="text-xs sm:text-sm text-neutral-500 max-w-md font-light leading-relaxed">
+        <p className="text-xs sm:text-sm text-neutral-500 max-w-md font-normal leading-relaxed">
           {language === "id"
-            ? "Membahas secara mendalam cara kerja sistem termal Absorption Chiller, sirkulasi Cooling Tower, boiler biomassa, serta reduksi emisi gas rumah kaca."
-            : "Deep-dive technical breakdown of thermal absorption chiller cycles, cooling tower heat exchange, biomass steam recovery, and greenhouse gas mitigation."}
+            ? "Pelajari secara mendalam siklus termal Absorption Chiller, sirkulasi Cooling Tower, integrasi uap biomassa, serta kontribusi dekarbonisasi industri."
+            : "Explore the thermodynamic cycle of Absorption Chillers, cooling tower circulation, biomass waste-heat recovery, and industrial decarbonization."}
         </p>
       </div>
 
@@ -70,7 +70,7 @@ export function TechnologyInsights() {
               className={`p-4 rounded-2xl border text-left transition-all duration-300 flex flex-col justify-between cursor-pointer ${
                 isActive
                   ? "bg-neutral-900 text-white border-neutral-900 shadow-lg shadow-neutral-900/10"
-                  : "bg-white text-neutral-700 border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50"
+                  : "bg-white text-neutral-700 border-neutral-200 hover:border-neutral-400 hover:bg-neutral-50"
               }`}
             >
               <div className="flex items-center justify-between mb-4">
@@ -81,7 +81,7 @@ export function TechnologyInsights() {
               </div>
               <div>
                 <h4 className="text-xs sm:text-sm font-bold leading-snug mb-0.5">{topic.title}</h4>
-                <p className={`text-[11px] font-light ${isActive ? "text-neutral-300" : "text-neutral-400"}`}>{topic.subtitle}</p>
+                <p className={`text-[11px] font-normal ${isActive ? "text-neutral-300" : "text-neutral-500"}`}>{topic.subtitle}</p>
               </div>
             </button>
           );
@@ -99,78 +99,132 @@ export function TechnologyInsights() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
             transition={{ duration: 0.35 }}
-            className="bg-neutral-50 rounded-3xl p-6 sm:p-10 border border-neutral-200 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+            className="bg-neutral-50 rounded-3xl p-6 sm:p-10 border border-neutral-200 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start"
           >
             <div className="lg:col-span-7 space-y-4">
               <span className="text-[10px] uppercase font-bold tracking-widest text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full">
-                {language === "id" ? "Siklus Termodinamika Lithium Bromide" : "Lithium Bromide (LiBr-H2O) Cycle"}
+                {language === "id" ? "Siklus Termal Lithium Bromide (LiBr - H2O)" : "Lithium Bromide (LiBr-H2O) Cycle"}
               </span>
               <h3 className="text-xl sm:text-2xl font-bold text-neutral-900">
                 {language === "id"
                   ? "Bagaimana Absorption Chiller Menghasilkan Air Dingin (7°C) Tanpa Kompresor Listrik?"
                   : "How Absorption Chillers Produce 7°C Chilled Water Without Electric Compressors"}
               </h3>
-              <p className="text-xs sm:text-sm text-neutral-600 font-light leading-relaxed">
+              <p className="text-xs sm:text-sm text-neutral-600 font-normal leading-relaxed">
                 {language === "id"
-                  ? "Berbeda dengan chiller sentrifugal listrik konvensional, Absorption Chiller memanfaatkan energi termal (uap panas pabrik, gas alam, atau air panas buangan) sebagai sumber energi utama. Air murni berfungsi sebagai refrigeran (R718) dan larutan Lithium Bromide (LiBr) sebagai penyerap (absorbent) dalam kondisi vakum absolut (6 mmHg)."
-                  : "Unlike conventional electric centrifugal chillers, Absorption Chillers utilize thermal energy (industrial waste steam, natural gas, or jacket water) as the primary driving force. Pure distilled water acts as refrigerant (R718) while non-toxic Lithium Bromide (LiBr) solution acts as the absorbent under deep vacuum (6 mmHg)."}
+                  ? "Absorption Chiller memanfaatkan uap panas buangan pabrik (waste steam), gas alam, atau air panas sebagai sumber energi penggerak. Air murni bertindak sebagai refrigeran alami (R718), sedangkan larutan garam Lithium Bromide (LiBr) bertindak sebagai penyerap dalam ruang bertekanan vakum absolut tinggi (6 mmHg)."
+                  : "Absorption Chillers harness industrial waste steam, natural gas, or hot water as the primary driving force. Pure distilled water acts as an eco-friendly natural refrigerant (R718), while Lithium Bromide (LiBr) solution acts as the absorbent in a deep vacuum vessel (6 mmHg)."}
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-                <div className="p-3 bg-white rounded-xl border border-neutral-200">
+                <div className="p-3.5 bg-white rounded-xl border border-neutral-200">
                   <span className="text-xs font-bold text-neutral-900 block mb-1">
-                    {language === "id" ? "1. Evaporator (Penguapan Dingin)" : "1. Evaporation Stage"}
+                    {language === "id" ? "1. Evaporator (Penguapan Dingin 4°C)" : "1. Evaporation Stage (4°C)"}
                   </span>
-                  <p className="text-[11px] text-neutral-500 font-light">
+                  <p className="text-[11px] text-neutral-500 font-normal leading-relaxed">
                     {language === "id"
-                      ? "Air menyemprot pada tekanan vakum 6 mmHg dan mendidih pada suhu 4°C, menyerap panas dari chilled water loop."
-                      : "Refrigerant water boils at 4°C under high vacuum, drawing latent heat from the building's chilled water circuit."}
+                      ? "Pada tekanan vakum 6 mmHg, air mendidih pada suhu 4°C dan menyerap panas laten dari sirkuit air dingin gedung (menghasilkan Chilled Water 7°C)."
+                      : "Under 6 mmHg vacuum, refrigerant water boils at 4°C, absorbing latent heat from building chilled water to yield 7°C supply."}
                   </p>
                 </div>
 
-                <div className="p-3 bg-white rounded-xl border border-neutral-200">
+                <div className="p-3.5 bg-white rounded-xl border border-neutral-200">
                   <span className="text-xs font-bold text-neutral-900 block mb-1">
-                    {language === "id" ? "2. Absorber & Generator (Regenerasi)" : "2. Absorption & Regeneration"}
+                    {language === "id" ? "2. Absorber & Generator (Regenerasi LiBr)" : "2. Absorption & Regeneration Stage"}
                   </span>
-                  <p className="text-[11px] text-neutral-500 font-light">
+                  <p className="text-[11px] text-neutral-500 font-normal leading-relaxed">
                     {language === "id"
-                      ? "Uap diserap larutan LiBr pekat, kemudian dipanaskan oleh steam/gas di generator untuk memisahkan uap kembali."
-                      : "Vapor is absorbed by concentrated LiBr, pumped to the generator, heated by steam/gas, and condensed back into liquid."}
+                      ? "Uap air diserap LiBr pekat di absorber. Larutan encer dipompa ke generator dan dipanaskan oleh steam boiler untuk memisahkan uap air kembali."
+                      : "Vapor is absorbed by LiBr in the absorber. Diluted solution is pumped to the generator and heated by steam/gas to regenerate concentrated LiBr."}
                   </p>
+                </div>
+              </div>
+
+              {/* Technical Data Highlights */}
+              <div className="grid grid-cols-3 gap-3 pt-2">
+                <div className="p-3 bg-white/80 rounded-lg border border-neutral-200">
+                  <span className="text-xs font-bold text-neutral-900 block">COP 1.45</span>
+                  <span className="text-[10px] text-neutral-500">{language === "id" ? "Efisiensi Double-Effect" : "Double-Effect COP"}</span>
+                </div>
+                <div className="p-3 bg-white/80 rounded-lg border border-neutral-200">
+                  <span className="text-xs font-bold text-emerald-700 block">&gt; 90% Hemat</span>
+                  <span className="text-[10px] text-neutral-500">{language === "id" ? "Daya Listrik Operasional" : "Power Draw Savings"}</span>
+                </div>
+                <div className="p-3 bg-white/80 rounded-lg border border-neutral-200">
+                  <span className="text-xs font-bold text-neutral-900 block">6 mmHg</span>
+                  <span className="text-[10px] text-neutral-500">{language === "id" ? "Tekanan Vakum Absolut" : "Deep Vacuum Chamber"}</span>
                 </div>
               </div>
             </div>
 
-            <div className="lg:col-span-5 bg-white rounded-2xl p-6 border border-neutral-200 space-y-4">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-neutral-400">
-                {language === "id" ? "Keunggulan Kunci Absorption Chiller" : "Key Absorption Chiller Advantages"}
-              </h4>
+            {/* Visual Thermodynamic Schematic Card */}
+            <div className="lg:col-span-5 bg-white rounded-2xl p-6 border border-neutral-200 shadow-sm space-y-4">
+              <div className="flex items-center justify-between pb-3 border-b border-neutral-100">
+                <span className="text-xs font-bold uppercase tracking-wider text-neutral-900">
+                  {language === "id" ? "Skematik Alur Siklus LiBr" : "LiBr Thermodynamic Flow"}
+                </span>
+                <span className="text-[10px] font-mono font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">
+                  Zero Compressor
+                </span>
+              </div>
 
-              <div className="space-y-3">
-                {[
-                  {
-                    title: language === "id" ? "Penghematan Listrik > 90%" : "> 90% Electricity Load Reduction",
-                    desc: language === "id" ? "Hanya memerlukan daya pompa kecil (5-15 kW) tanpa kompresor sentrifugal besar." : "Requires only small solution pumps without heavy megawatt compressor draws."
-                  },
-                  {
-                    title: language === "id" ? "Ramah Lingkungan (Zero ODP)" : "Zero Ozone Depletion Potential (ODP 0)",
-                    desc: language === "id" ? "Bebas dari freon sintetis HCFC/HFC yang berpotensi merusak ozon." : "Operates with 100% natural distilled water refrigerant with zero global warming chemicals."
-                  },
-                  {
-                    title: language === "id" ? "Tingkat Kebisingan Sangat Rendah" : "Ultra-Low Noise & Vibration",
-                    desc: language === "id" ? "Tidak ada getaran mekanis berat, memperpanjang usia pakai unit hingga > 25 tahun." : "Smooth vibration-free operation ensuring long equipment service life > 25 years."
-                  }
-                ].map((item, i) => (
-                  <div key={i} className="flex items-start gap-2.5">
-                    <div className="w-5 h-5 rounded-full bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5">
-                      <Check className="w-3 h-3" />
-                    </div>
-                    <div>
-                      <p className="text-xs font-bold text-neutral-900">{item.title}</p>
-                      <p className="text-[11px] text-neutral-500 font-light">{item.desc}</p>
-                    </div>
+              {/* Flow Steps Diagram */}
+              <div className="space-y-2.5">
+                <div className="p-2.5 rounded-lg bg-red-50 border border-red-100 flex items-center justify-between text-xs">
+                  <div>
+                    <span className="font-bold text-red-900 block">{language === "id" ? "1. Sumber Panas / Steam Masuk" : "1. Heat Source (Steam/Gas)"}</span>
+                    <span className="text-[11px] text-red-700">{language === "id" ? "Uap limbah boiler (0.4 - 0.8 MPa)" : "Waste steam from plant boilers"}</span>
                   </div>
-                ))}
+                  <Flame className="w-4 h-4 text-red-600" />
+                </div>
+
+                <div className="flex justify-center text-neutral-400">
+                  <ArrowRight className="w-3.5 h-3.5 rotate-90" />
+                </div>
+
+                <div className="p-2.5 rounded-lg bg-amber-50 border border-amber-100 flex items-center justify-between text-xs">
+                  <div>
+                    <span className="font-bold text-amber-900 block">{language === "id" ? "2. High-Pressure Generator" : "2. High-Pressure Generator"}</span>
+                    <span className="text-[11px] text-amber-700">{language === "id" ? "Mendidihkan LiBr encer memisahkan uap" : "Separates refrigerant vapor from LiBr"}</span>
+                  </div>
+                  <Gauge className="w-4 h-4 text-amber-600" />
+                </div>
+
+                <div className="flex justify-center text-neutral-400">
+                  <ArrowRight className="w-3.5 h-3.5 rotate-90" />
+                </div>
+
+                <div className="p-2.5 rounded-lg bg-blue-50 border border-blue-100 flex items-center justify-between text-xs">
+                  <div>
+                    <span className="font-bold text-blue-900 block">{language === "id" ? "3. Kondensor & Evaporator (7°C)" : "3. Condenser & Evaporator (7°C)"}</span>
+                    <span className="text-[11px] text-blue-700">{language === "id" ? "Keluaran air dingin dialirkan ke AHU/FCU" : "Supplies chilled water to facility"}</span>
+                  </div>
+                  <Droplets className="w-4 h-4 text-blue-600" />
+                </div>
+
+                <div className="flex justify-center text-neutral-400">
+                  <ArrowRight className="w-3.5 h-3.5 rotate-90" />
+                </div>
+
+                <div className="p-2.5 rounded-lg bg-emerald-50 border border-emerald-100 flex items-center justify-between text-xs">
+                  <div>
+                    <span className="font-bold text-emerald-900 block">{language === "id" ? "4. Absorber & Solution Pump" : "4. Absorber & Solution Pump"}</span>
+                    <span className="text-[11px] text-emerald-700">{language === "id" ? "Hanya perlu daya pompa kecil (5-15 kW)" : "Only low-power solution pump draw"}</span>
+                  </div>
+                  <Zap className="w-4 h-4 text-emerald-600" />
+                </div>
+              </div>
+
+              {/* Power Comparison Strip */}
+              <div className="pt-3 border-t border-neutral-100 bg-neutral-50 p-3 rounded-xl">
+                <div className="flex justify-between text-xs mb-1">
+                  <span className="text-neutral-500 font-medium">{language === "id" ? "Beban Daya Listrik Chiller 1,000 TR:" : "Power Draw for 1,000 TR:"}</span>
+                </div>
+                <div className="flex items-center gap-2 text-xs">
+                  <span className="font-bold text-neutral-900">Listrik Konvensional: ~650 kW</span>
+                  <span className="text-neutral-400">vs</span>
+                  <span className="font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">Abs Chiller: ~12 kW</span>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -184,51 +238,98 @@ export function TechnologyInsights() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
             transition={{ duration: 0.35 }}
-            className="bg-neutral-50 rounded-3xl p-6 sm:p-10 border border-neutral-200 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+            className="bg-neutral-50 rounded-3xl p-6 sm:p-10 border border-neutral-200 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start"
           >
             <div className="lg:col-span-7 space-y-4">
               <span className="text-[10px] uppercase font-bold tracking-widest text-blue-800 bg-blue-100 px-3 py-1 rounded-full">
-                {language === "id" ? "Pembuangan Panas Evaporatif" : "Evaporative Heat Rejection Dynamics"}
+                {language === "id" ? "Termodinamika Kontak Langsung Air-Udara" : "Air-Water Direct Contact Thermodynamics"}
               </span>
               <h3 className="text-xl sm:text-2xl font-bold text-neutral-900">
                 {language === "id"
-                  ? "Optimalisasi Sirkulasi Cooling Tower & Pengendalian Suhu Wet Bulb"
-                  : "Cooling Tower Closed-Circuit Optimization & Wet Bulb Approach"}
+                  ? "Sirkulasi Kalor Evaporatif & Pengendalian Suhu Wet-Bulb"
+                  : "Evaporative Heat Rejection & Wet-Bulb Approach Control"}
               </h3>
-              <p className="text-xs sm:text-sm text-neutral-600 font-light leading-relaxed">
+              <p className="text-xs sm:text-sm text-neutral-600 font-normal leading-relaxed">
                 {language === "id"
-                  ? "Cooling tower berfungsi membuang kalor panas dari kondensor Chiller ke atmosfer melalui kontak langsung antara air sirkulasi dan aliran udara ambien. Desain Cross-Flow & Counter-Flow berteknologi FRP tahan korosi memastikan suhu air kondenser tetap stabil (± 32°C masuk, 28°C keluar) bahkan di iklim tropis berkelembapan tinggi."
-                  : "Cooling towers reject heat from chiller condensers to the atmosphere via optimized air-water direct contact. Advanced FRP corrosion-proof cross-flow and counter-flow architectures maintain reliable water delivery temperatures even in tropical high-humidity climates."}
+                  ? "Cooling tower membuang kalor panas dari kondensor Chiller ke atmosfer melalui penguapan sebagian kecil air sirkulasi. Konstruksi FRP tahan korosi dan kisi pengisi PVC berprofil gelombang memaksimalkan bidang kontak antara air hangat (37°C) dan udara dingin ambien untuk menghasilkan air dingin kondenser (32°C)."
+                  : "Cooling towers reject heat from chiller condensers by evaporating a minimal fraction of circulating water. Corrosion-resistant FRP casing and cross-fluted PVC film fill maximize contact surface between incoming hot water (37°C) and ambient air, delivering cooled water (32°C) back to chillers."}
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
-                <div className="p-3 bg-white rounded-xl border border-neutral-200">
-                  <span className="text-lg font-bold text-neutral-900 block">3 - 4°C</span>
+                <div className="p-3.5 bg-white rounded-xl border border-neutral-200">
+                  <span className="text-xl font-bold text-neutral-900 block">3.0 - 4.0°C</span>
                   <span className="text-[10px] uppercase font-bold text-neutral-400 block mb-1">{language === "id" ? "Approach Suhu" : "Design Approach"}</span>
-                  <p className="text-[10px] text-neutral-500 font-light">{language === "id" ? "Mendekati temperatur bola basah (Wet-bulb)" : "Tight approach to ambient wet bulb"}</p>
+                  <p className="text-[11px] text-neutral-500 font-normal">{language === "id" ? "Mendekati temperatur bola basah (Wet-bulb)" : "Tight approach to ambient wet bulb"}</p>
                 </div>
-                <div className="p-3 bg-white rounded-xl border border-neutral-200">
-                  <span className="text-lg font-bold text-neutral-900 block">&lt; 0.005%</span>
+                <div className="p-3.5 bg-white rounded-xl border border-neutral-200">
+                  <span className="text-xl font-bold text-neutral-900 block">&lt; 0.005%</span>
                   <span className="text-[10px] uppercase font-bold text-neutral-400 block mb-1">{language === "id" ? "Drift Loss Rendah" : "Drift Loss Elimination"}</span>
-                  <p className="text-[10px] text-neutral-500 font-light">{language === "id" ? "Eliminator PVC mencegah semprotan air terbuang" : "PVC cellular drift eliminators"}</p>
+                  <p className="text-[11px] text-neutral-500 font-normal">{language === "id" ? "Eliminator selular mencegah air terbuang" : "PVC cellular drift eliminators"}</p>
                 </div>
-                <div className="p-3 bg-white rounded-xl border border-neutral-200">
-                  <span className="text-lg font-bold text-neutral-900 block">IE3 / VFD</span>
-                  <span className="text-[10px] uppercase font-bold text-neutral-400 block mb-1">{language === "id" ? "Motor Kipas Hemat Listrik" : "Variable Speed Fans"}</span>
-                  <p className="text-[10px] text-neutral-500 font-light">{language === "id" ? "Otomatis modulasi kecepatan sesuai beban termal" : "Modulates speed to match cooling load"}</p>
+                <div className="p-3.5 bg-white rounded-xl border border-neutral-200">
+                  <span className="text-xl font-bold text-neutral-900 block">VFD / IE3</span>
+                  <span className="text-[10px] uppercase font-bold text-neutral-400 block mb-1">{language === "id" ? "Motor Kipas Inverter" : "Inverter Fan Drive"}</span>
+                  <p className="text-[11px] text-neutral-500 font-normal">{language === "id" ? "Otomatis modulasi putaran sesuai cuaca" : "Modulates RPM to thermal load"}</p>
                 </div>
               </div>
             </div>
 
-            <div className="lg:col-span-5 bg-white rounded-2xl p-6 border border-neutral-200 space-y-3">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-neutral-400">
-                {language === "id" ? "Penerapan Industri" : "Industrial Applications"}
-              </h4>
-              <p className="text-xs text-neutral-600 font-light">
-                {language === "id"
-                  ? "Dipasangkan secara terintegrasi pada sistem Chiller Mall of Indonesia, Central Park, serta sistem pendingin proses pabrik Indorama dan Indah Kiat."
-                  : "Integrated across major chiller facilities including Mall of Indonesia, Central Park Mall, and manufacturing plants at Indorama and Indah Kiat."}
-              </p>
+            {/* Cooling Tower Visual Circuit */}
+            <div className="lg:col-span-5 bg-white rounded-2xl p-6 border border-neutral-200 shadow-sm space-y-4">
+              <div className="flex items-center justify-between pb-3 border-b border-neutral-100">
+                <span className="text-xs font-bold uppercase tracking-wider text-neutral-900">
+                  {language === "id" ? "Sirkulasi Air Kondenser" : "Condenser Circuit Steps"}
+                </span>
+                <span className="text-[10px] font-mono font-semibold text-blue-700 bg-blue-50 px-2 py-0.5 rounded">
+                  Cross-Flow / Closed-Circuit
+                </span>
+              </div>
+
+              <div className="space-y-2.5">
+                <div className="p-2.5 rounded-lg bg-red-50 border border-red-100 text-xs flex justify-between items-center">
+                  <div>
+                    <span className="font-bold text-red-900 block">{language === "id" ? "1. Air Panas dari Chiller (37°C)" : "1. Hot Water Inflow (37°C)"}</span>
+                    <span className="text-[11px] text-red-700">{language === "id" ? "Membawa beban kalor kondensor gedung/pabrik" : "Carrying condenser rejection heat"}</span>
+                  </div>
+                  <Flame className="w-4 h-4 text-red-500" />
+                </div>
+
+                <div className="flex justify-center text-neutral-400">
+                  <ArrowRight className="w-3.5 h-3.5 rotate-90" />
+                </div>
+
+                <div className="p-2.5 rounded-lg bg-neutral-50 border border-neutral-200 text-xs flex justify-between items-center">
+                  <div>
+                    <span className="font-bold text-neutral-900 block">{language === "id" ? "2. Distribusi Gravitasi & Nozel" : "2. Gravity Distribution Basin"}</span>
+                    <span className="text-[11px] text-neutral-600">{language === "id" ? "Menyemprotkan air secara merata ke permukaan fill" : "Even dispersal across PVC packings"}</span>
+                  </div>
+                  <Droplets className="w-4 h-4 text-neutral-600" />
+                </div>
+
+                <div className="flex justify-center text-neutral-400">
+                  <ArrowRight className="w-3.5 h-3.5 rotate-90" />
+                </div>
+
+                <div className="p-2.5 rounded-lg bg-teal-50 border border-teal-100 text-xs flex justify-between items-center">
+                  <div>
+                    <span className="font-bold text-teal-900 block">{language === "id" ? "3. Pertukaran Kalor Film Fill & Fan" : "3. Film Fill & Axial Exhaust Fan"}</span>
+                    <span className="text-[11px] text-teal-700">{language === "id" ? "Udara ambien meniup menyerap panas laten" : "Induced airflow draws latent heat upwards"}</span>
+                  </div>
+                  <Wind className="w-4 h-4 text-teal-600" />
+                </div>
+
+                <div className="flex justify-center text-neutral-400">
+                  <ArrowRight className="w-3.5 h-3.5 rotate-90" />
+                </div>
+
+                <div className="p-2.5 rounded-lg bg-blue-50 border border-blue-100 text-xs flex justify-between items-center">
+                  <div>
+                    <span className="font-bold text-blue-900 block">{language === "id" ? "4. Basin Air Dingin (32°C Kembali ke Chiller)" : "4. Cold Basin Outflow (32°C Return)"}</span>
+                    <span className="text-[11px] text-blue-700">{language === "id" ? "Air dingin bersih siap menyerap panas lagi" : "Cooled water re-circulates to chiller"}</span>
+                  </div>
+                  <ShieldCheck className="w-4 h-4 text-blue-600" />
+                </div>
+              </div>
             </div>
           </motion.div>
         )}
@@ -241,33 +342,92 @@ export function TechnologyInsights() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
             transition={{ duration: 0.35 }}
-            className="bg-neutral-50 rounded-3xl p-6 sm:p-10 border border-neutral-200 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+            className="bg-neutral-50 rounded-3xl p-6 sm:p-10 border border-neutral-200 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start"
           >
             <div className="lg:col-span-7 space-y-4">
               <span className="text-[10px] uppercase font-bold tracking-widest text-amber-800 bg-amber-100 px-3 py-1 rounded-full">
-                {language === "id" ? "Sirkularitas Energi Panas" : "Circular Thermal Energy"}
+                {language === "id" ? "Konsep CCHP (Combined Cooling, Heating & Power)" : "Biomass Tri-Generation Model"}
               </span>
               <h3 className="text-xl sm:text-2xl font-bold text-neutral-900">
                 {language === "id"
-                  ? "Pemanfaatan Biomassa & Pemulihan Uap Panas (Heat Recovery)"
-                  : "Biomass Steam Generation & Thermal Energy Recovery"}
+                  ? "Pemanfaatan Boiler Biomassa & Pemulihan Uap Panas (Waste Steam)"
+                  : "Biomass Boiler Integration & Waste Heat Steam Recovery"}
               </h3>
-              <p className="text-xs sm:text-sm text-neutral-600 font-light leading-relaxed">
+              <p className="text-xs sm:text-sm text-neutral-600 font-normal leading-relaxed">
                 {language === "id"
-                  ? "Sektor industri pulp & paper, perkebunan kelapa sawit, dan pengolahan kayu menghasilkan limbah padat biomassa (cangkang sawit, serbuk kayu, sekam padi). Dengan mengintegrasikan boiler biomassa bersama sistem steam trap berefisiensi tinggi dan Absorption Chiller, energi uap dapat digunakan kembali untuk proses pengeringan maupun pendinginan gedung tanpa biaya bahan bakar fosil."
-                  : "Agricultural and pulp processing produces renewable biomass waste (palm kernel shells, wood residue, rice husks). Integrating biomass boilers with high-enthalpy steam traps and Absorption Chillers turns waste heat into chilled water without fossil fuel expenses."}
+                  ? "Pabrik kelapa sawit, pulp & paper, dan pengolahan kayu menghasilkan limbah organik padat (cangkang sawit, serbuk gergaji, tandan kosong). Membakar limbah ini pada boiler biomassa bertekanan tinggi menghasilkan uap berharga yang dapat dialirkan ke turbin generator listrik, lalu uap buangnya (exhaust steam) disalurkan ke Absorption Chiller untuk pendinginan ruangan atau proses."
+                  : "Agricultural, palm oil, and pulp mills produce solid biomass waste. Combustion in high-pressure biomass boilers generates clean steam that first powers electric turbines, while downstream exhaust steam directly powers Absorption Chillers for plant air conditioning and process cooling."}
               </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                <div className="p-3.5 bg-white rounded-xl border border-neutral-200">
+                  <span className="text-xs font-bold text-neutral-900 block mb-1">
+                    {language === "id" ? "Bahan Bakar Nol Emisi Fosil" : "Zero Fossil Fuel Expense"}
+                  </span>
+                  <p className="text-[11px] text-neutral-500 font-normal">
+                    {language === "id"
+                      ? "Menggantikan solar/batu bara dengan cangkang sawit dan sekam padi lokal."
+                      : "Replaces diesel and coal with abundant local palm kernel shells and rice husks."}
+                  </p>
+                </div>
+
+                <div className="p-3.5 bg-white rounded-xl border border-neutral-200">
+                  <span className="text-xs font-bold text-neutral-900 block mb-1">
+                    {language === "id" ? "Efisiensi Termal > 85%" : "Thermal Efficiency > 85%"}
+                  </span>
+                  <p className="text-[11px] text-neutral-500 font-normal">
+                    {language === "id"
+                      ? "Jauh melampaui PLTU konvensional yang hanya mencapai efisiensi ~35%."
+                      : "Far exceeds conventional thermal power plants which operate around only 35%."}
+                  </p>
+                </div>
+              </div>
             </div>
 
-            <div className="lg:col-span-5 bg-white rounded-2xl p-6 border border-neutral-200 space-y-3">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-neutral-400">
-                {language === "id" ? "Kombinasi CCHP (Tri-Generation)" : "CCHP Tri-Generation Model"}
-              </h4>
-              <p className="text-xs text-neutral-600 font-light leading-relaxed">
-                {language === "id"
-                  ? "Combined Cooling, Heating, and Power (CCHP) memberikan efisiensi termal total hingga 85%, jauh melampaui pembangkit listrik konvensional yang hanya 35%."
-                  : "Tri-Generation achieves combined thermal-electrical efficiencies up to 85%, dramatically outperforming conventional 35% grid power."}
-              </p>
+            {/* Biomass Cycle Visual */}
+            <div className="lg:col-span-5 bg-white rounded-2xl p-6 border border-neutral-200 shadow-sm space-y-4">
+              <div className="flex items-center justify-between pb-3 border-b border-neutral-100">
+                <span className="text-xs font-bold uppercase tracking-wider text-neutral-900">
+                  {language === "id" ? "Alur Sirkular Biomassa" : "Circular Waste Flow"}
+                </span>
+                <span className="text-[10px] font-mono font-semibold text-amber-700 bg-amber-50 px-2 py-0.5 rounded">
+                  Tri-Generation
+                </span>
+              </div>
+
+              <div className="space-y-2.5">
+                <div className="p-2.5 rounded-lg bg-amber-50 border border-amber-100 text-xs flex justify-between items-center">
+                  <div>
+                    <span className="font-bold text-amber-900 block">{language === "id" ? "1. Limbah Biomassa Padat" : "1. Biomass Fuel Feed"}</span>
+                    <span className="text-[11px] text-amber-700">{language === "id" ? "Cangkang sawit, sekam padi, serbuk kayu" : "Palm kernel shells, wood residue"}</span>
+                  </div>
+                  <Leaf className="w-4 h-4 text-amber-600" />
+                </div>
+
+                <div className="flex justify-center text-neutral-400">
+                  <ArrowRight className="w-3.5 h-3.5 rotate-90" />
+                </div>
+
+                <div className="p-2.5 rounded-lg bg-orange-50 border border-orange-100 text-xs flex justify-between items-center">
+                  <div>
+                    <span className="font-bold text-orange-900 block">{language === "id" ? "2. Biomass Boiler (Uap Tekanan Tinggi)" : "2. Biomass High-Pressure Boiler"}</span>
+                    <span className="text-[11px] text-orange-700">{language === "id" ? "Menghasilkan steam superheated" : "Generates superheated steam"}</span>
+                  </div>
+                  <Flame className="w-4 h-4 text-orange-600" />
+                </div>
+
+                <div className="flex justify-center text-neutral-400">
+                  <ArrowRight className="w-3.5 h-3.5 rotate-90" />
+                </div>
+
+                <div className="p-2.5 rounded-lg bg-emerald-50 border border-emerald-100 text-xs flex justify-between items-center">
+                  <div>
+                    <span className="font-bold text-emerald-900 block">{language === "id" ? "3. Steam Absorption Chiller" : "3. Steam Absorption Chiller"}</span>
+                    <span className="text-[11px] text-emerald-700">{language === "id" ? "Mengubah uap limbah menjadi Chilled Water 7°C" : "Converts exhaust steam into chilled water"}</span>
+                  </div>
+                  <Zap className="w-4 h-4 text-emerald-600" />
+                </div>
+              </div>
             </div>
           </motion.div>
         )}
@@ -280,34 +440,87 @@ export function TechnologyInsights() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
             transition={{ duration: 0.35 }}
-            className="bg-neutral-50 rounded-3xl p-6 sm:p-10 border border-neutral-200 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+            className="bg-neutral-50 rounded-3xl p-6 sm:p-10 border border-neutral-200 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start"
           >
             <div className="lg:col-span-7 space-y-4">
               <span className="text-[10px] uppercase font-bold tracking-widest text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full">
-                {language === "id" ? "ESG & Sertifikasi Gedung Hijau" : "ESG & Green Building Standards"}
+                {language === "id" ? "Mitigasi Pemanasan Global & ESG" : "Global Warming Mitigation & ESG"}
               </span>
               <h3 className="text-xl sm:text-2xl font-bold text-neutral-900">
                 {language === "id"
-                  ? "Pengurangan Emisi Karbon CO2 & Kontribusi Net-Zero Indonesia"
-                  : "Measurable CO2 Emissions Reduction & Net-Zero Trajectory"}
+                  ? "Pengurangan Emisi Karbon CO2 & Kontribusi Menuju Net-Zero Indonesia"
+                  : "Measurable CO2 Reductions & Indonesian Net-Zero Trajectory"}
               </h3>
-              <p className="text-xs sm:text-sm text-neutral-600 font-light leading-relaxed">
+              <p className="text-xs sm:text-sm text-neutral-600 font-normal leading-relaxed">
                 {language === "id"
-                  ? "Setiap instalasi pompa tenaga surya, chiller pemulih panas, dan sistem pipa hidrolik efisiensi tinggi Benua Green Energy telah berkontribusi menghindarkan lebih dari 112 juta pon emisi gas CO2 ke atmosfer. Solusi kami memenuhi kriteria penilaian Greenship GBCI, LEED Gold/Platinum, dan Green Mark."
-                  : "Every solar pump installation, waste-heat absorption chiller, and high-efficiency hydraulic pipe loop deployed by Benua Green Energy has contributed to avoiding over 112M+ lbs of CO2 emissions. Solutions comply with Greenship GBCI, LEED, and Green Mark ratings."}
+                  ? "Sistem HVAC komersial dan industri menyumbang hingga 40-50% dari total konsumsi energi fasilitas. Dengan mengganti chiller kompresor listrik berbahan bakar PLTU batu bara dengan Absorption Chiller berbasis limbah panas, perusahaan menghemat megawatt beban listrik dan langsung memangkas ribuan ton emisi gas CO2 setiap tahun."
+                  : "Commercial and industrial HVAC consumes 40-50% of a facility's electrical load. Replacing coal-grid powered electric chillers with waste-heat absorption chillers saves megawatts of peak electricity and directly slashes thousands of metric tons of CO2 emissions annually."}
               </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                <div className="p-3.5 bg-white rounded-xl border border-neutral-200">
+                  <span className="text-xs font-bold text-neutral-900 block mb-1">
+                    {language === "id" ? "Zero Ozone Depletion (ODP = 0)" : "Zero Ozone Depletion (ODP = 0)"}
+                  </span>
+                  <p className="text-[11px] text-neutral-500 font-normal">
+                    {language === "id"
+                      ? "Menggunakan air murni (H2O), bukan gas freon sintesis HCFC/HFC perusak lapisan ozon."
+                      : "Uses pure distilled water (R718), eliminating synthetic HCFC/HFC fluorocarbons."}
+                  </p>
+                </div>
+
+                <div className="p-3.5 bg-white rounded-xl border border-neutral-200">
+                  <span className="text-xs font-bold text-neutral-900 block mb-1">
+                    {language === "id" ? "Sertifikasi Green Building" : "Green Building Rating Points"}
+                  </span>
+                  <p className="text-[11px] text-neutral-500 font-normal">
+                    {language === "id"
+                      ? "Memenuhi poin efisiensi energi untuk sertifikasi Greenship GBCI, LEED Platinum/Gold, dan BCA Green Mark."
+                      : "Delivers maximum energy credits for Greenship GBCI, LEED Platinum/Gold, and BCA Green Mark."}
+                  </p>
+                </div>
+              </div>
             </div>
 
-            <div className="lg:col-span-5 bg-neutral-900 text-white rounded-2xl p-6 space-y-3">
+            {/* Impact Metric & Rating Badges */}
+            <div className="lg:col-span-5 bg-neutral-900 text-white rounded-2xl p-6 shadow-sm space-y-4">
               <span className="text-[10px] uppercase font-bold tracking-widest text-emerald-400 block">
-                {language === "id" ? "Metrik Dampak Kumulatif" : "Cumulative Environmental Metric"}
+                {language === "id" ? "Dampak Nyata Dekarbonisasi" : "Measurable Decarbonization Impact"}
               </span>
-              <p className="text-3xl sm:text-4xl font-light text-white tracking-tight">
-                112,845,311+ <span className="text-sm font-normal text-emerald-400">lbs CO2</span>
-              </p>
-              <p className="text-xs text-neutral-400 font-light">
-                {language === "id" ? "Emisi karbon yang berhasil dihindarkan sejak 2009 melalui efisiensi termal dan energi surya." : "Carbon emissions avoided since 2009 through solar pumping & thermal recovery."}
-              </p>
+
+              <div className="p-4 rounded-xl bg-white/5 border border-white/10">
+                <p className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+                  112,845,311+
+                </p>
+                <p className="text-xs text-emerald-400 font-medium mt-1">
+                  {language === "id" ? "Pon Emisi CO2 Berhasil Dihindarkan" : "Pounds of CO2 Emissions Avoided"}
+                </p>
+                <p className="text-[11px] text-neutral-400 mt-2 font-normal">
+                  {language === "id"
+                    ? "Setara dengan penanaman 1.800.000+ pohon atau penghentian ribuan ton pembakaran batu bara."
+                    : "Equivalent to planting 1.8M+ trees or avoiding thousands of tons of coal combustion."}
+                </p>
+              </div>
+
+              <div className="pt-2">
+                <span className="text-[10px] uppercase font-bold text-neutral-400 block mb-2">
+                  {language === "id" ? "Kepatuhan Regulasi & Standar" : "Standard Compliance"}
+                </span>
+                <div className="flex flex-wrap gap-2">
+                  <span className="px-2.5 py-1 rounded bg-white/10 text-[10px] font-medium text-neutral-200">
+                    GBCI Greenship
+                  </span>
+                  <span className="px-2.5 py-1 rounded bg-white/10 text-[10px] font-medium text-neutral-200">
+                    USGBC LEED
+                  </span>
+                  <span className="px-2.5 py-1 rounded bg-white/10 text-[10px] font-medium text-neutral-200">
+                    BCA Green Mark
+                  </span>
+                  <span className="px-2.5 py-1 rounded bg-white/10 text-[10px] font-medium text-neutral-200">
+                    ISO 50001 EnMS
+                  </span>
+                </div>
+              </div>
             </div>
           </motion.div>
         )}

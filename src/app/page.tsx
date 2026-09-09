@@ -2,11 +2,12 @@
 
 import { useState, useMemo } from "react";
 import { HeroBanner } from "@/components/HeroBanner";
+import { ClientLogoMarquee } from "@/components/ClientLogoMarquee";
 import { ProductSlider } from "@/components/ProductSlider";
 import { ProductModal } from "@/components/ProductModal";
 import { ProductCard } from "@/components/ProductCard";
 import { CATEGORIES_DATA, Product } from "@/lib/products";
-import { ArrowRight, LayoutGrid, SlidersHorizontal, SearchX, Sparkles, ShieldCheck, Layers } from "lucide-react";
+import { ArrowRight, LayoutGrid, SlidersHorizontal, Search, SearchX, Sparkles, ShieldCheck, Layers } from "lucide-react";
 import Link from "next/link";
 import { useLanguage, TranslationKey } from "@/lib/i18n";
 import { motion } from "framer-motion";
@@ -72,72 +73,122 @@ export default function HomePage() {
 
   return (
     <main className="flex-grow pb-20 bg-white">
-      {/* Minimalist Hero */}
-      <HeroBanner
-        searchQuery={searchQuery}
-        onSearchChange={setSearchQuery}
-        selectedCategory={selectedCategory}
-        onSelectCategory={setSelectedCategory}
-      />
+      
+      {/* 1. High-Impact Corporate Industrial Hero Banner */}
+      <HeroBanner />
 
-      {/* Main Content Area */}
-      <div className="max-w-7xl mx-auto pt-4" id="catalog">
+      {/* 2. Customer Logos Besar Marquee (Dipercaya Klien Industri Terbesar) */}
+      <ClientLogoMarquee />
+
+      {/* 3. Main Industrial Catalog Section */}
+      <div className="max-w-7xl mx-auto pt-16 sm:pt-20 px-6 sm:px-8" id="catalog">
         
-        {/* 3 Corporate Pillars (inspired by benuagreenenergy.com) */}
-        {!searchQuery && (
-          <div className="px-6 sm:px-8 mb-12">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="p-5 rounded-2xl bg-neutral-50/80 border border-neutral-100 hover:border-neutral-200 transition-all">
-                <div className="w-8 h-8 rounded-full bg-neutral-900 text-white flex items-center justify-center mb-3">
-                  <Sparkles className="w-4 h-4" />
-                </div>
-                <h3 className="text-sm font-bold text-neutral-900 mb-1">
-                  {language === "id" ? "Sistem Pompa Tenaga Surya" : "Solar & High-Efficiency Pumping"}
-                </h3>
-                <p className="text-xs text-neutral-500 font-light leading-relaxed">
-                  {language === "id"
-                    ? "Inverter MPPT efisiensi 99% dan motor tahan pasir untuk irigasi, perkebunan, dan suplai air bersih tanpa biaya listrik."
-                    : "99% MPPT efficiency inverters and sand-resistant submersible motors for off-grid irrigation and water supply."}
-                </p>
-              </div>
+        {/* Catalog Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-neutral-200/80 gap-4">
+          <div>
+            <span className="text-xs font-bold tracking-widest text-emerald-700 uppercase block mb-1">
+              {language === "id" ? "PORTFOLIO SISTEM & PERALATAN" : "PRODUCTS & ENGINEERING SYSTEMS"}
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900">
+              {language === "id"
+                ? "Katalog Produk & Solusi Industri"
+                : "Industrial Product Line & Solutions"}
+            </h2>
+          </div>
+          <p className="text-xs sm:text-sm text-neutral-500 max-w-md font-normal leading-relaxed md:text-right">
+            {language === "id"
+              ? "Chiller, Cooling Tower, AHU/FCU, Pipa & Fitting PPR-CT, Valve Kontrol, Pompa Industri, dan Inverter Tenaga Surya."
+              : "Chillers, Cooling Towers, AHU/FCU, PPR-CT Piping, Control Valves, Industrial Pumps, and Solar Inverters."}
+          </p>
+        </div>
 
-              <div className="p-5 rounded-2xl bg-neutral-50/80 border border-neutral-100 hover:border-neutral-200 transition-all">
-                <div className="w-8 h-8 rounded-full bg-neutral-900 text-white flex items-center justify-center mb-3">
-                  <ShieldCheck className="w-4 h-4" />
-                </div>
-                <h3 className="text-sm font-bold text-neutral-900 mb-1">
-                  {language === "id" ? "Garansi & Layanan Cepat" : "Technical Support & Warranty"}
-                </h3>
-                <p className="text-xs text-neutral-500 font-light leading-relaxed">
-                  {language === "id"
-                    ? "Jaminan unit pengganti < 24 jam, supervisi instalasi di lokasi, serta depo logistik aktif di Jakarta, Surabaya, dan Balikpapan."
-                    : "Guaranteed < 24h replacement units, on-site commissioning, and regional depot hubs in Jakarta, Surabaya, Balikpapan."}
-                </p>
-              </div>
+        {/* Filter Controls: Category Tabs, Search Bar, and View Mode Toggle */}
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-10 pb-6 border-b border-neutral-100">
+          
+          {/* Category Tabs */}
+          <div className="flex flex-wrap items-center gap-2">
+            <button
+              onClick={() => setSelectedCategory("all")}
+              className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-200 border cursor-pointer ${
+                selectedCategory === "all"
+                  ? "bg-neutral-900 text-white border-neutral-900 shadow-sm"
+                  : "bg-neutral-50 text-neutral-600 border-neutral-200 hover:border-neutral-400 hover:text-neutral-900 hover:bg-white"
+              }`}
+            >
+              {language === "id" ? "Semua Sistem" : "All Systems"}
+            </button>
+            {CATEGORIES_DATA.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setSelectedCategory(cat.slug)}
+                className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-200 border cursor-pointer ${
+                  selectedCategory === cat.slug
+                    ? "bg-neutral-900 text-white border-neutral-900 shadow-sm"
+                    : "bg-neutral-50 text-neutral-600 border-neutral-200 hover:border-neutral-400 hover:text-neutral-900 hover:bg-white"
+                }`}
+              >
+                {getCategoryName(cat.slug, cat.name)}
+              </button>
+            ))}
+          </div>
 
-              <div className="p-5 rounded-2xl bg-neutral-50/80 border border-neutral-100 hover:border-neutral-200 transition-all">
-                <div className="w-8 h-8 rounded-full bg-neutral-900 text-white flex items-center justify-center mb-3">
-                  <Layers className="w-4 h-4" />
-                </div>
-                <h3 className="text-sm font-bold text-neutral-900 mb-1">
-                  {language === "id" ? "Pipa PPR & Infrastruktur 50+ Thn" : "PPR Piping & Industrial Infrastructure"}
-                </h3>
-                <p className="text-xs text-neutral-500 font-light leading-relaxed">
-                  {language === "id"
-                    ? "Material food-grade higienis tahan tekanan tinggi dan korosi dengan usia pakai pipa lebih dari 50 tahun."
-                    : "Certified food-grade corrosion-free piping rated for high pressures with an engineered 50+ year operational life."}
-                </p>
-              </div>
+          {/* Right: Search Box + View Mode Toggle */}
+          <div className="flex items-center gap-3 w-full lg:w-auto">
+            {/* Search Input */}
+            <div className="relative flex-1 lg:w-64">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-neutral-400 pointer-events-none" />
+              <input
+                type="text"
+                placeholder={language === "id" ? "Cari spesifikasi / produk..." : "Search specs or products..."}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-9 pr-8 py-1.5 rounded-full bg-neutral-50 border border-neutral-200 text-neutral-900 placeholder:text-neutral-400 text-xs focus:outline-none focus:bg-white focus:border-neutral-400 transition-all"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] text-neutral-400 hover:text-neutral-900"
+                >
+                  ✕
+                </button>
+              )}
+            </div>
+
+            {/* View Mode Switcher */}
+            <div className="flex items-center p-0.5 rounded-full bg-neutral-100 border border-neutral-200 text-neutral-500 shrink-0">
+              <button
+                onClick={() => setViewMode("slider")}
+                className={`p-1.5 rounded-full transition-all ${
+                  viewMode === "slider"
+                    ? "bg-white text-neutral-900 shadow-xs"
+                    : "hover:text-neutral-900"
+                }`}
+                title="Slider View"
+              >
+                <SlidersHorizontal className="w-3.5 h-3.5" />
+              </button>
+              <button
+                onClick={() => setViewMode("grid")}
+                className={`p-1.5 rounded-full transition-all ${
+                  viewMode === "grid"
+                    ? "bg-white text-neutral-900 shadow-xs"
+                    : "hover:text-neutral-900"
+                }`}
+                title="Grid View"
+              >
+                <LayoutGrid className="w-3.5 h-3.5" />
+              </button>
             </div>
           </div>
-        )}
-        
+
+        </div>
+
         {/* If user is actively searching */}
         {searchQuery.trim() ? (
-          <div className="px-6 sm:px-8 py-4">
+          <div className="py-2">
             <div className="flex items-center justify-between mb-8 pb-3 border-b border-neutral-100">
               <div>
-                <h2 className="text-lg font-medium text-neutral-900">
+                <h2 className="text-base font-bold text-neutral-900">
                   {t("catalog.searchResults")} &ldquo;{searchQuery}&rdquo;
                 </h2>
                 <p className="text-xs text-neutral-400 mt-0.5">
@@ -182,7 +233,7 @@ export default function HomePage() {
                 </p>
                 <button
                   onClick={() => setSearchQuery("")}
-                  className="bg-neutral-900 hover:bg-neutral-800 text-white rounded-full px-5 py-2 text-xs font-medium transition-colors"
+                  className="px-4 py-2 bg-neutral-900 text-white rounded-full text-xs font-medium hover:bg-neutral-800 transition-colors"
                 >
                   {t("catalog.viewAll")}
                 </button>
@@ -190,73 +241,22 @@ export default function HomePage() {
             )}
           </div>
         ) : (
-          /* Catalog View Mode Switcher */
-          <div>
-            <div className="px-6 sm:px-8 mb-8 flex items-center justify-between">
-              <div>
-                <span className="text-[11px] font-medium text-neutral-400 uppercase tracking-wider block">
-                  {t("catalog.collection")}
-                </span>
-                <h2 className="text-xl sm:text-2xl font-medium tracking-tight text-neutral-900">
-                  {selectedCategory === "all"
-                    ? t("catalog.allProducts")
-                    : getCategoryName(displayedCategories[0]?.slug, displayedCategories[0]?.name)}
-                </h2>
-              </div>
-
-              {/* View toggle */}
-              <div className="flex items-center gap-1 bg-neutral-100 p-1 rounded-full">
-                <button
-                  onClick={() => setViewMode("slider")}
-                  className={`px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1.5 transition-all duration-200 ${
-                    viewMode === "slider"
-                      ? "bg-white text-neutral-900 shadow-sm"
-                      : "text-neutral-500 hover:text-neutral-900"
-                  }`}
-                >
-                  <SlidersHorizontal className="w-3 h-3" />
-                  <span className="hidden sm:inline">{t("catalog.carousel")}</span>
-                </button>
-                <button
-                  onClick={() => setViewMode("grid")}
-                  className={`px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1.5 transition-all duration-200 ${
-                    viewMode === "grid"
-                      ? "bg-white text-neutral-900 shadow-sm"
-                      : "text-neutral-500 hover:text-neutral-900"
-                  }`}
-                >
-                  <LayoutGrid className="w-3 h-3" />
-                  <span className="hidden sm:inline">{t("catalog.grid")}</span>
-                </button>
-              </div>
-            </div>
-
-            {/* Slider View Mode */}
+          /* Normal View: Category Sliders or Grid */
+          <>
             {viewMode === "slider" ? (
-              <motion.div
-                key="slider-view"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.4 }}
-                className="space-y-4"
-              >
+              <div className="space-y-16">
                 {displayedCategories.map((category) => (
-                  <ProductSlider
-                    key={category.id}
-                    category={category}
-                    onSelectProduct={setSelectedProduct}
-                  />
+                  <div key={category.id} className="relative">
+                    <ProductSlider
+                      category={category}
+                      onSelectProduct={setSelectedProduct}
+                    />
+                  </div>
                 ))}
-              </motion.div>
+              </div>
             ) : (
-              /* Grid View Mode */
-              <motion.div
-                key="grid-view"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.4 }}
-                className="px-6 sm:px-8"
-              >
+              /* Flat Grid View across active categories */
+              <div className="space-y-12">
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                   {allDisplayedProducts.map((product) => (
                     <ProductCard
@@ -266,121 +266,28 @@ export default function HomePage() {
                     />
                   ))}
                 </div>
-              </motion.div>
+              </div>
             )}
-          </div>
+          </>
         )}
-
-        {/* Technology Insights Section (Inspired by Hitachi & Johnson Controls) */}
-        <TechnologyInsights />
-
-        {/* Major Client Project References (Indorama, Indah Kiat, RAPP, Garudafood, MOI, Central Park) */}
-        <ProjectShowcase />
-
-        {/* Minimalist Editorial Story Section with scroll animation */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="my-20 sm:my-28 px-6 sm:px-8 border-t border-neutral-100 pt-16"
-        >
-          <div className="max-w-5xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-start">
-              
-              <div className="md:col-span-5">
-                <span className="text-xs font-medium text-neutral-400 uppercase tracking-wider block mb-2">
-                  {t("story.label")}
-                </span>
-                <h3 className="text-2xl sm:text-3xl font-normal text-neutral-900 tracking-tight leading-snug">
-                  {t("story.title")}
-                </h3>
-              </div>
-
-              <div className="md:col-span-7 space-y-4 text-neutral-500 text-sm sm:text-base leading-relaxed font-light">
-                <p>
-                  {t("story.p1")}
-                </p>
-                <p>
-                  {t("story.p2")}
-                </p>
-                <div className="pt-3">
-                  <Link
-                    href="/about"
-                    className="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-900 hover:text-neutral-600 transition-colors group"
-                  >
-                    <span>{t("story.readMore")}</span>
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                </div>
-              </div>
-
-            </div>
-
-            {/* Clean Metrics Row */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 pt-16 mt-16 border-t border-neutral-100">
-              <div>
-                <p className="text-3xl sm:text-4xl font-light text-neutral-900 tracking-tight">40+</p>
-                <p className="text-xs text-neutral-400 mt-1">{t("metrics.models")}</p>
-              </div>
-              <div>
-                <p className="text-3xl sm:text-4xl font-light text-neutral-900 tracking-tight">99%</p>
-                <p className="text-xs text-neutral-400 mt-1">{t("metrics.mppt")}</p>
-              </div>
-              <div>
-                <p className="text-3xl sm:text-4xl font-light text-neutral-900 tracking-tight">50+ Yrs</p>
-                <p className="text-xs text-neutral-400 mt-1">{t("metrics.life")}</p>
-              </div>
-              <div>
-                <p className="text-3xl sm:text-4xl font-light text-neutral-900 tracking-tight">24/7</p>
-                <p className="text-xs text-neutral-400 mt-1">{t("metrics.support")}</p>
-              </div>
-            </div>
-          </div>
-        </motion.section>
-
-        {/* Minimalist Inquiry Callout */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="my-12 px-6 sm:px-8"
-        >
-          <div className="max-w-5xl mx-auto bg-neutral-50 rounded-2xl p-8 sm:p-12 flex flex-col sm:flex-row items-center justify-between gap-6 border border-neutral-100">
-            <div className="space-y-1 text-center sm:text-left">
-              <h3 className="text-lg sm:text-xl font-medium text-neutral-900">
-                {t("inquiry.title")}
-              </h3>
-              <p className="text-xs sm:text-sm text-neutral-500 font-light">
-                {t("inquiry.desc")}
-              </p>
-            </div>
-            <div className="shrink-0">
-              <Link
-                href="/contact"
-                className="inline-flex items-center px-5 py-2.5 bg-neutral-900 hover:bg-neutral-800 text-white text-xs font-medium rounded-full transition-all duration-300 shadow-sm hover:shadow-md"
-              >
-                <span>{t("inquiry.btn")}</span>
-                <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
-              </Link>
-            </div>
-          </div>
-        </motion.section>
 
       </div>
 
-      {/* Product Detail Modal */}
-      <ProductModal
-        product={selectedProduct}
-        isOpen={Boolean(selectedProduct)}
-        onClose={() => setSelectedProduct(null)}
-      />
+      {/* 4. Interactive Technology Insights Section (Cara Kerja Chiller, Cooling Tower, Biomass & CO2) */}
+      <TechnologyInsights />
+
+      {/* 5. Major Client Project Showcase (Indorama, APP, APRIL, Garudafood, MOI, Central Park) */}
+      <ProjectShowcase />
+
+      {/* 6. Product Detail Modal */}
+      {selectedProduct && (
+        <ProductModal
+          product={selectedProduct}
+          isOpen={!!selectedProduct}
+          onClose={() => setSelectedProduct(null)}
+        />
+      )}
+
     </main>
   );
 }
-
-
-
-
-

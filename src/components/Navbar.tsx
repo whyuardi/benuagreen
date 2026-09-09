@@ -11,7 +11,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Menu, ArrowRight, Globe } from "lucide-react";
+import { Menu, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
 import { motion } from "framer-motion";
 import { SocialLinks } from "@/components/SocialLinks";
@@ -30,21 +30,20 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Streamlined 4 Core Enterprise Navigation Items
   const navLinks = [
     { name: t("nav.products"), href: "/#catalog" },
     { name: t("nav.technology"), href: "/#technology" },
     { name: t("nav.projects"), href: "/#projects" },
-    { name: t("nav.rental"), href: "/rental" },
     { name: t("nav.about"), href: "/about" },
-    { name: t("nav.contact"), href: "/contact" },
   ];
 
   return (
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-white/90 backdrop-blur-md border-b border-neutral-200/80 py-3.5 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.04)]"
-          : "bg-white border-b border-neutral-100 py-4.5"
+          ? "bg-white/95 backdrop-blur-md border-b border-neutral-200/80 py-3 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.05)]"
+          : "bg-white border-b border-neutral-100 py-4"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 sm:px-8 flex items-center justify-between">
@@ -62,17 +61,17 @@ export function Navbar() {
             />
           </div>
           <div className="flex flex-col">
-            <span className="font-semibold text-sm tracking-tight text-neutral-900 leading-none">
+            <span className="font-bold text-sm tracking-tight text-neutral-900 leading-none">
               Benua Green
             </span>
-            <span className="text-[10px] text-neutral-400 tracking-wider font-medium uppercase mt-0.5">
+            <span className="text-[10px] text-neutral-400 tracking-wider font-semibold uppercase mt-0.5">
               {t("nav.tagline")}
             </span>
           </div>
         </Link>
 
-        {/* Navigation Links */}
-        <nav className="hidden md:flex items-center space-x-7">
+        {/* Streamlined Desktop Navigation Links (4 core items) */}
+        <nav className="hidden md:flex items-center space-x-8">
           {navLinks.map((link) => {
             const isActive =
               link.href === "/"
@@ -101,16 +100,16 @@ export function Navbar() {
           })}
         </nav>
 
-        {/* Right Actions */}
+        {/* Right Actions: Language Switcher & 1 Clear B2B CTA */}
         <div className="flex items-center gap-3 sm:gap-4">
           
-          {/* Language Switcher Pill (Desktop) with smooth sliding pill */}
-          <div className="relative flex items-center bg-neutral-100 p-0.5 rounded-full border border-neutral-200/60 text-[11px] font-medium">
+          {/* Language Switcher Pill */}
+          <div className="relative flex items-center bg-neutral-100 p-0.5 rounded-full border border-neutral-200/70 text-[11px] font-medium">
             <button
               onClick={() => setLanguage("id")}
               className={`relative px-2.5 py-0.5 rounded-full transition-colors duration-200 z-10 ${
                 language === "id"
-                  ? "text-neutral-950 font-semibold"
+                  ? "text-neutral-950 font-bold"
                   : "text-neutral-500 hover:text-neutral-900"
               }`}
               title="Bahasa Indonesia"
@@ -128,7 +127,7 @@ export function Navbar() {
               onClick={() => setLanguage("en")}
               className={`relative px-2.5 py-0.5 rounded-full transition-colors duration-200 z-10 ${
                 language === "en"
-                  ? "text-neutral-950 font-semibold"
+                  ? "text-neutral-950 font-bold"
                   : "text-neutral-500 hover:text-neutral-900"
               }`}
               title="English"
@@ -144,21 +143,16 @@ export function Navbar() {
             </button>
           </div>
 
+          {/* Primary B2B Engineering CTA Button */}
           <Link
             href="/contact"
-            className="hidden sm:inline-flex items-center px-4 py-1.5 rounded-full text-xs font-medium text-neutral-700 hover:text-neutral-950 border border-neutral-200 hover:border-neutral-400 transition-all duration-300"
+            className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold text-white bg-neutral-900 hover:bg-neutral-800 transition-all duration-300 shadow-sm hover:shadow-md"
           >
-            {t("nav.inquire")}
+            <span>{t("nav.inquire")}</span>
+            <ArrowRight className="w-3 h-3 text-neutral-300" />
           </Link>
 
-          <Link
-            href="/contact?type=quote"
-            className="hidden sm:inline-flex items-center px-4 py-1.5 rounded-full text-xs font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-all duration-300 shadow-sm hover:shadow-md"
-          >
-            {t("nav.requestQuote")}
-          </Link>
-
-          {/* Mobile Sheet */}
+          {/* Mobile Sheet Menu */}
           <div className="md:hidden">
             <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
               <SheetTrigger className="w-8 h-8 border border-neutral-200 rounded-lg flex items-center justify-center text-neutral-700">
@@ -166,7 +160,7 @@ export function Navbar() {
               </SheetTrigger>
               <SheetContent
                 side="right"
-                className="w-[80vw] max-w-xs bg-white border-l border-neutral-100 p-6 flex flex-col justify-between"
+                className="w-[82vw] max-w-xs bg-white border-l border-neutral-100 p-6 flex flex-col justify-between"
               >
                 <div>
                   <SheetHeader className="text-left pb-4 border-b border-neutral-100">
@@ -181,7 +175,7 @@ export function Navbar() {
                             unoptimized
                           />
                         </div>
-                        <span className="font-semibold text-sm text-neutral-900">
+                        <span className="font-bold text-sm text-neutral-900">
                           Benua Green
                         </span>
                       </div>
@@ -212,7 +206,7 @@ export function Navbar() {
                     </SheetTitle>
                   </SheetHeader>
 
-                  <div className="flex flex-col space-y-2 pt-6">
+                  <div className="flex flex-col space-y-1.5 pt-6">
                     {navLinks.map((link) => {
                       const isActive =
                         link.href === "/"
@@ -223,10 +217,10 @@ export function Navbar() {
                           key={link.name}
                           href={link.href}
                           onClick={() => setMobileOpen(false)}
-                          className={`flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-colors ${
+                          className={`flex items-center justify-between px-3 py-2.5 rounded-lg text-sm transition-colors ${
                             isActive
                               ? "bg-neutral-900 text-white font-medium"
-                              : "text-neutral-600 hover:text-neutral-900"
+                              : "text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50"
                           }`}
                         >
                           <span>{link.name}</span>
@@ -241,22 +235,16 @@ export function Navbar() {
                   <Link
                     href="/contact"
                     onClick={() => setMobileOpen(false)}
-                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-neutral-900 text-white text-xs font-medium rounded-lg shadow-sm"
+                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-neutral-900 text-white text-xs font-semibold rounded-lg shadow-sm"
                   >
-                    {t("nav.requestQuote")}
-                  </Link>
-                  <Link
-                    href="/contact"
-                    onClick={() => setMobileOpen(false)}
-                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 border border-neutral-200 text-neutral-700 text-xs font-medium rounded-lg"
-                  >
-                    {t("nav.contact")}
+                    <span>{t("nav.inquire")}</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
 
                   {/* Mobile Social Media Icons */}
                   <div className="pt-2">
                     <p className="text-[10px] uppercase font-semibold tracking-wider text-neutral-400 mb-2.5 text-center">
-                      Sosial Media / Connect
+                      Connect With Us
                     </p>
                     <SocialLinks className="flex items-center justify-center gap-2.5" iconClassName="w-8 h-8" />
                   </div>
@@ -270,8 +258,3 @@ export function Navbar() {
     </header>
   );
 }
-
-
-
-
-

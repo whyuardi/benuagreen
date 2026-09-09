@@ -17,7 +17,11 @@ export function ProductSlider({ category, onSelectProduct }: ProductSliderProps)
 
   const getCategoryName = (slug: string, fallback: string) => {
     const keyMap: Record<string, TranslationKey> = {
+      chillers: "cat.chillers",
+      "cooling-air": "cat.coolingAir",
+      "piping-valves": "cat.pipingValves",
       pumps: "cat.pumps",
+      "heating-power": "cat.heatingPower",
       "solar-drives": "cat.solarDrives",
       ppr: "cat.ppr",
       inverter: "cat.inverter",
