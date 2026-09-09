@@ -11,6 +11,9 @@ import Link from "next/link";
 import { useLanguage, TranslationKey } from "@/lib/i18n";
 import { motion } from "framer-motion";
 
+import { TechnologyInsights } from "@/components/TechnologyInsights";
+import { ProjectShowcase } from "@/components/ProjectShowcase";
+
 export default function HomePage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -20,12 +23,17 @@ export default function HomePage() {
 
   const getCategoryName = (slug: string, fallback: string) => {
     const keyMap: Record<string, TranslationKey> = {
+      chillers: "cat.chillers",
+      "cooling-air": "cat.coolingAir",
+      "piping-valves": "cat.pipingValves",
       pumps: "cat.pumps",
+      "heating-power": "cat.heatingPower",
       "solar-drives": "cat.solarDrives",
       ppr: "cat.ppr",
       inverter: "cat.inverter",
       "starters-and-controllers": "cat.starters",
       "rms-dongle": "cat.rms",
+      dongle: "cat.rms",
     };
     const key = keyMap[slug];
     return key ? t(key) : fallback;
@@ -263,7 +271,11 @@ export default function HomePage() {
           </div>
         )}
 
-        {/* Product Detail Modal */}
+        {/* Technology Insights Section (Inspired by Hitachi & Johnson Controls) */}
+        <TechnologyInsights />
+
+        {/* Major Client Project References (Indorama, Indah Kiat, RAPP, Garudafood, MOI, Central Park) */}
+        <ProjectShowcase />
 
         {/* Minimalist Editorial Story Section with scroll animation */}
         <motion.section

@@ -5,6 +5,7 @@ export interface Product {
   image: string;
   description?: string;
   features?: string[];
+  specs?: Record<string, string>;
   tag?: string;
 }
 
@@ -18,27 +19,194 @@ export interface CategoryGroup {
 
 export const CATEGORIES_DATA: CategoryGroup[] = [
   {
-    id: "dongle",
-    name: "Dongle",
-    slug: "dongle",
-    description: "Advanced monitoring and remote management dongles for solar and pump systems.",
+    id: "chillers",
+    name: "Chiller & HVAC Systems",
+    slug: "chillers",
+    description: "Industrial absorption chillers, magnetic centrifugal chillers, and compact modular chillers for commercial & manufacturing facilities.",
     products: [
       {
-        id: "rms-dongle",
-        name: "RMS Dongle",
-        category: "Dongle",
-        image: "https://benuagreen.com/storage/img/produk/1769003848_6970db48ed186.png",
-        description: "Remote Monitoring System (RMS) Dongle designed for real-time telemetry, data logging, and cloud synchronization for solar pump installations.",
-        features: ["Plug & Play Connectivity", "Cloud Synchronization", "Real-time Telemetry", "IP65 Weather Resistance"],
-        tag: "Product Info"
+        id: "abs-chiller-steam-fired",
+        name: "Double Effect Steam Fired Absorption Chiller",
+        category: "Chillers & HVAC",
+        image: "https://benuagreen.com/storage/img/produk/1769004131_6970dc6351a99.png",
+        description: "High-efficiency thermal absorption chiller powered by industrial waste steam or boiler steam (0.4 - 0.8 MPa). Delivers high COP up to 1.45 with zero fluorocarbon refrigerants (natural LiBr-H2O cycle).",
+        features: ["Capacities from 150 TR to 900+ TR", "Zero Electric Compressor (Minimal Power Load)", "High COP 1.42 - 1.48 with Waste Heat", "Ozone Friendly (Zero ODP, GWP < 1)", "Intelligent PLC Microprocessor Control"],
+        specs: { "Cooling Capacity": "150 - 900 TR", "Steam Pressure": "0.4 - 0.8 MPa", "Refrigerant": "Distilled Water (R718)", "Absorbent": "Lithium Bromide (LiBr)" },
+        tag: "Industrial Grade"
+      },
+      {
+        id: "abs-chiller-direct-fired",
+        name: "Double Effect Direct Fired Absorption Chiller",
+        category: "Chillers & HVAC",
+        image: "https://benuagreen.com/storage/img/produk/1769004074_6970dc2adbef9.png",
+        description: "Direct-fired absorption chiller operating on natural gas, biogas, or diesel. Eliminates peak electrical demand for large shopping malls, hospitals, and manufacturing complexes.",
+        features: ["Natural Gas / Biogas / Dual Fuel Burner", "Simultaneous Cooling & Heating Capability", "Ultra-Low Noise & Zero Vibration", "Automatic Solution Concentration Control"],
+        specs: { "Cooling Capacity": "150 - 900 TR", "Fuel Type": "Natural Gas / Biogas / Diesel", "COP": "1.38 - 1.44" },
+        tag: "Industrial Grade"
+      },
+      {
+        id: "abs-chiller-hot-water",
+        name: "Single Effect Hot Water Absorption Chiller",
+        category: "Chillers & HVAC",
+        image: "https://benuagreen.com/storage/img/produk/1769004051_6970dc135eeea.png",
+        description: "Harnesses low-grade industrial waste hot water (85°C - 98°C) from cogeneration or jacket water to produce chilled water for air conditioning.",
+        features: ["Operates on Low-Grade Waste Hot Water (85°C - 98°C)", "Excellent Part-Load Modulation", "No Compressor Replacement Needed", "Long Service Life > 25 Years"],
+        specs: { "Hot Water Inlet": "85°C - 98°C", "Chilled Water Output": "7°C", "COP": "0.72 - 0.78" },
+        tag: "Waste Heat Recovery"
+      },
+      {
+        id: "yms-magnetic-centrifugal-chiller",
+        name: "YMS Magnetic Bearing Centrifugal Chiller",
+        category: "Chillers & HVAC",
+        image: "https://benuagreen.com/storage/img/produk/1769002815_6970d73f449db.png",
+        description: "Friction-free magnetic levitation centrifugal chiller delivering ultra-high IPLV and lowest sound levels. 100% oil-free design eliminates oil contamination.",
+        features: ["Oil-Free Magnetic Levitation Bearings", "IPLV up to 10.5+ at Part Load", "Ultra-low Acoustic Signature (< 72 dBA)", "Rapid Restart in < 30 Seconds"],
+        specs: { "Capacity": "100 - 600 TR", "Bearing Type": "Active Magnetic", "Refrigerant": "Eco-friendly R134a / R1234ze" },
+        tag: "Ultra High Efficiency"
+      },
+      {
+        id: "mini-chiller-ycae",
+        name: "Mini Chiller YCAE Series (Air-Cooled)",
+        category: "Chillers & HVAC",
+        image: "https://benuagreen.com/storage/img/produk/1769003131_6970d87bf23a6.png",
+        description: "Compact modular air-cooled scroll water chiller for light commercial buildings, clean rooms, and localized industrial cooling.",
+        features: ["Modular Master-Slave Combination (Up to 8 Units)", "High-Efficiency Scroll Compressors", "Built-in Hydraulic Pump & Expansion Tank Option", "Weatherproof Heavy Powder-Coated Casing"],
+        specs: { "Available Sizes": "18.5 TR, 28.4 TR, 37 TR", "Condenser": "Air-Cooled Aluminum Fins", "Refrigerant": "R410A" },
+        tag: "Modular Series"
+      },
+      {
+        id: "mini-chiller-ycwe",
+        name: "Mini Chiller YCWE Series (Water-Cooled)",
+        category: "Chillers & HVAC",
+        image: "https://benuagreen.com/storage/img/produk/1769004026_6970dbfa82969.png",
+        description: "Water-cooled compact scroll chiller delivering consistent COP year-round paired with cooling towers.",
+        features: ["High Full-Load EER", "Shell-and-Tube Condenser for Easy Maintenance", "Compact Mechanical Room Footprint"],
+        specs: { "Available Sizes": "21 TR, 32 TR, 42 TR", "Condenser": "Water-Cooled Shell & Tube", "Refrigerant": "R410A" },
+        tag: "Modular Series"
+      }
+    ]
+  },
+  {
+    id: "cooling-air",
+    name: "Cooling Towers & Air Distribution (AHU / FCU)",
+    slug: "cooling-air",
+    description: "High-performance evaporative cooling towers, Air Handling Units (AHU), and Fan Coil Units (FCU).",
+    products: [
+      {
+        id: "crossflow-cooling-tower",
+        name: "Industrial Cross-Flow Evaporative Cooling Tower",
+        category: "Cooling Towers & AHU/FCU",
+        image: "https://benuagreen.com/storage/img/produk/1769004131_6970dc6351a99.png",
+        description: "Engineered FRP cross-flow cooling towers with high-efficiency PVC film fill and low-noise axial fans for industrial and chiller condenser circuits.",
+        features: ["Heavy Corrosion-Resistant FRP Casing", "Low-Drift PVC Infill Honeycomb", "Energy-Saving Direct-Drive / Belt-Drive Fans", "Easy Access Internal Walkway"],
+        specs: { "Water Flow Rate": "50 - 2000 m³/hr", "Design Wet Bulb": "28°C", "Material": "UV-Stabilized FRP" },
+        tag: "Condenser Cooling"
+      },
+      {
+        id: "closed-circuit-cooling-tower",
+        name: "Closed-Circuit Fluid Cooler (Counter-Flow)",
+        category: "Cooling Towers & AHU/FCU",
+        image: "https://benuagreen.com/storage/img/produk/1769004074_6970dc2adbef9.png",
+        description: "Closed loop cooling tower protecting process water and chillers from airborne debris, scale, and atmospheric contamination.",
+        features: ["100% Contamination-Free Closed Loop", "Stainless Steel / HDG Cooling Coils", "Water Saving Hybrid Evaporative Operation"],
+        specs: { "Coil Material": "304/316 Stainless Steel", "Application": "Process & Chiller Cooling" },
+        tag: "Process Cooling"
+      },
+      {
+        id: "industrial-ahu",
+        name: "Modular Air Handling Unit (AHU)",
+        category: "Cooling Towers & AHU/FCU",
+        image: "https://benuagreen.com/storage/img/produk/1769003281_6970d91149775.png",
+        description: "Double-skin thermal break Air Handling Units engineered for shopping malls, hospital operating theaters, and cleanrooms.",
+        features: ["Thermal Break Aluminum Profile (TB2/T2)", "Double-Skin PU Foam Injected Panels (25/50mm)", "Plug Fan with EC Motor / VFD", "Multi-stage Air Filtration (G4, F7, HEPA)"],
+        specs: { "Airflow": "2,000 - 60,000 CFM", "Cooling Coil": "Chilled Water 4/6/8 Rows" },
+        tag: "Air Quality"
+      },
+      {
+        id: "chilled-water-fcu",
+        name: "Ceiling Concealed Chilled Water Fan Coil Unit (FCU)",
+        category: "Cooling Towers & AHU/FCU",
+        image: "https://benuagreen.com/storage/img/produk/1769004105_6970dc4970278.png",
+        description: "Low-profile, whisper-quiet chilled water ceiling concealed FCU for office suites, hotel rooms, and commercial retail stores.",
+        features: ["Ultra-Quiet Centrifugal Blower", "3-Speed / EC Inverter Motor Control", "Integrated Condensate Drain Pan with Insulation", "High External Static Pressure Options"],
+        specs: { "Airflow": "300 - 2,200 CFM", "Cooling Capacity": "1.5 - 12 kW" },
+        tag: "Commercial HVAC"
+      }
+    ]
+  },
+  {
+    id: "piping-valves",
+    name: "PPR Piping, Valves & Insulation Accessories",
+    slug: "piping-valves",
+    description: "Certified food-grade PPR pipes, electrofusion fittings, dynamic balancing valves, and closed-cell insulation materials.",
+    products: [
+      {
+        id: "ppr-pipe-industrial-series",
+        name: "PPR-CT Industrial High-Pressure Pipe (PN16 / PN20)",
+        category: "PPR & Installation Accessories",
+        image: "https://benuagreen.com/storage/img/produk/1769003584_6970da40b616a.png",
+        description: "German-engineered PPR-CT pipes with fiberglass composite core (Faser). Minimal thermal expansion, 100% rust-free, designed for 50+ year operational life.",
+        features: ["Faser-Glass Composite Layer (Low Thermal Expansion)", "Certified Non-Toxic & Food-Grade (Lead Free)", "Working Pressure up to 20 Bar (PN20)", "Temperature Range -20°C to +95°C"],
+        specs: { "Sizes Available": "DN20 (1/2\") up to DN315 (12\")", "Lifespan": "> 50 Years", "Joining Method": "Socket Fusion / Electrofusion / Flange" },
+        tag: "50+ Year Life"
+      },
+      {
+        id: "ppr-electrofusion-fittings",
+        name: "PPR Electrofusion & Socket Fittings & Flanges",
+        category: "PPR & Installation Accessories",
+        image: "https://benuagreen.com/storage/img/produk/1769003661_6970da8dc61f9.png",
+        description: "Complete line of high-pressure PPR elbows, tees, reducers, electrofusion couplers, and brass transition adaptors for leak-free installations.",
+        features: ["Seamless Molecular Weld (Homogeneous Fusion)", "Zero Leak Risk at Joints", "Brass Threaded Inserts with Anti-Rotation Ribs"],
+        specs: { "Types": "Elbows 90°/45°, Equal/Reducing Tees, Couplers, Flange Adaptors", "Rating": "PN20 / PN25" },
+        tag: "Leak-Free Fusion"
+      },
+      {
+        id: "motorized-control-valve",
+        name: "Motorized 2-Way & 3-Way Modulating Control Valves",
+        category: "PPR & Installation Accessories",
+        image: "https://benuagreen.com/storage/img/produk/1769003714_6970dac2b9a7a.png",
+        description: "Precision electric modulating valves with 0-10V / 4-20mA proportional actuators for AHU and chiller chilled water flow control.",
+        features: ["High Rangeability Equal Percentage Characteristic", "Tight Shut-Off Class IV/VI", "Manual Override Lever with Position Indicator", "IP54 / IP65 Protected Actuator"],
+        specs: { "Signal": "0-10V DC / 4-20mA", "Body Material": "Cast Iron / Bronze / Stainless Steel", "Pressure": "PN16 / PN25" },
+        tag: "HVAC Control"
+      },
+      {
+        id: "dynamic-balancing-valve",
+        name: "Dynamic Automatic Hydraulic Balancing Valve (PICV)",
+        category: "PPR & Installation Accessories",
+        image: "https://benuagreen.com/storage/img/produk/1769003814_6970db2687bf6.png",
+        description: "Pressure Independent Control Valve (PICV) combining automatic differential balancing and temperature control in one compact valve.",
+        features: ["Eliminates Flow Over-Supply in Chiller Networks", "Maintains Design ΔT (Delta T) in Chiller Plants", "Built-in Pressure Test Ports (P/T Plugs)"],
+        specs: { "Sizes": "DN15 to DN250", "Max ΔP": "400 kPa", "Accuracy": "± 5%" },
+        tag: "Energy Optimization"
+      },
+      {
+        id: "industrial-butterfly-valve",
+        name: "Industrial Wafer Butterfly & Gate Valves",
+        category: "PPR & Installation Accessories",
+        image: "https://benuagreen.com/storage/img/produk/1769003743_6970dadfe5e3b.png",
+        description: "Ductile iron epoxy-coated butterfly and resilient seated gate valves for pump isolation and cooling tower headers.",
+        features: ["EPDM / NBR Resilient Liner", "Stainless Steel SS316 Disc", "Epoxy Coated Inside & Out (Anti-Corrosion)"],
+        specs: { "Standard": "DIN / ANSI / JIS", "Rating": "PN10 / PN16 / Class 150" },
+        tag: "Isolation"
+      },
+      {
+        id: "elastomeric-pipe-insulation",
+        name: "Closed-Cell Elastomeric Thermal Pipe & Duct Insulation",
+        category: "PPR & Installation Accessories",
+        image: "https://benuagreen.com/storage/img/produk/1769003766_6970daf685b88.png",
+        description: "Flexible closed-cell synthetic rubber foam insulation preventing condensation on chilled water pipes and ducting.",
+        features: ["Built-in Vapor Barrier (μ ≥ 10,000)", "Class 0 / Class 1 Fire Rated (Self-Extinguishing)", "Dust-free & Fiber-free (Safe for Hospitals & Cleanrooms)"],
+        specs: { "Thickness": "9mm to 50mm", "Thermal Conductivity": "λ ≤ 0.034 W/m·K at 0°C" },
+        tag: "Thermal Protection"
       }
     ]
   },
   {
     id: "pumps",
-    name: "Pumps",
+    name: "High Efficiency Industrial & Solar Pumps",
     slug: "pumps",
-    description: "High-efficiency commercial, industrial, solar, and residential water pumping systems.",
+    description: "Deep well solar submersibles, horizontal split case, multistage boosters, and heavy-duty wastewater pumping systems.",
     products: [
       {
         id: "sdw-waste-water-pumps",
@@ -77,24 +245,6 @@ export const CATEGORIES_DATA: CategoryGroup[] = [
         tag: "Product Info"
       },
       {
-        id: "nsp-non-self-priming-pumps",
-        name: "NSP Non Self-Priming Pumps",
-        category: "Pumps",
-        image: "https://benuagreen.com/storage/img/produk/1769004074_6970dc2adbef9.png",
-        description: "Inline non self-priming centrifugal pumps designed for clean liquid distribution and HVAC systems.",
-        features: ["Quiet Operation", "Low Maintenance", "Compact In-line Mount"],
-        tag: "Product Info"
-      },
-      {
-        id: "svx-waste-water-pumps",
-        name: "SVX Waste Water Pumps",
-        category: "Pumps",
-        image: "https://benuagreen.com/storage/img/produk/1769004026_6970dbfa82969.png",
-        description: "Vortex impeller submersible pumps for liquids containing abrasive solids and fibrous materials.",
-        features: ["Vortex Impeller", "Hardened Stainless Steel Shaft", "Oil-lubricated Seals"],
-        tag: "Product Info"
-      },
-      {
         id: "horizontal-split-case-pumps",
         name: "Horizontal Split Case Pumps",
         category: "Pumps",
@@ -111,351 +261,53 @@ export const CATEGORIES_DATA: CategoryGroup[] = [
         description: "Automated constant pressure booster system with intelligent VFD inverter controls and pressure tank.",
         features: ["Energy Saving VFD", "Constant Pressure Supply", "Automatic Cascade Sequencing"],
         tag: "Product Info"
-      },
-      {
-        id: "openwell-pumps",
-        name: "Openwell Pumps",
-        category: "Pumps",
-        image: "https://benuagreen.com/storage/img/produk/1769002844_6970d75c49e04.png",
-        description: "Submersible openwell pumps designed for open wells, sumps, lakes, and river lifting.",
-        features: ["Water Cooled Motor", "Wide Voltage Band Operation", "Anti-Fouling Coating"],
-        tag: "Product Info"
-      },
-      {
-        id: "openwell-shos-ca-sa-series",
-        name: "Openwell SHOS CA_SA Series",
-        category: "Pumps",
-        image: "https://benuagreen.com/storage/img/produk/1769003023_6970d80f9e736.png",
-        description: "Specialized horizontal openwell submersible pumps for agriculture and farm irrigation.",
-        features: ["High Discharge Capacity", "Easy Maintenance", "Durable Cast Iron Construction"],
-        tag: "Product Info"
-      },
-      {
-        id: "megh-self-priming-pumps",
-        name: "Megh Self-Priming Pumps",
-        category: "Pumps",
-        image: "https://benuagreen.com/storage/img/produk/1769004105_6970dc4970278.png",
-        description: "Self-priming regenerative mono-block pumps suitable for domestic overhead tanks and gardens.",
-        features: ["Fast Self-Priming", "Brass Impeller", "Thermal Overload Protection"],
-        tag: "Product Info"
-      },
-      {
-        id: "pressure-booster-pumps-sh-shi-shin",
-        name: "Pressure Booster Pumps SH_SHI_SHIN",
-        category: "Pumps",
-        image: "https://benuagreen.com/storage/img/produk/1769003281_6970d91146ac1.png",
-        description: "Multi-stage horizontal pressure boosting pump units for residential and light commercial use.",
-        features: ["All Wetted Parts Stainless Steel", "Quiet Operation", "Dry-run Protection"],
-        tag: "Product Info"
-      },
-      {
-        id: "crp-self-priming-pumps",
-        name: "CRP Self-Priming Pumps",
-        category: "Pumps",
-        image: "https://benuagreen.com/storage/img/produk/1769004097_6970dc41eea76.png",
-        description: "Centrifugal self-priming pumps for transfer of muddy water, dewatering, and general circulation.",
-        features: ["Semi-open Impeller", "Easy Inspection Cover", "Wear Resistant Materials"],
-        tag: "Product Info"
-      },
-      {
-        id: "solar-open-well-pumps",
-        name: "Solar Open Well pumps",
-        category: "Pumps",
-        image: "https://benuagreen.com/storage/img/produk/1769001830_6970d36600698.png",
-        description: "High-efficiency DC/AC solar compatible submersible openwell pumps optimized for solar arrays.",
-        features: ["High Solar Tracking Efficiency", "MPPT Compatible", "Rugged Stainless Steel Build"],
-        tag: "Product Info"
-      },
-      {
-        id: "4-inch-premium-plug-play-pumps",
-        name: "4 inch Premium Plug & Play Pumps",
-        category: "Pumps",
-        image: "https://benuagreen.com/storage/img/produk/1769001948_6970d3dc0f4ab.png",
-        description: "Deep well submersible borehole pump kit with integrated controller for rapid deployment.",
-        features: ["Plug & Play Integrated Drive", "Built-in Surge Protection", "Corrosion Resistant NEMA Mount"],
-        tag: "Product Info"
-      },
-      {
-        id: "ro-pumps",
-        name: "RO Pumps",
-        category: "Pumps",
-        image: "https://benuagreen.com/storage/img/produk/1769003542_6970da16e2e66.png",
-        description: "High pressure reverse osmosis booster pumps designed for commercial water purification.",
-        features: ["High Operating Pressure", "Food-grade Materials", "Extended Duty Cycle"],
-        tag: "Product Info"
-      },
-      {
-        id: "positive-displacement-pumps",
-        name: "Positive Displacement Pumps",
-        category: "Pumps",
-        image: "https://benuagreen.com/storage/img/produk/1769001902_6970d3ae07f6c.png",
-        description: "High head low volume progressive cavity positive displacement pumps for deep water extraction.",
-        features: ["Deep Lift Capability", "Low Solar Power Starting", "Stainless Rotor"],
-        tag: "Product Info"
-      },
-      {
-        id: "domestic-water-pressure-booster-pumps",
-        name: "Domestic Water Pressure Booster Pumps",
-        category: "Pumps",
-        image: "https://benuagreen.com/storage/img/produk/1769003218_6970d8d27a840.png",
-        description: "Compact smart automated booster pump with automatic start/stop and leak protection for homes.",
-        features: ["Smart Flow Sensor Control", "Super Quiet Operation", "Integrated Pressure Switch"],
-        tag: "Product Info"
-      },
-      {
-        id: "vertical-multi-stage-centrifugal-pumps",
-        name: "Vertical Multi Stage Centrifugal Pumps",
-        category: "Pumps",
-        image: "https://benuagreen.com/storage/img/produk/1769003114_6970d86a03fe5.png",
-        description: "Stainless steel inline vertical multistage pumps for boiler feed, reverse osmosis, and booster skids.",
-        features: ["DIN Flange Standard", "Cartridge Seal Design", "High Temperature Resistance"],
-        tag: "Product Info"
-      },
-      {
-        id: "solar-dc-pump",
-        name: "Solar DC Pump",
-        category: "Pumps",
-        image: "https://benuagreen.com/storage/img/produk/1769004162_6970dc8285b20.jpg",
-        description: "Direct-drive brushless DC solar submersible water pump with integrated MPPT logic.",
-        features: ["Brushless DC Motor (BLDC)", "High Energy Conversion Rate", "Zero Grid Power Needed"],
-        tag: "Product Info"
-      },
-      {
-        id: "immersible-pumps-smtr",
-        name: "Immersible Pumps SMTR",
-        category: "Pumps",
-        image: "https://benuagreen.com/storage/img/produk/1769003212_6970d8ccb03d2.png",
-        description: "Multistage immersible pump designed for machine tool coolant, filtration, and washing systems.",
-        features: ["Top Mount Immersible", "High Wear Resistance", "Compatible with Coolant & Oils"],
-        tag: "Product Info"
-      },
-      {
-        id: "shallow-well-pumps",
-        name: "Shallow Well Pumps",
-        category: "Pumps",
-        image: "https://benuagreen.com/storage/img/produk/1769004148_6970dc74a032b.png",
-        description: "Jet ejector type shallow well water pump with heavy duty motor for domestic and farm use.",
-        features: ["Built-in Jet Ejector", "High Suction Lift", "Thermal Protection"],
-        tag: "Product Info"
-      },
-      {
-        id: "micro-surface-pumpset",
-        name: "Micro Surface Pumpset",
-        category: "Pumps",
-        image: "https://benuagreen.com/storage/img/produk/1769002020_6970d424db78d.png",
-        description: "Compact micro surface pump set for localized irrigation, drip lines, and small scale solar pumping.",
-        features: ["Compact Portable Design", "Low Energy Consumption", "High Efficiency"],
-        tag: "Product Info"
-      },
-      {
-        id: "end-section-closed-couple-pumps",
-        name: "End-Section Closed Couple Pumps",
-        category: "Pumps",
-        image: "https://benuagreen.com/storage/img/produk/1769002957_6970d7cd1ec83.png",
-        description: "Monobloc close-coupled centrifugal pump with standard electric motor for clean liquid transport.",
-        features: ["Close Coupled Design", "Space Efficient", "Low Maintenance"],
-        tag: "Product Info"
-      },
-      {
-        id: "ro-pumps-v2",
-        name: "RO Pumps (High Capacity)",
-        category: "Pumps",
-        image: "https://benuagreen.com/storage/img/produk/1769003869_6970db5d488cb.png",
-        description: "Industrial grade Reverse Osmosis membrane booster pump engineered for high salinity seawater & brackish water.",
-        features: ["High Pressure Rated", "SS316 Stainless Steel Components", "Continuous Operation"],
-        tag: "Product Info"
-      },
-      {
-        id: "pressure-booster",
-        name: "Pressure Booster",
-        category: "Pumps",
-        image: "https://benuagreen.com/storage/img/produk/1769003146_6970d88ab32d2.png",
-        description: "Variable frequency drive automated water pressure booster pump unit.",
-        features: ["Constant Pressure Control", "Digital Touch Interface", "Energy Efficient"],
-        tag: "Product Info"
       }
     ]
   },
   {
-    id: "others",
-    name: "Others",
-    slug: "others",
-    description: "VFD drives, line filters, and power conversion equipment for solar pump control.",
+    id: "heating-power",
+    name: "Solar Power, Heating & Telemetry",
+    slug: "heating-power",
+    description: "Tier-1 solar PV modules, MPPT solar pump drives, cloud RMS telemetry dongles, and biomass steam accessories.",
     products: [
       {
-        id: "nandi-universal-drive",
-        name: "Nandi Universal Drive",
-        category: "Others",
+        id: "rms-dongle",
+        name: "RMS Telemetry Cloud Dongle",
+        category: "Solar & Telemetry",
+        image: "https://benuagreen.com/storage/img/produk/1769003848_6970db48ed186.png",
+        description: "Remote Monitoring System (RMS) Dongle designed for real-time telemetry, energy logging, and cloud synchronization for solar pump and chiller installations.",
+        features: ["Plug & Play Connectivity", "Cloud Telemetry & Mobile App Access", "Real-time Flow & Power Logging", "IP65 Weather Resistance"],
+        tag: "IoT & Cloud"
+      },
+      {
+        id: "mppt-solar-pump-inverter",
+        name: "Smart MPPT Solar Pump Inverter IP65",
+        category: "Solar & Telemetry",
         image: "https://benuagreen.com/storage/img/produk/1769003584_6970da40b616a.png",
-        description: "Heavy duty universal Variable Frequency Drive (VFD) supporting both solar PV input and AC grid power.",
-        features: ["Dual Power Input (Solar/Grid)", "Built-in MPPT Algorithm", "LCD Display", "Dry Run Protection"],
-        tag: "Product Info"
+        description: "Heavy-duty outdoor IP65 solar variable frequency drive with 99% dynamic MPPT tracking. Automatically drives AC 3-Phase submersible and surface pumps directly from solar PV.",
+        features: ["99% Dynamic MPPT Tracking Efficiency", "IP65 Waterproof Outdoor Enclosure", "Automatic AC Grid / Genset Hybrid Backup", "Dry-Run & Water Level Sensor Controls"],
+        specs: { "Power Range": "0.75 kW to 75 kW", "Input Voltage": "DC 250V - 800V", "Output": "3-Phase 380V AC" },
+        tag: "Solar VFD"
       },
       {
-        id: "solar-simha-drive",
-        name: "Solar SIMHA Drive",
-        category: "Others",
-        image: "https://benuagreen.com/storage/img/produk/1769003545_6970da198595e.png",
-        description: "Next generation intelligent solar water pump inverter with high speed MPPT and remote monitoring readiness.",
-        features: ["99% MPPT Efficiency", "Wide DC Voltage Range", "Automatic Sleep and Wake-up Mode"],
-        tag: "Product Info"
+        id: "solar-pv-modules",
+        name: "Tier-1 High Efficiency Monocrystalline Solar PV Modules",
+        category: "Solar & Telemetry",
+        image: "https://benuagreen.com/storage/img/produk/1769003114_6970d86a03fe5.png",
+        description: "Tier-1 half-cut cell PERC & TOPCon solar photovoltaic modules engineered for tropical high-humidity reliability with 25-year linear performance warranty.",
+        features: ["Module Efficiency up to 22.5%+", "Anti-PID & Anti-Salt Corrosion Certified", "High Hail & Wind Load Resistance (5400 Pa)", "25-Year Performance Warranty"],
+        specs: { "Power Rating": "550W - 670W", "Cell Type": "N-Type TOPCon / Monocrystalline" },
+        tag: "Tier-1 Solar"
       },
       {
-        id: "lotus-universal-drive",
-        name: "Lotus Universal Drive",
-        category: "Others",
-        image: "https://benuagreen.com/storage/img/produk/1769003567_6970da2f8d93e.png",
-        description: "Compact VFD solar pump inverter optimized for agricultural irrigation and rural water supply.",
-        features: ["IP54 Protection Rated", "Simple Keypad Setup", "Multi-pump Control Support"],
-        tag: "Product Info"
-      },
-      {
-        id: "du-dt-filter",
-        name: "DU_DT Filter",
-        category: "Others",
-        image: "https://benuagreen.com/storage/img/produk/1769003721_6970dac977107.png",
-        description: "High performance output dU/dt filter for protecting motor insulation against voltage spikes and long cable reflections.",
-        features: ["Reduces Peak Voltage Spikes", "Protects Motor Windings", "Extends Pump Lifespan"],
-        tag: "Product Info"
-      }
-    ]
-  },
-  {
-    id: "ppr",
-    name: "PPR",
-    slug: "ppr",
-    description: "Premium Polypropylene Random Copolymer (PPR) pipes, drip irrigation lines, and plumbing solutions.",
-    products: [
-      {
-        id: "flat-drip-irrigation",
-        name: "Flat Drip Irrigation",
-        category: "PPR",
-        image: "https://benuagreen.com/storage/img/produk/1769003094_6970d856db59e.png",
-        description: "Precision engineered flat emitter drip tape for row crops, vineyards, and agricultural water saving.",
-        features: ["Clog Resistant Emitters", "UV Protected Polyethylene", "Uniform Water Distribution"],
-        tag: "Product Info"
-      },
-      {
-        id: "pipes",
-        name: "Pipes",
-        category: "PPR",
-        image: "https://benuagreen.com/storage/img/produk/1769002917_6970d7a57a775.png",
-        description: "High pressure PPR hot & cold water piping systems with antimicrobial internal finish.",
-        features: ["Non-toxic & Food Grade", "High Temperature Resistance (up to 95°C)", "50+ Years Service Life"],
-        tag: "Product Info"
-      },
-      {
-        id: "plain-drip-irrigation",
-        name: "Plain Drip Irrigation",
-        category: "PPR",
-        image: "https://benuagreen.com/storage/img/produk/1769003056_6970d8309ee33.png",
-        description: "Durable unpunched LDPE lateral tubes for custom emitter insertion in micro irrigation installations.",
-        features: ["Virgin LDPE Material", "High Burst Pressure", "Flexible & Crack Resistant"],
-        tag: "Product Info"
-      },
-      {
-        id: "round-drip-irrigation",
-        name: "Round Drip Irrigation",
-        category: "PPR",
-        image: "https://benuagreen.com/storage/img/produk/1769003077_6970d845a5254.png",
-        description: "Cylindrical round emitter integrated drip line for multi-season irrigation and orchards.",
-        features: ["Self-cleaning Mechanism", "High Tensile Strength", "Wide Flow Path Emitter"],
-        tag: "Product Info"
-      }
-    ]
-  },
-  {
-    id: "inverter",
-    name: "Inverter",
-    slug: "inverter",
-    description: "Grid-tie, hybrid, and off-grid solar inverters for residential, commercial, and agricultural electrification.",
-    products: [
-      {
-        id: "grid-tie-inverter",
-        name: "Grid Tie Inverter",
-        category: "Inverter",
-        image: "https://benuagreen.com/storage/img/produk/1769003951_6970dbafc4394.png",
-        description: "High efficiency pure sine wave grid-tied solar inverter with dual MPPT and WiFi connectivity.",
-        features: ["Up to 98.6% Efficiency", "Dual MPPT Trackers", "Smart App Monitoring", "Export Power Limitation"],
-        tag: "Product Info"
-      },
-      {
-        id: "hybrid-inverter",
-        name: "Hybrid Inverter",
-        category: "Inverter",
-        image: "https://benuagreen.com/storage/img/produk/1769003865_6970db5913056.png",
-        description: "All-in-one solar energy storage hybrid inverter with UPS seamless switching and lithium battery support.",
-        features: ["Supports Lithium & Lead-Acid Batteries", "< 10ms Fast Transfer", "Integrated MPPT Charger"],
-        tag: "Product Info"
-      },
-      {
-        id: "home-inverter-s1000",
-        name: "Home Inverter s1000",
-        category: "Inverter",
-        image: "https://benuagreen.com/storage/img/produk/1766214515_69464b7389888.png",
-        description: "Compact domestic backup inverter with pure sine wave output for household appliances and sensitive electronics.",
-        features: ["Pure Sine Wave Output", "Smart Battery Management", "Silent Operation"],
-        tag: "Product Info"
-      }
-    ]
-  },
-  {
-    id: "starter",
-    name: "Starter",
-    slug: "starter",
-    description: "Smart digital motor starters and soft starters with comprehensive electrical protections.",
-    products: [
-      {
-        id: "a1-smart-starter",
-        name: "A1 Smart Starter",
-        category: "Starter",
-        image: "https://benuagreen.com/storage/img/produk/1769003973_6970dbc572274.png",
-        description: "Microcontroller based smart motor starter with phase reversal, dry run, and overload protections.",
-        features: ["Digital Voltage & Amp Display", "Auto Start Timer", "Dry Run & Overload Protection"],
-        tag: "Product Info"
-      },
-      {
-        id: "elite-soft-starter",
-        name: "Elite Soft Starter",
-        category: "Starter",
-        image: "https://benuagreen.com/storage/img/produk/1769003996_6970dbdcc71ae.png",
-        description: "Advanced solid-state electronic soft starter eliminating mechanical shock and water hammer effects.",
-        features: ["Smooth Acceleration / Deceleration Ramp", "Bypass Contactor Built-in", "Reduces Starting Current Surge"],
-        tag: "Product Info"
-      }
-    ]
-  },
-  {
-    id: "controller",
-    name: "Controller",
-    slug: "controller",
-    description: "Intelligent solar pump controllers and automation systems.",
-    products: [
-      {
-        id: "universal-solar-pump-controller",
-        name: "Universal Solar Pump Controller",
-        category: "Controller",
-        image: "https://benuagreen.com/storage/img/produk/1769003936_6970dba025939.png",
-        description: "Universal solar pump controller with dynamic MPPT tracking, tank level sensing, and remote monitoring.",
-        features: ["Dynamic MPPT Tracking", "Water Level Sensor Inputs", "IP65 Weatherproof Enclosure"],
-        tag: "Product Info"
-      }
-    ]
-  },
-  {
-    id: "cable",
-    name: "Cable",
-    slug: "cable",
-    description: "High-grade submersible cables, solar DC cables, and power distribution wiring.",
-    products: [
-      {
-        id: "cable-submersible",
-        name: "Flat & Round Submersible Cable",
-        category: "Cable",
-        image: "https://benuagreen.com/storage/img/produk/1769002917_6970d7a5ef081.png",
-        description: "3-core and 4-core waterproof copper submersible cables resistant to moisture, oil, and continuous water immersion.",
-        features: ["100% Electrolytic Copper Conductors", "Double Sheathed Waterproof PVC", "High Flexibility & Tear Resistance"],
-        tag: "Product Info"
+        id: "biomass-steam-trap",
+        name: "Thermodynamic & Float Steam Traps / Heat Exchangers",
+        category: "Solar & Telemetry",
+        image: "https://benuagreen.com/storage/img/produk/1769003714_6970dac2b9a7a.png",
+        description: "High-enthalpy steam traps, strainers, and plate heat exchangers for biomass boilers and steam-fired absorption chiller circuits.",
+        features: ["Instant Condensate Discharge without Live Steam Loss", "Hardened Stainless Steel Disc & Seat", "Inline Renewable Components"],
+        specs: { "Pressure Rating": "PN16 to PN40", "Max Temperature": "350°C" },
+        tag: "Steam Recovery"
       }
     ]
   }

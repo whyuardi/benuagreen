@@ -7,16 +7,20 @@ export type Language = "id" | "en";
 export const dictionary = {
   // Navbar
   "nav.products": {
-    id: "Produk",
+    id: "Katalog Produk",
     en: "Products",
   },
-  "nav.pumps": {
-    id: "Pompa",
-    en: "Pumps",
+  "nav.technology": {
+    id: "Teknologi & Solusi",
+    en: "Technology",
   },
-  "nav.ppr": {
-    id: "Pipa PPR & Irigasi",
-    en: "PPR & Piping",
+  "nav.projects": {
+    id: "Proyek Klien",
+    en: "Major Projects",
+  },
+  "nav.rental": {
+    id: "Rental Pompa",
+    en: "Pump Rental",
   },
   "nav.about": {
     id: "Tentang Kami",
@@ -32,7 +36,7 @@ export const dictionary = {
   },
   "nav.requestQuote": {
     id: "Minta Penawaran",
-    en: "Request Quote",
+    en: "Get A Quote",
   },
   "nav.tagline": {
     id: "Energi & Sistem Air",
@@ -53,24 +57,12 @@ export const dictionary = {
     en: "Energy & Water Future.",
   },
   "hero.subtitle": {
-    id: "Di Benua Green Energy, kami menyediakan solusi komprehensif sistem pompa efisiensi tinggi, inverter tenaga surya, dan infrastruktur perpipaan berkualitas tinggi untuk kebutuhan industri dan proyek Anda.",
-    en: "At Benua Green Energy, we provide a full spectrum of high-efficiency water pumping, solar energy, and sustainable infrastructure solutions engineered for project reliability.",
-  },
-  "hero.exploreProducts": {
-    id: "Jelajahi Produk",
-    en: "Explore Products",
-  },
-  "hero.exploreRental": {
-    id: "Layanan & Rental Pompa",
-    en: "Rental Services",
-  },
-  "hero.getQuote": {
-    id: "Minta Penawaran (WhatsApp)",
-    en: "Get A Quote",
+    id: "Di Benua Green Energy, kami menyediakan solusi komprehensif sistem pendingin Chiller, Cooling Tower, Pipa PPR, Valve, dan Pompa Industri hemat energi yang dirancang untuk efisiensi fasilitas komersial dan manufaktur Anda.",
+    en: "At Benua Green Energy, we provide a full spectrum of high-efficiency Absorption Chillers, Cooling Towers, Industrial PPR Piping, Control Valves, and Solar Pumping systems engineered for industrial reliability.",
   },
   "hero.searchPlaceholder": {
-    id: "Cari model pompa atau seri produk...",
-    en: "Search pump models, drives or series...",
+    id: "Cari tipe chiller, cooling tower, pompa, pipa ppr, valve...",
+    en: "Search chillers, cooling towers, pumps, PPR piping, valves...",
   },
   "hero.all": {
     id: "Semua Kategori",
@@ -82,9 +74,25 @@ export const dictionary = {
   },
 
   // Categories
+  "cat.chillers": {
+    id: "Chiller & Sistem HVAC",
+    en: "Chiller & HVAC Systems",
+  },
+  "cat.coolingAir": {
+    id: "Cooling Tower & AHU/FCU",
+    en: "Cooling Towers & Air Handling",
+  },
+  "cat.pipingValves": {
+    id: "Pipa PPR, Valve & Isolasi",
+    en: "PPR Piping, Valves & Insulation",
+  },
   "cat.pumps": {
-    id: "Pompa Air Efisiensi Tinggi",
-    en: "High Efficiency Pumps",
+    id: "Pompa Industri & Tenaga Surya",
+    en: "High Efficiency Industrial & Solar Pumps",
+  },
+  "cat.heatingPower": {
+    id: "Tenaga Surya, Pemanas & Telemetri",
+    en: "Solar Power, Heating & Telemetry",
   },
   "cat.solarDrives": {
     id: "Solar Drive & Inverter Pompa",
@@ -547,11 +555,6 @@ export const dictionary = {
   "footer.rights": {
     id: "Hak cipta dilindungi undang-undang.",
     en: "All rights reserved.",
-  },
-  // Navbar
-  "nav.rental": {
-    id: "Rental Pompa",
-    en: "Pump Rental",
   },
 
   // Availability Checker

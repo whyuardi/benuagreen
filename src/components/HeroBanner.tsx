@@ -23,12 +23,17 @@ export function HeroBanner({
 
   const getCategoryName = (slug: string, fallback: string) => {
     const keyMap: Record<string, TranslationKey> = {
+      chillers: "cat.chillers",
+      "cooling-air": "cat.coolingAir",
+      "piping-valves": "cat.pipingValves",
       pumps: "cat.pumps",
+      "heating-power": "cat.heatingPower",
       "solar-drives": "cat.solarDrives",
       ppr: "cat.ppr",
       inverter: "cat.inverter",
       "starters-and-controllers": "cat.starters",
       "rms-dongle": "cat.rms",
+      dongle: "cat.rms",
     };
     const key = keyMap[slug];
     return key ? t(key) : fallback;

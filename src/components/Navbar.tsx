@@ -31,10 +31,10 @@ export function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: t("nav.products"), href: "/" },
+    { name: t("nav.products"), href: "/#catalog" },
+    { name: t("nav.technology"), href: "/#technology" },
+    { name: t("nav.projects"), href: "/#projects" },
     { name: t("nav.rental"), href: "/rental" },
-    { name: t("nav.pumps"), href: "/pumps" },
-    { name: t("nav.ppr"), href: "/ppr" },
     { name: t("nav.about"), href: "/about" },
     { name: t("nav.contact"), href: "/contact" },
   ];
