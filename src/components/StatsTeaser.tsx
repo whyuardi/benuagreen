@@ -1,85 +1,98 @@
 "use client";
 
 import Link from "next/link";
-import { Briefcase, Wrench, ShieldCheck } from "lucide-react";
+import { Briefcase, Wrench, ShieldCheck, ArrowRight } from "lucide-react";
 
 export function StatsTeaser() {
+  const cards = [
+    {
+      step: "01",
+      tag: "ENGINEERING & CCHP",
+      title: "Services",
+      description:
+        "Comprehensive CCHP solutions engineering consulting, design, turnkey installation, and expert commissioning services tailored for heavy industrial applications.",
+      icon: Briefcase,
+      iconColor: "text-[#2a1768]",
+      bgColor: "bg-[#2a1768]/8",
+      borderColor: "group-hover:border-[#2a1768]/40",
+      href: "/#services",
+    },
+    {
+      step: "02",
+      tag: "OPERATIONAL INTEGRITY",
+      title: "Maintenance",
+      description:
+        "Preventive and corrective maintenance programs ensuring optimal thermodynamic performance, maximum operational reliability, and extended equipment longevity.",
+      icon: Wrench,
+      iconColor: "text-emerald-700",
+      bgColor: "bg-emerald-50",
+      borderColor: "group-hover:border-emerald-400/40",
+      href: "/#services",
+    },
+    {
+      step: "03",
+      tag: "SMART AUTOMATION",
+      title: "EMS",
+      description:
+        "Advanced energy management systems monitoring, optimizing, and digitally controlling CCHP equipment performance with real-time analytics and predictive diagnostics.",
+      icon: ShieldCheck,
+      iconColor: "text-sky-700",
+      bgColor: "bg-sky-50",
+      borderColor: "group-hover:border-sky-400/40",
+      href: "/#services",
+    },
+  ];
+
   return (
-    <section className="bg-[#eef2f5] pb-10 pt-2">
+    <section className="bg-gradient-to-b from-[#f4f7fa] to-[#eef2f5] pb-12 pt-2">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* 3 Service Pillars Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
-          
-          {/* Card 1: Services */}
-          <div className="bg-white rounded-2xl p-6 sm:p-8 flex flex-col items-center justify-between text-center shadow-sm border border-neutral-100 transition-all duration-300 hover:shadow-md hover:-translate-y-0.5">
-            <div className="flex flex-col items-center">
-              <div className="w-12 h-12 flex items-center justify-center mb-4 text-[#1d1841]">
-                <Briefcase className="w-8 h-8 stroke-[1.5]" />
-              </div>
-              <h3 className="text-lg font-bold text-[#1d1841] mb-2.5">
-                Services
-              </h3>
-              <p className="text-xs text-neutral-600 leading-relaxed font-normal">
-                Comprehensive CCHP solutions engineering consulting design installation commissioning services.
-              </p>
-            </div>
-            <div className="pt-6">
-              <Link
-                href="/#services"
-                className="inline-block px-5 py-2 rounded-md text-xs font-semibold text-[#1d1841] border border-[#1d1841] hover:bg-[#1d1841] hover:text-white transition-all duration-200"
+        {/* 3 Pillars Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
+          {cards.map((card) => {
+            const Icon = card.icon;
+            return (
+              <div
+                key={card.title}
+                className={`group relative bg-white rounded-3xl p-7 sm:p-9 flex flex-col justify-between text-left shadow-[0_4px_25px_-5px_rgba(0,0,0,0.05)] hover:shadow-[0_12px_35px_-8px_rgba(42,23,104,0.12)] border border-neutral-200/80 ${card.borderColor} transition-all duration-300 hover:-translate-y-1.5`}
               >
-                Learn more
-              </Link>
-            </div>
-          </div>
+                <div>
+                  {/* Top Bar: Step & Icon */}
+                  <div className="flex items-center justify-between mb-6">
+                    <div className={`w-14 h-14 rounded-2xl ${card.bgColor} flex items-center justify-center transition-transform duration-300 group-hover:scale-110 shadow-inner`}>
+                      <Icon className={`w-7 h-7 ${card.iconColor} stroke-[1.8]`} />
+                    </div>
+                    <span className="text-[11px] font-mono font-bold text-neutral-300 tracking-wider">
+                      {card.step}
+                    </span>
+                  </div>
 
-          {/* Card 2: Maintenance */}
-          <div className="bg-white rounded-2xl p-6 sm:p-8 flex flex-col items-center justify-between text-center shadow-sm border border-neutral-100 transition-all duration-300 hover:shadow-md hover:-translate-y-0.5">
-            <div className="flex flex-col items-center">
-              <div className="w-12 h-12 flex items-center justify-center mb-4 text-[#1d1841]">
-                <Wrench className="w-8 h-8 stroke-[1.5]" />
+                  <span className="text-[10px] font-extrabold uppercase tracking-widest text-neutral-400 block mb-1.5">
+                    {card.tag}
+                  </span>
+
+                  <h3 className="text-xl sm:text-2xl font-black text-[#1d1841] mb-3 tracking-tight">
+                    {card.title}
+                  </h3>
+
+                  <p className="text-xs sm:text-[13px] text-neutral-600 leading-relaxed font-normal">
+                    {card.description}
+                  </p>
+                </div>
+
+                <div className="pt-8 mt-4 border-t border-neutral-100 flex items-center justify-between">
+                  <Link
+                    href={card.href}
+                    className="inline-flex items-center gap-2 text-xs font-bold text-[#1d1841] group-hover:text-[#2a1768] transition-colors"
+                  >
+                    <span>Learn more</span>
+                    <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                  <span className="w-2 h-2 rounded-full bg-neutral-200 group-hover:bg-[#2a1768] transition-colors" />
+                </div>
               </div>
-              <h3 className="text-lg font-bold text-[#1d1841] mb-2.5">
-                Maintenance
-              </h3>
-              <p className="text-xs text-neutral-600 leading-relaxed font-normal">
-                Preventive corrective maintenance programs ensuring optimal performance reliability longevity.
-              </p>
-            </div>
-            <div className="pt-6">
-              <Link
-                href="/#services"
-                className="inline-block px-5 py-2 rounded-md text-xs font-semibold text-[#1d1841] border border-[#1d1841] hover:bg-[#1d1841] hover:text-white transition-all duration-200"
-              >
-                Learn more
-              </Link>
-            </div>
-          </div>
-
-          {/* Card 3: EMS */}
-          <div className="bg-white rounded-2xl p-6 sm:p-8 flex flex-col items-center justify-between text-center shadow-sm border border-neutral-100 transition-all duration-300 hover:shadow-md hover:-translate-y-0.5" id="ems">
-            <div className="flex flex-col items-center">
-              <div className="w-12 h-12 flex items-center justify-center mb-4 text-[#1d1841]">
-                <ShieldCheck className="w-8 h-8 stroke-[1.5]" />
-              </div>
-              <h3 className="text-lg font-bold text-[#1d1841] mb-2.5">
-                EMS
-              </h3>
-              <p className="text-xs text-neutral-600 leading-relaxed font-normal">
-                Advanced energy management systems monitoring optimizing controlling CCHP equipment performance.
-              </p>
-            </div>
-            <div className="pt-6">
-              <Link
-                href="/#services"
-                className="inline-block px-5 py-2 rounded-md text-xs font-semibold text-[#1d1841] border border-[#1d1841] hover:bg-[#1d1841] hover:text-white transition-all duration-200"
-              >
-                Learn more
-              </Link>
-            </div>
-          </div>
-
+            );
+          })}
         </div>
 
       </div>
