@@ -55,7 +55,7 @@ export function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 left-0 w-full z-50 transition-all duration-300 bg-white ${
+      className={`sticky top-0 left-0 w-full z-[1001] transition-all duration-300 bg-white ${
         scrolled
           ? "shadow-sm py-2.5 border-b border-neutral-200/70"
           : "py-3.5 border-b border-neutral-100"
@@ -92,18 +92,29 @@ export function Navbar() {
             About
           </Link>
 
-          {/* Products Dropdown */}
+          {/* Products Link & Dropdown */}
           <div
             className="relative"
             onMouseEnter={() => setProductsOpen(true)}
             onMouseLeave={() => setProductsOpen(false)}
           >
-            <button className="flex items-center gap-1 text-neutral-700 hover:text-[#281b66] font-medium py-2 transition-colors duration-150">
+            <Link
+              href="/products"
+              className={`flex items-center gap-1 font-medium py-2 transition-colors duration-150 ${
+                pathname === "/products" ? "text-[#281b66] font-bold" : "text-neutral-700 hover:text-[#281b66]"
+              }`}
+            >
               <span>Products</span>
               <ChevronDown className="w-3.5 h-3.5 text-neutral-500" />
-            </button>
+            </Link>
             {productsOpen && (
               <div className="absolute top-full left-0 w-60 bg-white border border-neutral-150 rounded-lg shadow-lg py-2 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
+                <Link
+                  href="/products"
+                  className="block px-4 py-2 text-xs font-bold text-[#1a3a6e] hover:bg-neutral-50 border-b border-neutral-100"
+                >
+                  All Products Catalog →
+                </Link>
                 {productCategories.map((item) => (
                   <Link
                     key={item.name}
@@ -123,12 +134,23 @@ export function Navbar() {
             onMouseEnter={() => setServicesOpen(true)}
             onMouseLeave={() => setServicesOpen(false)}
           >
-            <button className="flex items-center gap-1 text-neutral-700 hover:text-[#281b66] font-medium py-2 transition-colors duration-150">
+            <Link
+              href="/services"
+              className={`flex items-center gap-1 font-medium py-2 transition-colors duration-150 ${
+                pathname === "/services" ? "text-[#281b66] font-bold" : "text-neutral-700 hover:text-[#281b66]"
+              }`}
+            >
               <span>Services</span>
               <ChevronDown className="w-3.5 h-3.5 text-neutral-500" />
-            </button>
+            </Link>
             {servicesOpen && (
               <div className="absolute top-full left-0 w-64 bg-white border border-neutral-150 rounded-lg shadow-lg py-2 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
+                <Link
+                  href="/services"
+                  className="block px-4 py-2 text-xs font-bold text-[#1a3a6e] hover:bg-neutral-50 border-b border-neutral-100"
+                >
+                  All Engineering Services →
+                </Link>
                 {serviceCategories.map((item) => (
                   <Link
                     key={item.name}
@@ -143,14 +165,18 @@ export function Navbar() {
           </div>
 
           <Link
-            href="/#ems"
-            className="text-neutral-700 hover:text-[#281b66] font-medium transition-colors duration-150"
+            href="/ems"
+            className={`font-medium transition-colors duration-150 ${
+              pathname === "/ems" ? "text-[#281b66] font-bold" : "text-neutral-700 hover:text-[#281b66]"
+            }`}
           >
             EMS
           </Link>
           <Link
             href="/contact"
-            className="text-neutral-700 hover:text-[#281b66] font-medium transition-colors duration-150"
+            className={`font-medium transition-colors duration-150 ${
+              pathname === "/contact" ? "text-[#281b66] font-bold" : "text-neutral-700 hover:text-[#281b66]"
+            }`}
           >
             Contact
           </Link>
@@ -228,21 +254,21 @@ export function Navbar() {
                     About
                   </Link>
                   <Link
-                    href="/#catalog"
+                    href="/products"
                     onClick={() => setMobileOpen(false)}
                     className="text-neutral-700 py-1"
                   >
                     Products
                   </Link>
                   <Link
-                    href="/#services"
+                    href="/services"
                     onClick={() => setMobileOpen(false)}
                     className="text-neutral-700 py-1"
                   >
                     Services
                   </Link>
                   <Link
-                    href="/#ems"
+                    href="/ems"
                     onClick={() => setMobileOpen(false)}
                     className="text-neutral-700 py-1"
                   >

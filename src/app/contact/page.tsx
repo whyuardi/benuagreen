@@ -1,28 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import {
-  Phone,
-  Mail,
-  MapPin,
-  Clock,
-  Send,
-  CheckCircle2,
-  Headphones,
-} from "lucide-react";
+import Image from "next/image";
+import { MapPin, Mail, Phone, CheckCircle2 } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
-import { SocialLinks } from "@/components/SocialLinks";
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
     phone: "",
-    category: "Pumps",
+    email: "",
+    subject: "",
     message: "",
   });
-  const { t } = useLanguage();
+  const { language } = useLanguage();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,215 +22,222 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="flex-grow pb-24 bg-white">
-      {/* Monochrome Editorial Header */}
-      <section className="mt-[4.25rem] pt-16 pb-12 px-6 sm:px-8 border-b border-neutral-100 bg-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <span className="text-xs font-semibold tracking-widest text-neutral-400 uppercase mb-3 block">
-            {t("contact.direct")}
-          </span>
-          <h1 className="text-3xl sm:text-5xl font-normal tracking-tight text-neutral-900 mb-4">
-            {t("contact.title")}
+    <main className="flex-grow bg-white text-neutral-800 font-sans">
+      {/* ── HEADER BANNER ── */}
+      <section className="relative mt-[4.25rem] h-[360px] sm:h-[400px] w-full overflow-hidden flex items-center justify-center">
+        <Image
+          src="/images/benua/29dc5558-f547-4e8b-8c66-9ff06f25ebe1.jpg"
+          alt="Contact Header Banner"
+          fill
+          className="object-cover object-center brightness-75"
+          priority
+        />
+        <div className="absolute inset-0 bg-black/25" />
+
+        {/* Floating Centered White Card */}
+        <div className="relative z-10 bg-white/95 backdrop-blur-md px-12 py-10 rounded-2xl shadow-2xl text-center max-w-lg mx-4 border border-white/60">
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-[#1d1841] tracking-tight mb-2">
+            Contact
           </h1>
-          <p className="text-neutral-500 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed font-light">
-            {t("contact.desc")}
-          </p>
+          <h4 className="text-sm sm:text-base font-semibold text-neutral-500 tracking-wide">
+            Get in touch and let us know how we can help.
+          </h4>
         </div>
       </section>
 
-      <div className="max-w-6xl mx-auto px-6 sm:px-8 pt-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      {/* ── GET IN TOUCH & MAP SECTION ── */}
+      <section className="py-20 px-6 sm:px-10 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           
-          {/* Contact Details */}
-          <div className="lg:col-span-5 space-y-6">
-            <div className="bg-neutral-50 p-8 rounded-2xl border border-neutral-100 space-y-6">
-              <h3 className="text-base font-semibold text-neutral-900 flex items-center gap-2">
-                <Headphones className="w-4 h-4 text-neutral-900" />
-                {t("contact.officeInfo")}
-              </h3>
-              
-              <div className="space-y-4 text-xs">
-                <div className="flex items-start gap-3">
-                  <MapPin className="w-4 h-4 text-neutral-400 shrink-0 mt-0.5" />
-                  <div>
-                    <p className="font-semibold text-neutral-900">{t("contact.headquarters")}</p>
-                    <p className="text-neutral-500">{t("contact.location")}</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <Mail className="w-4 h-4 text-neutral-400 shrink-0 mt-0.5" />
-                  <div>
-                    <p className="font-semibold text-neutral-900">{t("contact.emailInquiry")}</p>
-                    <a href="mailto:info@benuagreen.com" className="text-neutral-500 hover:text-neutral-900">
-                      info@benuagreen.com
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <Phone className="w-4 h-4 text-neutral-400 shrink-0 mt-0.5" />
-                  <div>
-                    <p className="font-semibold text-neutral-900">{t("contact.officialPortal")}</p>
-                    <a href="https://benuagreen.com" target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-neutral-900">
-                      benuagreen.com
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <Clock className="w-4 h-4 text-neutral-400 shrink-0 mt-0.5" />
-                  <div>
-                    <p className="font-semibold text-neutral-900">{t("contact.operatingHours")}</p>
-                    <p className="text-neutral-500">{t("contact.hours")}</p>
-                  </div>
-                </div>
-
-                <div className="pt-4 border-t border-neutral-100">
-                  <p className="text-[11px] font-semibold text-neutral-400 uppercase tracking-wider mb-2.5">
-                    Sosial Media / Social Channels
-                  </p>
-                  <SocialLinks className="flex items-center gap-2.5" iconClassName="w-8 h-8" />
-                </div>
-              </div>
+          {/* Left Column: Get in Touch & 3 Circle Icon Items */}
+          <div className="lg:col-span-6 space-y-8">
+            <div>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#1d1841] tracking-tight mb-4">
+                Get in touch
+              </h2>
+              <div className="w-16 h-1 bg-emerald-500 rounded-full mb-8" />
             </div>
 
-            <div className="bg-neutral-900 text-white p-8 rounded-2xl space-y-2">
-              <h4 className="font-medium text-sm">{t("contact.waTitle")}</h4>
-              <p className="text-xs text-neutral-400 leading-relaxed font-light">
-                {t("contact.waDesc")}
-              </p>
-              <div className="pt-2">
-                <a
-                  href="https://wa.me/6281234567890?text=Hello%20Benua%20Green,%20I%20would%20like%20to%20consult%20on%20products"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block text-xs font-medium text-white border-b border-white pb-0.5 hover:text-neutral-300 transition-colors"
-                >
-                  {t("contact.waBtn")}
-                </a>
+            <div className="space-y-8">
+              {/* Location */}
+              <div className="flex items-start gap-5">
+                <div className="w-14 h-14 rounded-full bg-[#2a1768] text-white flex items-center justify-center shrink-0 shadow-md">
+                  <MapPin className="w-6 h-6 text-emerald-400" />
+                </div>
+                <div>
+                  <h4 className="text-lg font-bold text-[#1d1841] mb-1">
+                    Location
+                  </h4>
+                  <p className="text-neutral-600 text-sm leading-relaxed max-w-md">
+                    Head Office PT. Benua Green Energy, Jl. Trocadero Office Park, Ruko Piazza De Europe, Garnier No. 82 Lippo Karawaci, Tangerang, 15139
+                  </p>
+                </div>
+              </div>
+
+              {/* Email */}
+              <div className="flex items-start gap-5">
+                <div className="w-14 h-14 rounded-full bg-[#2a1768] text-white flex items-center justify-center shrink-0 shadow-md">
+                  <Mail className="w-6 h-6 text-emerald-400" />
+                </div>
+                <div>
+                  <h4 className="text-lg font-bold text-[#1d1841] mb-1">
+                    Email us
+                  </h4>
+                  <a
+                    href="mailto:sales@benuagreen.com"
+                    className="text-neutral-600 hover:text-emerald-600 text-sm font-semibold transition-colors block"
+                  >
+                    sales@benuagreen.com
+                  </a>
+                </div>
+              </div>
+
+              {/* Call */}
+              <div className="flex items-start gap-5">
+                <div className="w-14 h-14 rounded-full bg-[#2a1768] text-white flex items-center justify-center shrink-0 shadow-md">
+                  <Phone className="w-6 h-6 text-emerald-400" />
+                </div>
+                <div>
+                  <h4 className="text-lg font-bold text-[#1d1841] mb-1">
+                    Call us
+                  </h4>
+                  <a
+                    href="tel:+622120022012"
+                    className="text-neutral-600 hover:text-emerald-600 text-sm font-semibold transition-colors block"
+                  >
+                    +62 2120022012
+                  </a>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Form */}
-          <div className="lg:col-span-7">
-            <div className="bg-white p-8 sm:p-10 rounded-2xl border border-neutral-100">
-              <h3 className="text-lg font-medium text-neutral-900 mb-1">{t("contact.formTitle")}</h3>
-              <p className="text-xs text-neutral-400 mb-8 font-light">
-                {t("contact.formDesc")}
-              </p>
-
-              {submitted ? (
-                <div className="p-8 text-center bg-neutral-50 rounded-2xl border border-neutral-100 space-y-3">
-                  <CheckCircle2 className="w-10 h-10 text-neutral-900 mx-auto" />
-                  <h4 className="text-base font-medium text-neutral-900">{t("contact.receivedTitle")}</h4>
-                  <p className="text-xs text-neutral-500 max-w-sm mx-auto font-light">
-                    {t("contact.receivedDesc")}
-                  </p>
-                  <button
-                    onClick={() => {
-                      setSubmitted(false);
-                      setFormData({ name: "", email: "", phone: "", category: "Pumps", message: "" });
-                    }}
-                    className="mt-4 bg-neutral-900 text-white rounded-full px-5 py-2 text-xs font-medium hover:bg-neutral-800 transition-colors"
-                  >
-                    {t("contact.sendAnother")}
-                  </button>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-1.5">
-                      <label className="text-[11px] font-medium text-neutral-600 uppercase tracking-wider">
-                        {t("contact.nameLabel")}
-                      </label>
-                      <input
-                        required
-                        type="text"
-                        placeholder="e.g. Budi Santoso"
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-lg border border-neutral-200 text-xs focus:outline-none focus:border-neutral-400"
-                      />
-                    </div>
-                    <div className="space-y-1.5">
-                      <label className="text-[11px] font-medium text-neutral-600 uppercase tracking-wider">
-                        {t("contact.emailLabel")}
-                      </label>
-                      <input
-                        required
-                        type="email"
-                        placeholder="e.g. budi@company.com"
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-lg border border-neutral-200 text-xs focus:outline-none focus:border-neutral-400"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-1.5">
-                      <label className="text-[11px] font-medium text-neutral-600 uppercase tracking-wider">
-                        {t("contact.phoneLabel")}
-                      </label>
-                      <input
-                        type="tel"
-                        placeholder="e.g. +62 812-3456-7890"
-                        value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-lg border border-neutral-200 text-xs focus:outline-none focus:border-neutral-400"
-                      />
-                    </div>
-                    <div className="space-y-1.5">
-                      <label className="text-[11px] font-medium text-neutral-600 uppercase tracking-wider">
-                        {t("contact.categoryLabel")}
-                      </label>
-                      <select
-                        value={formData.category}
-                        onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-lg border border-neutral-200 text-xs focus:outline-none focus:border-neutral-400 bg-white"
-                      >
-                        <option value="Pumps">Pumps Division</option>
-                        <option value="Solar Drives">Solar Drives & VFD</option>
-                        <option value="PPR & Irrigation">PPR & Irrigation</option>
-                        <option value="Inverter">Inverters & Power Storage</option>
-                        <option value="Starters & Controllers">Starters & Controllers</option>
-                        <option value="Service Zone">Technical Service & Repair</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <label className="text-[11px] font-medium text-neutral-600 uppercase tracking-wider">
-                      {t("contact.messageLabel")}
-                    </label>
-                    <textarea
-                      required
-                      rows={4}
-                      placeholder={t("contact.messagePlaceholder")}
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-neutral-200 text-xs focus:outline-none focus:border-neutral-400"
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="w-full sm:w-auto px-6 py-2.5 bg-neutral-900 hover:bg-neutral-800 text-white font-medium rounded-full text-xs flex items-center justify-center gap-2 transition-colors"
-                  >
-                    <Send className="w-3.5 h-3.5" />
-                    <span>{t("contact.submitBtn")}</span>
-                  </button>
-                </form>
-              )}
-            </div>
+          {/* Right Column: Google Maps Iframe */}
+          <div className="lg:col-span-6 w-full h-[450px] sm:h-[520px] rounded-3xl overflow-hidden shadow-xl border border-neutral-200">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2896.9304649090764!2d106.61683810396924!3d-6.221679078649678!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69fea877978433%3A0x5250ee758872e465!2sPT.Benua%20Green%20Energy!5e0!3m2!1sid!2sid!4v1740663119925!5m2!1sid!2sid"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen={false}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="PT. Benua Green Energy Google Maps"
+            />
           </div>
 
         </div>
-      </div>
+      </section>
+
+      {/* ── SEND US A MESSAGE SECTION ── */}
+      <section className="py-20 px-6 sm:px-10 bg-[#f9fafb] border-t border-neutral-200/80">
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#1d1841] tracking-tight">
+              Send us a message
+            </h2>
+          </div>
+
+          {submitted ? (
+            <div className="p-10 bg-white rounded-3xl border border-neutral-200 text-center space-y-4 shadow-lg">
+              <CheckCircle2 className="w-14 h-14 text-emerald-600 mx-auto" />
+              <h3 className="text-2xl font-bold text-[#1d1841]">Pesan Anda Berhasil Terkirim</h3>
+              <p className="text-neutral-600 text-sm max-w-md mx-auto">
+                Terima kasih telah menghubungi PT Benua Green Energy. Tim kami akan segera menindaklanjuti pesan Anda.
+              </p>
+              <button
+                onClick={() => {
+                  setSubmitted(false);
+                  setFormData({ name: "", phone: "", email: "", subject: "", message: "" });
+                }}
+                className="mt-4 px-6 py-2.5 bg-[#2a1768] text-white text-xs font-bold rounded-full hover:bg-[#3d2391] transition-colors"
+              >
+                Kirim Pesan Lain
+              </button>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="bg-white p-8 sm:p-12 rounded-3xl border border-neutral-200/90 shadow-xl space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-neutral-700 tracking-wide">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="Name"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="w-full px-4 py-3 rounded-xl border border-neutral-300 text-sm focus:outline-none focus:border-[#2a1768] transition-colors"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-neutral-700 tracking-wide">
+                    Phone
+                  </label>
+                  <input
+                    type="tel"
+                    placeholder="Phone"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    className="w-full px-4 py-3 rounded-xl border border-neutral-300 text-sm focus:outline-none focus:border-[#2a1768] transition-colors"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-xs font-bold text-neutral-700 tracking-wide">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  required
+                  placeholder="Email"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="w-full px-4 py-3 rounded-xl border border-neutral-300 text-sm focus:outline-none focus:border-[#2a1768] transition-colors"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-xs font-bold text-neutral-700 tracking-wide">
+                  Subject
+                </label>
+                <input
+                  type="text"
+                  required
+                  placeholder="Subject"
+                  value={formData.subject}
+                  onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                  className="w-full px-4 py-3 rounded-xl border border-neutral-300 text-sm focus:outline-none focus:border-[#2a1768] transition-colors"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-xs font-bold text-neutral-700 tracking-wide">
+                  Message
+                </label>
+                <textarea
+                  rows={4}
+                  placeholder="Message"
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  className="w-full px-4 py-3 rounded-xl border border-neutral-300 text-sm focus:outline-none focus:border-[#2a1768] transition-colors"
+                />
+              </div>
+
+              <div>
+                <button
+                  type="submit"
+                  className="w-full py-3.5 bg-[#2a1768] hover:bg-[#3d2391] text-white font-bold text-sm rounded-xl transition-all duration-200 shadow-md uppercase tracking-wider"
+                >
+                  Send
+                </button>
+              </div>
+            </form>
+          )}
+        </div>
+      </section>
     </main>
   );
 }
-
-

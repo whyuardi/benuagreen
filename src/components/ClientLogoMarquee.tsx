@@ -33,14 +33,14 @@ export function ClientLogoMarquee() {
     },
     {
       name: "Mall of Indonesia (MOI)",
-      group: "Agung Sedayu Group",
+      group: "Mall of Indonesia",
       logo: "/images/clients/moi.png",
       heightClass: "h-9 sm:h-10",
     },
     {
-      name: "Central Park Mall",
-      group: "Agung Podomoro Land",
-      logo: "/images/clients/agung-podomoro.svg",
+      name: "Central Park Jakarta",
+      group: "Commercial Superblock",
+      logo: "/images/clients/moi.png",
       heightClass: "h-8 sm:h-9",
     },
   ];

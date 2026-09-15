@@ -62,7 +62,7 @@ export function Footer() {
               {productLinks.map((name) => (
                 <li key={name}>
                   <Link
-                    href="/#catalog"
+                    href="/products"
                     className="text-neutral-600 hover:text-[#281b66] transition-colors"
                   >
                     {name}
@@ -81,7 +81,7 @@ export function Footer() {
               {serviceLinks.map((name) => (
                 <li key={name}>
                   <Link
-                    href="/#services"
+                    href="/services"
                     className="text-neutral-600 hover:text-[#281b66] transition-colors"
                   >
                     {name}
