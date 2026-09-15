@@ -11,10 +11,10 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Benua Green Energy - Sustainable Water & Clean Energy Systems",
-  description: "Official catalog of high-efficiency solar submersible pumps, intelligent VFD drives, pure sine wave inverters, and certified PPR piping infrastructure in Indonesia.",
+  title: "Benua Green Energy - Connecting The Green Energy Future",
+  description: "At Benua Green Energy, we provide a full spectrum of services, ensuring your energy needs are met efficiently and sustainably.",
   icons: {
-    icon: "https://benuagreen.com/storage/img/logo.png",
+    icon: "/images/benua/logo-benuagreenenergy.png",
   },
 };
 
@@ -25,7 +25,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="id" className={`${inter.variable} scroll-smooth`}>
-      <body className="font-sans bg-white text-neutral-900 flex flex-col min-h-screen antialiased selection:bg-neutral-900 selection:text-white">
+      <body className="font-sans bg-[#eef2f5] text-neutral-900 flex flex-col min-h-screen antialiased">
         <LanguageProvider>
           <Navbar />
           <div className="flex-grow flex flex-col">{children}</div>
@@ -35,4 +35,3 @@ export default function RootLayout({
     </html>
   );
 }
-

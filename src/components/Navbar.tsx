@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { Menu, ChevronDown, PhoneCall } from "lucide-react";
 import {
   Sheet,
   SheetContent,
@@ -11,248 +12,264 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Menu, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
-import { motion } from "framer-motion";
-import { SocialLinks } from "@/components/SocialLinks";
 
 export function Navbar() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { language, setLanguage, t } = useLanguage();
+  const [productsOpen, setProductsOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const { language, setLanguage } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 15);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Streamlined 4 Core Enterprise Navigation Items
-  const navLinks = [
-    { name: t("nav.products"), href: "/#catalog" },
-    { name: t("nav.technology"), href: "/#technology" },
-    { name: t("nav.projects"), href: "/#projects" },
-    { name: t("nav.about"), href: "/about" },
+  const productCategories = [
+    { name: "Chiller / HVAC", href: "/#catalog" },
+    { name: "Cooling Tower", href: "/#catalog" },
+    { name: "Steam Accessories", href: "/#catalog" },
+    { name: "Solar Panel", href: "/#catalog" },
+    { name: "BMS", href: "/#catalog" },
+    { name: "Green Solution", href: "/#catalog" },
+    { name: "High Efficiency Pump", href: "/#catalog" },
+    { name: "PPR Pipe & Fittings", href: "/#catalog" },
+    { name: "Solar Inverter Optimizer", href: "/#catalog" },
+    { name: "Alkaline Water Ionizer", href: "/#catalog" },
+  ];
+
+  const serviceCategories = [
+    { name: "Installation Services", href: "/#services" },
+    { name: "Energy Audit Services", href: "/#services" },
+    { name: "Repair & Maintenance Services", href: "/#services" },
+    { name: "Cleaning & Optimization", href: "/#services" },
+    { name: "Diagnostics Services", href: "/#services" },
+    { name: "Warranty Replacement Services", href: "/#services" },
+    { name: "Commissioning", href: "/#services" },
   ];
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+      className={`sticky top-0 left-0 w-full z-50 transition-all duration-300 bg-white ${
         scrolled
-          ? "bg-white/95 backdrop-blur-md border-b border-neutral-200/80 py-3 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.05)]"
-          : "bg-white border-b border-neutral-100 py-4"
+          ? "shadow-sm py-2.5 border-b border-neutral-200/70"
+          : "py-3.5 border-b border-neutral-100"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 flex items-center justify-between">
-        
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Brand Logo */}
-        <Link href="/" className="flex items-center gap-3 group">
-          <div className="relative w-8 h-8 sm:w-9 sm:h-9 shrink-0">
+        <Link href="/" className="flex items-center gap-3 shrink-0">
+          <div className="relative w-12 h-12 sm:w-14 sm:h-14">
             <Image
-              src="https://benuagreen.com/storage/img/logo.png"
-              alt="Benua Green Energy"
+              src="/images/benua/logo-benuagreenenergy.png"
+              alt="PT Benua Green Energy"
               fill
               className="object-contain"
               priority
-              unoptimized
             />
-          </div>
-          <div className="flex flex-col">
-            <span className="font-bold text-sm tracking-tight text-neutral-900 leading-none">
-              Benua Green
-            </span>
-            <span className="text-[10px] text-neutral-400 tracking-wider font-semibold uppercase mt-0.5">
-              {t("nav.tagline")}
-            </span>
           </div>
         </Link>
 
-        {/* Streamlined Desktop Navigation Links (4 core items) */}
-        <nav className="hidden md:flex items-center space-x-8">
-          {navLinks.map((link) => {
-            const isActive =
-              link.href === "/"
-                ? pathname === "/"
-                : pathname.startsWith(link.href);
-            return (
-              <Link
-                key={link.name}
-                href={link.href}
-                className={`relative text-[13px] py-1 tracking-normal transition-colors duration-200 ${
-                  isActive
-                    ? "text-neutral-950 font-semibold"
-                    : "text-neutral-500 hover:text-neutral-900 font-medium"
-                }`}
-              >
-                <span>{link.name}</span>
-                {isActive && (
-                  <motion.div
-                    layoutId="activeNavUnderline"
-                    className="absolute -bottom-1 left-0 right-0 h-[1.5px] bg-neutral-900 rounded-full"
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                  />
-                )}
-              </Link>
-            );
-          })}
+        {/* Center Desktop Navigation Links */}
+        <nav className="hidden md:flex items-center space-x-6 lg:space-x-8 text-[14px]">
+          <Link
+            href="/"
+            className={`font-semibold transition-colors duration-150 ${
+              pathname === "/" ? "text-[#281b66] font-bold" : "text-neutral-700 hover:text-[#281b66]"
+            }`}
+          >
+            Home
+          </Link>
+          <Link
+            href="/about"
+            className="text-neutral-700 hover:text-[#281b66] font-medium transition-colors duration-150"
+          >
+            About
+          </Link>
+
+          {/* Products Dropdown */}
+          <div
+            className="relative"
+            onMouseEnter={() => setProductsOpen(true)}
+            onMouseLeave={() => setProductsOpen(false)}
+          >
+            <button className="flex items-center gap-1 text-neutral-700 hover:text-[#281b66] font-medium py-2 transition-colors duration-150">
+              <span>Products</span>
+              <ChevronDown className="w-3.5 h-3.5 text-neutral-500" />
+            </button>
+            {productsOpen && (
+              <div className="absolute top-full left-0 w-60 bg-white border border-neutral-150 rounded-lg shadow-lg py-2 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
+                {productCategories.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className="block px-4 py-2 text-xs text-neutral-700 hover:bg-neutral-50 hover:text-[#281b66] transition-colors"
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Services Dropdown */}
+          <div
+            className="relative"
+            onMouseEnter={() => setServicesOpen(true)}
+            onMouseLeave={() => setServicesOpen(false)}
+          >
+            <button className="flex items-center gap-1 text-neutral-700 hover:text-[#281b66] font-medium py-2 transition-colors duration-150">
+              <span>Services</span>
+              <ChevronDown className="w-3.5 h-3.5 text-neutral-500" />
+            </button>
+            {servicesOpen && (
+              <div className="absolute top-full left-0 w-64 bg-white border border-neutral-150 rounded-lg shadow-lg py-2 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
+                {serviceCategories.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className="block px-4 py-2 text-xs text-neutral-700 hover:bg-neutral-50 hover:text-[#281b66] transition-colors"
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <Link
+            href="/#ems"
+            className="text-neutral-700 hover:text-[#281b66] font-medium transition-colors duration-150"
+          >
+            EMS
+          </Link>
+          <Link
+            href="/contact"
+            className="text-neutral-700 hover:text-[#281b66] font-medium transition-colors duration-150"
+          >
+            Contact
+          </Link>
         </nav>
 
-        {/* Right Actions: Language Switcher & 1 Clear B2B CTA */}
-        <div className="flex items-center gap-3 sm:gap-4">
-          
-          {/* Language Switcher Pill */}
-          <div className="relative flex items-center bg-neutral-100 p-0.5 rounded-full border border-neutral-200/70 text-[11px] font-medium">
+        {/* Right CTA Button & Language Switcher */}
+        <div className="flex items-center gap-3">
+          {/* Language Switcher */}
+          <div className="hidden sm:flex items-center bg-neutral-100 p-0.5 rounded-full border border-neutral-200 text-[11px] font-medium">
             <button
               onClick={() => setLanguage("id")}
-              className={`relative px-2.5 py-0.5 rounded-full transition-colors duration-200 z-10 ${
+              className={`px-2 py-0.5 rounded-full transition-all ${
                 language === "id"
-                  ? "text-neutral-950 font-bold"
+                  ? "bg-white text-[#281b66] shadow-xs font-bold"
                   : "text-neutral-500 hover:text-neutral-900"
               }`}
-              title="Bahasa Indonesia"
             >
-              {language === "id" && (
-                <motion.div
-                  layoutId="activeLangPill"
-                  className="absolute inset-0 bg-white rounded-full shadow-sm -z-10"
-                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                />
-              )}
-              <span>ID</span>
+              ID
             </button>
             <button
               onClick={() => setLanguage("en")}
-              className={`relative px-2.5 py-0.5 rounded-full transition-colors duration-200 z-10 ${
+              className={`px-2 py-0.5 rounded-full transition-all ${
                 language === "en"
-                  ? "text-neutral-950 font-bold"
+                  ? "bg-white text-[#281b66] shadow-xs font-bold"
                   : "text-neutral-500 hover:text-neutral-900"
               }`}
-              title="English"
             >
-              {language === "en" && (
-                <motion.div
-                  layoutId="activeLangPill"
-                  className="absolute inset-0 bg-white rounded-full shadow-sm -z-10"
-                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                />
-              )}
-              <span>EN</span>
+              EN
             </button>
           </div>
 
-          {/* Primary B2B Engineering CTA Button */}
-          <Link
-            href="/contact"
-            className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold text-white bg-neutral-900 hover:bg-neutral-800 transition-all duration-300 shadow-sm hover:shadow-md"
+          {/* Pill WhatsApp CTA Button "Get A Qoute" */}
+          <a
+            href="https://wa.me/+628176779719"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium text-white bg-[#2a1768] hover:bg-[#38208a] transition-all duration-200 shadow-sm hover:shadow"
           >
-            <span>{t("nav.inquire")}</span>
-            <ArrowRight className="w-3 h-3 text-neutral-300" />
-          </Link>
+            Get A Qoute
+          </a>
 
-          {/* Mobile Sheet Menu */}
+          {/* Mobile Menu Trigger */}
           <div className="md:hidden">
             <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
-              <SheetTrigger className="w-8 h-8 border border-neutral-200 rounded-lg flex items-center justify-center text-neutral-700">
-                <Menu className="w-4 h-4" />
+              <SheetTrigger className="w-9 h-9 border border-neutral-200 rounded-lg flex items-center justify-center text-neutral-700">
+                <Menu className="w-5 h-5" />
               </SheetTrigger>
-              <SheetContent
-                side="right"
-                className="w-[82vw] max-w-xs bg-white border-l border-neutral-100 p-6 flex flex-col justify-between"
-              >
-                <div>
-                  <SheetHeader className="text-left pb-4 border-b border-neutral-100">
-                    <SheetTitle className="flex items-center justify-between">
-                      <div className="flex items-center gap-2.5">
-                        <div className="relative w-7 h-7">
-                          <Image
-                            src="https://benuagreen.com/storage/img/logo.png"
-                            alt="Benua Green"
-                            fill
-                            className="object-contain"
-                            unoptimized
-                          />
-                        </div>
-                        <span className="font-bold text-sm text-neutral-900">
-                          Benua Green
-                        </span>
-                      </div>
+              <SheetContent side="right" className="w-[85vw] max-w-xs bg-white p-6">
+                <SheetHeader className="text-left pb-4 border-b border-neutral-100">
+                  <SheetTitle className="flex items-center gap-2.5">
+                    <div className="relative w-10 h-10">
+                      <Image
+                        src="/images/benua/logo-benuagreenenergy.png"
+                        alt="Benua Green"
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                  </SheetTitle>
+                </SheetHeader>
 
-                      {/* Mobile Language Switcher */}
-                      <div className="flex items-center bg-neutral-100 p-0.5 rounded-full border border-neutral-200 text-[10px] font-medium">
-                        <button
-                          onClick={() => setLanguage("id")}
-                          className={`px-2 py-0.5 rounded-full transition-all ${
-                            language === "id"
-                              ? "bg-white text-neutral-900 shadow-sm font-semibold"
-                              : "text-neutral-500"
-                          }`}
-                        >
-                          ID
-                        </button>
-                        <button
-                          onClick={() => setLanguage("en")}
-                          className={`px-2 py-0.5 rounded-full transition-all ${
-                            language === "en"
-                              ? "bg-white text-neutral-900 shadow-sm font-semibold"
-                              : "text-neutral-500"
-                          }`}
-                        >
-                          EN
-                        </button>
-                      </div>
-                    </SheetTitle>
-                  </SheetHeader>
-
-                  <div className="flex flex-col space-y-1.5 pt-6">
-                    {navLinks.map((link) => {
-                      const isActive =
-                        link.href === "/"
-                          ? pathname === "/"
-                          : pathname.startsWith(link.href);
-                      return (
-                        <Link
-                          key={link.name}
-                          href={link.href}
-                          onClick={() => setMobileOpen(false)}
-                          className={`flex items-center justify-between px-3 py-2.5 rounded-lg text-sm transition-colors ${
-                            isActive
-                              ? "bg-neutral-900 text-white font-medium"
-                              : "text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50"
-                          }`}
-                        >
-                          <span>{link.name}</span>
-                          <ArrowRight className="w-3.5 h-3.5 opacity-40" />
-                        </Link>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                <div className="space-y-3 pt-4 border-t border-neutral-100">
+                <div className="flex flex-col space-y-3 pt-6 text-sm">
+                  <Link
+                    href="/"
+                    onClick={() => setMobileOpen(false)}
+                    className="font-semibold text-[#281b66] py-1"
+                  >
+                    Home
+                  </Link>
+                  <Link
+                    href="/about"
+                    onClick={() => setMobileOpen(false)}
+                    className="text-neutral-700 py-1"
+                  >
+                    About
+                  </Link>
+                  <Link
+                    href="/#catalog"
+                    onClick={() => setMobileOpen(false)}
+                    className="text-neutral-700 py-1"
+                  >
+                    Products
+                  </Link>
+                  <Link
+                    href="/#services"
+                    onClick={() => setMobileOpen(false)}
+                    className="text-neutral-700 py-1"
+                  >
+                    Services
+                  </Link>
+                  <Link
+                    href="/#ems"
+                    onClick={() => setMobileOpen(false)}
+                    className="text-neutral-700 py-1"
+                  >
+                    EMS
+                  </Link>
                   <Link
                     href="/contact"
                     onClick={() => setMobileOpen(false)}
-                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-neutral-900 text-white text-xs font-semibold rounded-lg shadow-sm"
+                    className="text-neutral-700 py-1"
                   >
-                    <span>{t("nav.inquire")}</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    Contact
                   </Link>
+                </div>
 
-                  {/* Mobile Social Media Icons */}
-                  <div className="pt-2">
-                    <p className="text-[10px] uppercase font-semibold tracking-wider text-neutral-400 mb-2.5 text-center">
-                      Connect With Us
-                    </p>
-                    <SocialLinks className="flex items-center justify-center gap-2.5" iconClassName="w-8 h-8" />
-                  </div>
+                <div className="pt-8 border-t border-neutral-100 mt-6">
+                  <a
+                    href="https://wa.me/+628176779719"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full flex items-center justify-center px-4 py-2.5 rounded-full text-xs font-semibold text-white bg-[#2a1768] shadow-sm"
+                  >
+                    Get A Qoute
+                  </a>
                 </div>
               </SheetContent>
             </Sheet>
           </div>
-
         </div>
       </div>
     </header>
