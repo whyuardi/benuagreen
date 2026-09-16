@@ -19,7 +19,6 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
   const { language, setLanguage } = useLanguage();
 
   useEffect(() => {
@@ -31,26 +30,14 @@ export function Navbar() {
   }, []);
 
   const productCategories = [
-    { name: "Chiller / HVAC", href: "/#catalog" },
-    { name: "Cooling Tower", href: "/#catalog" },
-    { name: "Steam Accessories", href: "/#catalog" },
-    { name: "Solar Panel", href: "/#catalog" },
-    { name: "BMS", href: "/#catalog" },
-    { name: "Green Solution", href: "/#catalog" },
-    { name: "High Efficiency Pump", href: "/#catalog" },
-    { name: "PPR Pipe & Fittings", href: "/#catalog" },
-    { name: "Solar Inverter Optimizer", href: "/#catalog" },
-    { name: "Alkaline Water Ionizer", href: "/#catalog" },
-  ];
-
-  const serviceCategories = [
-    { name: "Installation Services", href: "/#services" },
-    { name: "Energy Audit Services", href: "/#services" },
-    { name: "Repair & Maintenance Services", href: "/#services" },
-    { name: "Cleaning & Optimization", href: "/#services" },
-    { name: "Diagnostics Services", href: "/#services" },
-    { name: "Warranty Replacement Services", href: "/#services" },
-    { name: "Commissioning", href: "/#services" },
+    { name: "Chiller", href: "/products" },
+    { name: "Cooling Tower", href: "/products" },
+    { name: "Steam Accessories", href: "/products" },
+    { name: "Solar Panel", href: "/products" },
+    { name: "High Efficiency Pump", href: "/products" },
+    { name: "PPR Pipe & Fittings", href: "/products" },
+    { name: "Solar Inverter Optimizer", href: "/products" },
+    { name: "Alkaline Water Ionizer", href: "/products" },
   ];
 
   return (
@@ -128,50 +115,6 @@ export function Navbar() {
             )}
           </div>
 
-          {/* Services Dropdown */}
-          <div
-            className="relative"
-            onMouseEnter={() => setServicesOpen(true)}
-            onMouseLeave={() => setServicesOpen(false)}
-          >
-            <Link
-              href="/services"
-              className={`flex items-center gap-1 font-medium py-2 transition-colors duration-150 ${
-                pathname === "/services" ? "text-[#281b66] font-bold" : "text-neutral-700 hover:text-[#281b66]"
-              }`}
-            >
-              <span>Services</span>
-              <ChevronDown className="w-3.5 h-3.5 text-neutral-500" />
-            </Link>
-            {servicesOpen && (
-              <div className="absolute top-full left-0 w-64 bg-white border border-neutral-150 rounded-lg shadow-lg py-2 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
-                <Link
-                  href="/services"
-                  className="block px-4 py-2 text-xs font-bold text-[#1a3a6e] hover:bg-neutral-50 border-b border-neutral-100"
-                >
-                  All Engineering Services →
-                </Link>
-                {serviceCategories.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className="block px-4 py-2 text-xs text-neutral-700 hover:bg-neutral-50 hover:text-[#281b66] transition-colors"
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-
-          <Link
-            href="/ems"
-            className={`font-medium transition-colors duration-150 ${
-              pathname === "/ems" ? "text-[#281b66] font-bold" : "text-neutral-700 hover:text-[#281b66]"
-            }`}
-          >
-            EMS
-          </Link>
           <Link
             href="/contact"
             className={`font-medium transition-colors duration-150 ${
@@ -259,20 +202,6 @@ export function Navbar() {
                     className="text-neutral-700 py-1"
                   >
                     Products
-                  </Link>
-                  <Link
-                    href="/services"
-                    onClick={() => setMobileOpen(false)}
-                    className="text-neutral-700 py-1"
-                  >
-                    Services
-                  </Link>
-                  <Link
-                    href="/ems"
-                    onClick={() => setMobileOpen(false)}
-                    className="text-neutral-700 py-1"
-                  >
-                    EMS
                   </Link>
                   <Link
                     href="/contact"

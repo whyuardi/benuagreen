@@ -6,12 +6,10 @@ import { Mail, Phone, Clock, MapPin, MessageCircle } from "lucide-react";
 
 export function Footer() {
   const productLinks = [
-    "Chiller / HVAC",
+    "Chiller",
     "Cooling Tower",
     "Steam Accessories",
     "Solar Panel",
-    "BMS",
-    "Green Solution",
     "High Efficiency Pump",
     "PPR Pipe & Fittings",
     "Solar Inverter Optimizer",

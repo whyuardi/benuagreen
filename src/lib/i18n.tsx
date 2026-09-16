@@ -75,8 +75,8 @@ export const dictionary = {
 
   // Categories
   "cat.chillers": {
-    id: "Chiller & Sistem HVAC",
-    en: "Chiller & HVAC Systems",
+    id: "Chiller",
+    en: "Chiller",
   },
   "cat.coolingAir": {
     id: "Cooling Tower & AHU/FCU",

@@ -10,12 +10,10 @@ interface HeroSectionProps {
 
 export function HeroSection({ onSelectCategory }: HeroSectionProps) {
   const categories = [
-    { name: "Chiller / HVAC", active: true, slug: "chillers" },
+    { name: "Chiller", active: true, slug: "chillers" },
     { name: "Cooling Tower", slug: "cooling-air" },
     { name: "Steam Accessories", slug: "heating-power" },
     { name: "Solar Panel", slug: "solar-drives" },
-    { name: "BMS", slug: "starters-and-controllers" },
-    { name: "Green Solution", slug: "cooling-air" },
     { name: "High Efficiency Pump", slug: "pumps" },
     { name: "PPR Pipe & Fittings", slug: "ppr" },
     { name: "Solar Inverter Optimizer", slug: "inverter" },
@@ -27,14 +25,14 @@ export function HeroSection({ onSelectCategory }: HeroSectionProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
           
-          {/* Left Column: 10 Product Categories Sidebar */}
+          {/* Left Column: Product Categories Sidebar */}
           <div className="lg:col-span-3 bg-white rounded-2xl shadow-sm border border-neutral-200/80 overflow-hidden flex flex-col py-2.5">
             <div className="px-5 py-2 border-b border-neutral-100 flex items-center justify-between">
               <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-400">
                 Product Categories
               </span>
               <span className="text-[10px] bg-[#2a1768]/10 text-[#2a1768] font-bold px-2 py-0.5 rounded-full">
-                10 Solutions
+                {categories.length} Solutions
               </span>
             </div>
 

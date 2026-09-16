@@ -20,7 +20,7 @@ export interface CategoryGroup {
 export const CATEGORIES_DATA: CategoryGroup[] = [
   {
     id: "chillers",
-    name: "Chiller & HVAC Systems",
+    name: "Chiller",
     slug: "chillers",
     description: "Industrial absorption chillers, magnetic centrifugal chillers, and compact modular chillers for commercial & manufacturing facilities.",
     products: [

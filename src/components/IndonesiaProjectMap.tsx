@@ -164,7 +164,7 @@ export function IndonesiaProjectMap() {
         .sidebar-row.active { background: #f9fafb; }
       `}</style>
 
-      <div className="w-full h-full flex flex-col bg-white rounded-2xl border border-neutral-200 overflow-hidden" style={{ minHeight: 480 }}>
+      <div className="w-full h-full flex flex-col bg-white rounded-2xl border border-neutral-200 overflow-hidden relative isolate z-0" style={{ minHeight: 480 }}>
 
         {/* Header */}
         <div className="flex items-center justify-between px-4 sm:px-5 pt-4 pb-3.5 border-b border-neutral-100">

@@ -202,7 +202,7 @@ export function LeafletMap({ selectedId, hoveredId, onSelect }: LeafletMapProps)
           border-radius: 4px 0 0 0 !important;
         }
       `}</style>
-      <div ref={mapRef} className="w-full h-full" style={{ minHeight: 360 }} />
+      <div ref={mapRef} className="w-full h-full relative isolate" style={{ minHeight: 360 }} />
     </>
   );
 }
