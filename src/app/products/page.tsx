@@ -17,18 +17,15 @@ interface ProductItem {
 }
 
 const CATEGORIES = [
-  { name: "All Products", slug: "all", count: 20 },
-  { name: "Mini Chiller YCAE", slug: "mini-chiller-ycae", count: 3 },
-  { name: "Mini Chiller YCWE", slug: "mini-chiller-ycwe", count: 3 },
-  { name: "Magnetic Centrifugal Chiller", slug: "magnetic-chiller", count: 1 },
-  { name: "Absorption Chiller", slug: "absorption-chiller", count: 4 },
-  { name: "High Efficiency Pump", slug: "high-efficiency-pump", count: 8 },
-  { name: "Solar Panel & Drives", slug: "solar-panel", count: 3 },
-  { name: "Cooling Tower", slug: "cooling-tower", count: 2 },
-  { name: "Steam Accessories", slug: "steam-accessories", count: 2 },
-  { name: "BMS & EMS", slug: "bms", count: 4 },
-  { name: "PPR Pipe & Fittings", slug: "ppr-pipe-fittings", count: 3 },
-  { name: "Green Solution & Ionizer", slug: "green-solution", count: 2 },
+  { name: "All Products", slug: "all" },
+  { name: "Mini Chiller YCAE", slug: "mini-chiller-ycae" },
+  { name: "Mini Chiller YCWE", slug: "mini-chiller-ycwe" },
+  { name: "Magnetic Centrifugal Chiller", slug: "magnetic-chiller" },
+  { name: "Absorption Chiller", slug: "absorption-chiller" },
+  { name: "High Efficiency Pump", slug: "high-efficiency-pump" },
+  { name: "PPR Pipe & Fittings", slug: "ppr-pipe-fittings" },
+  { name: "Solar Panel & Drives", slug: "solar-panel" },
+  { name: "Cooling Tower", slug: "cooling-tower" },
 ];
 
 const ALL_PRODUCTS: ProductItem[] = [
@@ -81,7 +78,7 @@ const ALL_PRODUCTS: ProductItem[] = [
     category: "Mini Chiller YCWE",
     categorySlug: "mini-chiller-ycwe",
     image: "/images/products/prod_2.png",
-    specs: ["Compact Footprint", "Independent Dual Compressor", "BMS BACnet Integration"],
+    specs: ["Compact Footprint", "Independent Dual Compressor", "Smart BACnet Integration"],
     capacity: "32 TR",
     description: "Chiller air berkinerja tinggi yang fleksibel untuk proyek retrofit ruang mekanikal terbatas.",
   },
@@ -204,28 +201,6 @@ const ALL_PRODUCTS: ProductItem[] = [
     description: "Sambungan fitting elektrofusi bertekanan tinggi untuk penyambungan pipa berdiameter besar dengan keandalan maksimal.",
   },
 
-  // BMS & EMS
-  {
-    id: "easyio-fw8",
-    name: "EasyIO FW-8 WiFi Controller EASYIO-FW-08",
-    category: "BMS & EMS",
-    categorySlug: "bms",
-    image: "/images/products/prod_10.png",
-    specs: ["8 Universal I/O", "Dual Ethernet IP + Wi-Fi", "Embedded HTML5 Web Server"],
-    capacity: "8 I/O Points",
-    description: "Controller IoT open-protocol BACnet IP dan Modbus untuk automasi unit AHU, FCU, dan sub-metering daya.",
-  },
-  {
-    id: "easyio-fd20i",
-    name: "EasyIO FD-20i Input Modbus IO EXPANSION",
-    category: "BMS & EMS",
-    categorySlug: "bms",
-    image: "/images/products/prod_11.png",
-    specs: ["20 Universal Inputs/Outputs", "BACnet IP / MSTP Native", "MQTT Cloud Direct"],
-    capacity: "20 I/O Points",
-    description: "Unit I/O density tinggi untuk plant chiller, pompa distribusi sentral, dan ruang kontrol mekanikal.",
-  },
-
   // Solar Panel & Drives
   {
     id: "solar-drive-vfd",
@@ -334,7 +309,9 @@ export default function ProductsPage() {
                         <span className={`text-[10px] px-2 py-0.5 rounded-full ${
                           isActive ? "bg-white/20 text-white" : "bg-neutral-100 text-neutral-500"
                         }`}>
-                          {cat.count}
+                          {cat.slug === "all"
+                            ? ALL_PRODUCTS.length
+                            : ALL_PRODUCTS.filter((p) => p.categorySlug === cat.slug).length}
                         </span>
                       </button>
                     </li>
