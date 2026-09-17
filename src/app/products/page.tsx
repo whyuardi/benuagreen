@@ -386,11 +386,40 @@ function ProductsContent() {
       </section>
 
       {/* ── MAIN SHOP CONTENT: SIDEBAR + PRODUCT GRID ── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-10">
+        {/* ── MOBILE HORIZONTAL CATEGORY PILLS BAR ── */}
+        <div className="lg:hidden mb-6">
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none" style={{ scrollbarWidth: "none" }}>
+            {CATEGORIES.map((cat) => {
+              const isActive = selectedCategory === cat.slug;
+              return (
+                <button
+                  key={cat.slug}
+                  onClick={() => setSelectedCategory(cat.slug)}
+                  className={`flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-semibold whitespace-nowrap shrink-0 transition-all ${
+                    isActive
+                      ? "bg-[#2a1768] text-white shadow-sm"
+                      : "bg-white text-neutral-700 border border-neutral-200 hover:bg-neutral-50 hover:text-[#2a1768]"
+                  }`}
+                >
+                  <span>{cat.name}</span>
+                  <span
+                    className={`text-[10px] px-1.5 py-0.5 rounded-full ${
+                      isActive ? "bg-white/20 text-white" : "bg-neutral-100 text-neutral-500"
+                    }`}
+                  >
+                    {getCategoryCount(cat.slug)}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-          {/* ── LEFT SIDEBAR: PRODUCT CATEGORIES ── */}
-          <aside className="lg:col-span-3 bg-white p-6 rounded-2xl border border-neutral-200/80 shadow-xs space-y-6 sticky top-24">
+          {/* ── DESKTOP LEFT SIDEBAR: PRODUCT CATEGORIES ── */}
+          <aside className="hidden lg:block lg:col-span-3 bg-white p-6 rounded-2xl border border-neutral-200/80 shadow-xs space-y-6 lg:sticky lg:top-24">
             <div>
               <h3 className="text-sm font-extrabold uppercase tracking-wider text-[#1d1841] mb-4 pb-2 border-b border-neutral-200 flex items-center justify-between">
                 <span>Product Categories</span>
