@@ -2,15 +2,19 @@
 
 import Link from "next/link";
 import { Briefcase, Wrench, ShieldCheck, ArrowRight } from "lucide-react";
+import { useLanguage } from "@/lib/i18n";
 
 export function StatsTeaser() {
+  const { language } = useLanguage();
+
   const cards = [
     {
       step: "01",
       tag: "ENGINEERING & CCHP",
-      title: "Services",
-      description:
-        "Comprehensive CCHP solutions engineering consulting, design, turnkey installation, and expert commissioning services tailored for heavy industrial applications.",
+      title: language === "id" ? "Layanan" : "Services",
+      description: language === "id"
+        ? "Solusi engineering CCHP komprehensif meliputi konsultasi, desain, instalasi turnkey, dan komisioning untuk aplikasi industri berat."
+        : "Comprehensive CCHP solutions engineering consulting, design, turnkey installation, and expert commissioning services tailored for heavy industrial applications.",
       icon: Briefcase,
       iconColor: "text-[#2a1768]",
       bgColor: "bg-[#2a1768]/8",
@@ -19,10 +23,11 @@ export function StatsTeaser() {
     },
     {
       step: "02",
-      tag: "OPERATIONAL INTEGRITY",
-      title: "Maintenance",
-      description:
-        "Preventive and corrective maintenance programs ensuring optimal thermodynamic performance, maximum operational reliability, and extended equipment longevity.",
+      tag: language === "id" ? "INTEGRITAS OPERASIONAL" : "OPERATIONAL INTEGRITY",
+      title: language === "id" ? "Perawatan" : "Maintenance",
+      description: language === "id"
+        ? "Program perawatan preventif dan korektif untuk memastikan performa termodinamis optimal, keandalan operasional maksimal, dan masa pakai peralatan yang lebih panjang."
+        : "Preventive and corrective maintenance programs ensuring optimal thermodynamic performance, maximum operational reliability, and extended equipment longevity.",
       icon: Wrench,
       iconColor: "text-emerald-700",
       bgColor: "bg-emerald-50",
@@ -31,10 +36,11 @@ export function StatsTeaser() {
     },
     {
       step: "03",
-      tag: "SMART AUTOMATION",
+      tag: language === "id" ? "AUTOMASI CERDAS" : "SMART AUTOMATION",
       title: "EMS",
-      description:
-        "Advanced energy management systems monitoring, optimizing, and digitally controlling CCHP equipment performance with real-time analytics and predictive diagnostics.",
+      description: language === "id"
+        ? "Sistem manajemen energi canggih untuk monitoring, optimalisasi, dan kontrol digital peralatan CCHP dengan analitik real-time dan diagnostik prediktif."
+        : "Advanced energy management systems monitoring, optimizing, and digitally controlling CCHP equipment performance with real-time analytics and predictive diagnostics.",
       icon: ShieldCheck,
       iconColor: "text-sky-700",
       bgColor: "bg-sky-50",
@@ -85,7 +91,7 @@ export function StatsTeaser() {
                     href={card.href}
                     className="inline-flex items-center gap-2 text-xs font-bold text-[#1d1841] group-hover:text-[#2a1768] transition-colors"
                   >
-                    <span>Learn more</span>
+                    <span>{language === "id" ? "Pelajari lebih lanjut" : "Learn more"}</span>
                     <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
                   </Link>
                   <span className="w-2 h-2 rounded-full bg-neutral-200 group-hover:bg-[#2a1768] transition-colors" />

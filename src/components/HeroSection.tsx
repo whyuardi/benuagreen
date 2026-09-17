@@ -3,21 +3,24 @@
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { IndonesiaProjectMap } from "@/components/IndonesiaProjectMap";
+import { useLanguage } from "@/lib/i18n";
 
 interface HeroSectionProps {
   onSelectCategory?: (category: string) => void;
 }
 
 export function HeroSection({ onSelectCategory }: HeroSectionProps) {
+  const { language } = useLanguage();
+
   const categories = [
     { name: "Chiller", slug: "chiller", href: "/products?category=chiller" },
     { name: "Cooling Tower", slug: "cooling-tower", href: "/products?category=cooling-tower" },
-    { name: "Steam Accessories", slug: "steam-accessories", href: "/products?category=steam-accessories" },
-    { name: "Solar Panel", slug: "solar-panel", href: "/products?category=solar-panel" },
-    { name: "High Efficiency Pump", slug: "high-efficiency-pump", href: "/products?category=high-efficiency-pump" },
-    { name: "PPR Pipe & Fittings", slug: "ppr-pipe-fittings", href: "/products?category=ppr-pipe-fittings" },
-    { name: "Solar Inverter Optimizer", slug: "solar-inverter-optimizer", href: "/products?category=solar-inverter-optimizer" },
-    { name: "Alkaline Water Ionizer", slug: "alkaline-water-ionizer", href: "/products?category=alkaline-water-ionizer" },
+    { name: language === "id" ? "Aksesoris Steam & Boiler" : "Steam Accessories", slug: "steam-accessories", href: "/products?category=steam-accessories" },
+    { name: language === "id" ? "Panel Surya" : "Solar Panel", slug: "solar-panel", href: "/products?category=solar-panel" },
+    { name: language === "id" ? "Pompa Efisiensi Tinggi" : "High Efficiency Pump", slug: "high-efficiency-pump", href: "/products?category=high-efficiency-pump" },
+    { name: language === "id" ? "Pipa PPR & Fitting" : "PPR Pipe & Fittings", slug: "ppr-pipe-fittings", href: "/products?category=ppr-pipe-fittings" },
+    { name: language === "id" ? "Inverter Pompa Surya" : "Solar Inverter Optimizer", slug: "solar-inverter-optimizer", href: "/products?category=solar-inverter-optimizer" },
+    { name: language === "id" ? "Ionizer Air Alkali" : "Alkaline Water Ionizer", slug: "alkaline-water-ionizer", href: "/products?category=alkaline-water-ionizer" },
   ];
 
   return (
@@ -29,10 +32,10 @@ export function HeroSection({ onSelectCategory }: HeroSectionProps) {
           <div className="lg:col-span-3 bg-white rounded-2xl shadow-sm border border-neutral-200/80 overflow-hidden flex flex-col py-2.5">
             <div className="px-5 py-2 border-b border-neutral-100 flex items-center justify-between">
               <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-400">
-                Product Categories
+                {language === "id" ? "Kategori Produk" : "Product Categories"}
               </span>
               <span className="text-[10px] bg-[#2a1768]/10 text-[#2a1768] font-bold px-2 py-0.5 rounded-full">
-                {categories.length} Solutions
+                {language === "id" ? `${categories.length} Solusi` : `${categories.length} Solutions`}
               </span>
             </div>
 

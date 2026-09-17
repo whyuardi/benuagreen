@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { ChevronRight, Search, SlidersHorizontal, ArrowRight, Check } from "lucide-react";
+import { useLanguage } from "@/lib/i18n";
 
 interface ProductItem {
   id: string;
@@ -32,6 +33,43 @@ const CATEGORIES = [
   { name: "Magnetic Centrifugal Chiller", slug: "magnetic-chiller" },
   { name: "Absorption Chiller", slug: "absorption-chiller" },
 ];
+
+function getCategoryName(slug: string, lang: string): string {
+  if (lang === "id") {
+    switch (slug) {
+      case "all": return "Semua Produk";
+      case "chiller": return "Chiller";
+      case "cooling-tower": return "Cooling Tower";
+      case "steam-accessories": return "Aksesoris Steam & Boiler";
+      case "solar-panel": return "Panel Surya";
+      case "high-efficiency-pump": return "Pompa Efisiensi Tinggi";
+      case "ppr-pipe-fittings": return "Pipa PPR & Fitting";
+      case "solar-inverter-optimizer": return "Inverter Pompa Surya";
+      case "alkaline-water-ionizer": return "Ionizer Air Alkali";
+      case "mini-chiller-ycae": return "Mini Chiller YCAE";
+      case "mini-chiller-ycwe": return "Mini Chiller YCWE";
+      case "magnetic-chiller": return "Chiller Sentrifugal Magnetik";
+      case "absorption-chiller": return "Chiller Absorpsi";
+      default: return slug;
+    }
+  }
+  switch (slug) {
+    case "all": return "All Products";
+    case "chiller": return "Chiller";
+    case "cooling-tower": return "Cooling Tower";
+    case "steam-accessories": return "Steam Accessories";
+    case "solar-panel": return "Solar Panel";
+    case "high-efficiency-pump": return "High Efficiency Pump";
+    case "ppr-pipe-fittings": return "PPR Pipe & Fittings";
+    case "solar-inverter-optimizer": return "Solar Inverter Optimizer";
+    case "alkaline-water-ionizer": return "Alkaline Water Ionizer";
+    case "mini-chiller-ycae": return "Mini Chiller YCAE";
+    case "mini-chiller-ycwe": return "Mini Chiller YCWE";
+    case "magnetic-chiller": return "Magnetic Centrifugal Chiller";
+    case "absorption-chiller": return "Absorption Chiller";
+    default: return slug;
+  }
+}
 
 const ALL_PRODUCTS: ProductItem[] = [
   // Mini Chiller YCAE
@@ -278,6 +316,7 @@ const ALL_PRODUCTS: ProductItem[] = [
 ];
 
 function ProductsContent() {
+  const { language } = useLanguage();
   const searchParams = useSearchParams();
   const categoryParam = searchParams.get("category");
   const searchParam = searchParams.get("search");
@@ -354,20 +393,24 @@ function ProductsContent() {
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 text-xs text-neutral-500 mb-1">
-              <Link href="/" className="hover:text-[#2a1768]">Home</Link>
+              <Link href="/" className="hover:text-[#2a1768] transition-colors">
+                {language === "id" ? "Beranda" : "Home"}
+              </Link>
               <span>/</span>
-              <span className="text-[#2a1768] font-bold">Products</span>
+              <span className="text-[#2a1768] font-bold">
+                {language === "id" ? "Produk" : "Products"}
+              </span>
               {selectedCategory !== "all" && (
                 <>
                   <span>/</span>
                   <span className="text-neutral-700 capitalize font-medium">
-                    {CATEGORIES.find((c) => c.slug === selectedCategory)?.name}
+                    {getCategoryName(selectedCategory, language)}
                   </span>
                 </>
               )}
             </div>
             <h1 className="text-2xl sm:text-3xl font-extrabold text-[#1d1841]">
-              Products
+              {language === "id" ? "Katalog Produk" : "Products"}
             </h1>
           </div>
 
@@ -376,7 +419,7 @@ function ProductsContent() {
             <Search className="w-4 h-4 text-neutral-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
-              placeholder="Search products..."
+              placeholder={language === "id" ? "Cari tipe produk..." : "Search products..."}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-10 pr-4 py-2 bg-white rounded-lg border border-neutral-300 text-xs focus:outline-none focus:border-[#2a1768]"
@@ -402,7 +445,7 @@ function ProductsContent() {
                       : "bg-white text-neutral-700 border border-neutral-200 hover:bg-neutral-50 hover:text-[#2a1768]"
                   }`}
                 >
-                  <span>{cat.name}</span>
+                  <span>{getCategoryName(cat.slug, language)}</span>
                   <span
                     className={`text-[10px] px-1.5 py-0.5 rounded-full ${
                       isActive ? "bg-white/20 text-white" : "bg-neutral-100 text-neutral-500"
@@ -422,7 +465,7 @@ function ProductsContent() {
           <aside className="hidden lg:block lg:col-span-3 bg-white p-6 rounded-2xl border border-neutral-200/80 shadow-xs space-y-6 lg:sticky lg:top-24">
             <div>
               <h3 className="text-sm font-extrabold uppercase tracking-wider text-[#1d1841] mb-4 pb-2 border-b border-neutral-200 flex items-center justify-between">
-                <span>Product Categories</span>
+                <span>{language === "id" ? "Kategori Produk" : "Product Categories"}</span>
                 <SlidersHorizontal className="w-4 h-4 text-neutral-400" />
               </h3>
 
@@ -439,7 +482,7 @@ function ProductsContent() {
                             : "text-neutral-700 hover:bg-neutral-50 hover:text-[#2a1768]"
                         }`}
                       >
-                        <span className="truncate">{cat.name}</span>
+                        <span className="truncate">{getCategoryName(cat.slug, language)}</span>
                         <span className={`text-[10px] px-2 py-0.5 rounded-full ${
                           isActive ? "bg-white/20 text-white" : "bg-neutral-100 text-neutral-500"
                         }`}>
@@ -455,13 +498,17 @@ function ProductsContent() {
             {/* Quick Contact Badge */}
             <div className="pt-4 border-t border-neutral-200">
               <div className="bg-[#eef3f8] p-4 rounded-xl text-center space-y-2">
-                <p className="text-xs font-bold text-[#1d1841]">Need Custom Engineered Capacity?</p>
-                <p className="text-[11px] text-neutral-600">Consult with our licensed HVAC &amp; Pump engineers.</p>
+                <p className="text-xs font-bold text-[#1d1841]">
+                  {language === "id" ? "Butuh Kapasitas Kustom?" : "Need Custom Engineered Capacity?"}
+                </p>
+                <p className="text-[11px] text-neutral-600">
+                  {language === "id" ? "Konsultasikan dengan tim ahli HVAC & Pompa kami." : "Consult with our licensed HVAC & Pump engineers."}
+                </p>
                 <Link
                   href="/contact"
                   className="inline-block mt-2 text-xs font-bold text-white bg-[#2a1768] px-4 py-2 rounded-full hover:bg-[#3b218f] transition-colors"
                 >
-                  Contact Engineering
+                  {language === "id" ? "Hubungi Engineering" : "Contact Engineering"}
                 </Link>
               </div>
             </div>
@@ -473,20 +520,28 @@ function ProductsContent() {
             {/* Top Bar: Results Count */}
             <div className="flex items-center justify-between pb-4 border-b border-neutral-200 text-xs text-neutral-500">
               <p>
-                Showing all <strong>{filteredProducts.length}</strong> results
+                {language === "id" ? (
+                  <>Menampilkan semua <strong>{filteredProducts.length}</strong> produk</>
+                ) : (
+                  <>Showing all <strong>{filteredProducts.length}</strong> results</>
+                )}
               </p>
-              <span className="text-neutral-400">Authorized Distributor Johnson Controls &amp; YORK</span>
+              <span className="text-neutral-400">
+                {language === "id" ? "Distributor Resmi Johnson Controls & YORK" : "Authorized Distributor Johnson Controls & YORK"}
+              </span>
             </div>
 
             {/* Grid */}
             {filteredProducts.length === 0 ? (
               <div className="py-20 text-center bg-white rounded-2xl border border-neutral-200 space-y-3">
-                <p className="text-sm font-bold text-neutral-600">No products found matching your search.</p>
+                <p className="text-sm font-bold text-neutral-600">
+                  {language === "id" ? "Tidak ada produk yang cocok dengan pencarian Anda." : "No products found matching your search."}
+                </p>
                 <button
                   onClick={() => { setSelectedCategory("all"); setSearchQuery(""); }}
                   className="px-4 py-2 text-xs bg-[#2a1768] text-white font-bold rounded-lg"
                 >
-                  Reset Filter
+                  {language === "id" ? "Reset Filter" : "Reset Filter"}
                 </button>
               </div>
             ) : (
@@ -510,7 +565,7 @@ function ProductsContent() {
 
                       {/* Category */}
                       <span className="text-[11px] font-semibold text-neutral-400 block mb-1">
-                        {prod.category}
+                        {getCategoryName(prod.categorySlug, language)}
                       </span>
 
                       {/* Title */}
@@ -540,16 +595,16 @@ function ProductsContent() {
                     <div className="pt-3 border-t border-neutral-100 flex items-center justify-between gap-2">
                       <button
                         onClick={() => setActiveModalProduct(prod)}
-                        className="text-xs font-semibold text-neutral-600 hover:text-[#2a1768] py-1.5 px-3 rounded-lg hover:bg-neutral-50 transition-colors"
+                        className="text-xs font-semibold text-neutral-600 hover:text-[#2a1768] py-1.5 px-3 rounded-lg hover:bg-neutral-50 transition-colors cursor-pointer"
                       >
-                        Details
+                        {language === "id" ? "Detail" : "Details"}
                       </button>
 
                       <Link
-                        href={`/contact?subject=Inquiry Product: ${encodeURIComponent(prod.name)}`}
+                        href={`/contact?subject=${encodeURIComponent(language === "id" ? `Konsultasi Produk: ${prod.name}` : `Inquiry Product: ${prod.name}`)}`}
                         className="text-xs font-bold text-white bg-[#2a1768] hover:bg-[#3d2391] px-4 py-2 rounded-full transition-colors shadow-xs inline-flex items-center gap-1"
                       >
-                        <span>Read more</span>
+                        <span>{language === "id" ? "Lihat Detail" : "Read more"}</span>
                         <ArrowRight className="w-3 h-3" />
                       </Link>
                     </div>
@@ -569,7 +624,7 @@ function ProductsContent() {
           <div className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative animate-in fade-in zoom-in-95 duration-150">
             <button
               onClick={() => setActiveModalProduct(null)}
-              className="absolute top-5 right-5 w-8 h-8 rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-600 flex items-center justify-center font-bold text-sm"
+              className="absolute top-5 right-5 w-8 h-8 rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-600 flex items-center justify-center font-bold text-sm cursor-pointer"
             >
               ✕
             </button>
@@ -585,7 +640,7 @@ function ProductsContent() {
               </div>
               <div>
                 <span className="text-xs font-bold text-emerald-600 uppercase">
-                  {activeModalProduct.category}
+                  {getCategoryName(activeModalProduct.categorySlug, language)}
                 </span>
                 <h3 className="text-lg font-bold text-[#1d1841] leading-snug">
                   {activeModalProduct.name}
@@ -595,7 +650,9 @@ function ProductsContent() {
 
             <div className="space-y-4 text-xs sm:text-sm text-neutral-700">
               <div>
-                <h4 className="font-bold text-[#1d1841] mb-1">Product Description:</h4>
+                <h4 className="font-bold text-[#1d1841] mb-1">
+                  {language === "id" ? "Deskripsi Produk:" : "Product Description:"}
+                </h4>
                 <p className="text-neutral-600 leading-relaxed text-justify">
                   {activeModalProduct.description}
                 </p>
@@ -603,13 +660,17 @@ function ProductsContent() {
 
               {activeModalProduct.capacity && (
                 <div className="bg-neutral-50 p-3 rounded-xl border border-neutral-200 font-mono text-xs">
-                  <span className="font-bold text-neutral-900">Capacity / Sizing: </span>
+                  <span className="font-bold text-neutral-900">
+                    {language === "id" ? "Kapasitas / Ukuran: " : "Capacity / Sizing: "}
+                  </span>
                   <span className="text-emerald-700 font-bold">{activeModalProduct.capacity}</span>
                 </div>
               )}
 
               <div>
-                <h4 className="font-bold text-[#1d1841] mb-2">Key Specifications:</h4>
+                <h4 className="font-bold text-[#1d1841] mb-2">
+                  {language === "id" ? "Spesifikasi Utama:" : "Key Specifications:"}
+                </h4>
                 <ul className="space-y-1.5">
                   {activeModalProduct.specs.map((s, idx) => (
                     <li key={idx} className="flex items-center gap-2">
@@ -624,15 +685,15 @@ function ProductsContent() {
             <div className="mt-8 pt-4 border-t border-neutral-200 flex items-center justify-end gap-3">
               <button
                 onClick={() => setActiveModalProduct(null)}
-                className="px-5 py-2.5 rounded-full border border-neutral-200 text-xs font-semibold text-neutral-600 hover:bg-neutral-50"
+                className="px-5 py-2.5 rounded-full border border-neutral-200 text-xs font-semibold text-neutral-600 hover:bg-neutral-50 cursor-pointer"
               >
-                Close
+                {language === "id" ? "Tutup" : "Close"}
               </button>
               <Link
-                href={`/contact?subject=Inquiry Product: ${encodeURIComponent(activeModalProduct.name)}`}
+                href={`/contact?subject=${encodeURIComponent(language === "id" ? `Konsultasi Produk: ${activeModalProduct.name}` : `Inquiry Product: ${activeModalProduct.name}`)}`}
                 className="px-6 py-2.5 rounded-full bg-[#2a1768] hover:bg-[#3d2391] text-white text-xs font-bold transition-colors shadow-md"
               >
-                Inquire Product
+                {language === "id" ? "Konsultasi Produk" : "Inquire Product"}
               </Link>
             </div>
           </div>

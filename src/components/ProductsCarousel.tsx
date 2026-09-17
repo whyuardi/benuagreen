@@ -3,8 +3,10 @@
 import { useState, useRef } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useLanguage } from "@/lib/i18n";
 
 export function ProductsCarousel() {
+  const { language } = useLanguage();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const products = [
@@ -71,10 +73,12 @@ export function ProductsCarousel() {
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
           <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight uppercase drop-shadow-md mb-2">
-            OUR PRODUCTS
+            {language === "id" ? "PRODUK KAMI" : "OUR PRODUCTS"}
           </h2>
           <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-widest text-white/95 drop-shadow-sm">
-            DISCOVER BENUA GREEN ENERGY&apos;S NEWEST ECO-FRIENDLY SOLUTIONS. SHAPING A SUSTAINABLE TOMORROW.
+            {language === "id"
+              ? "TEMUKAN SOLUSI RAMAH LINGKUNGAN TERBARU DARI BENUA GREEN ENERGY. MEMBENTUK HARI ESOK YANG BERKELANJUTAN."
+              : "DISCOVER BENUA GREEN ENERGY'S NEWEST ECO-FRIENDLY SOLUTIONS. SHAPING A SUSTAINABLE TOMORROW."}
           </p>
         </div>
 

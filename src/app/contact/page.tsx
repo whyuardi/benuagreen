@@ -37,10 +37,12 @@ export default function ContactPage() {
         {/* Floating Centered White Card */}
         <div className="relative z-10 bg-white/95 backdrop-blur-md px-12 py-10 rounded-2xl shadow-2xl text-center max-w-lg mx-4 border border-white/60">
           <h1 className="text-3xl sm:text-4xl font-extrabold text-[#1d1841] tracking-tight mb-2">
-            Contact
+            {language === "id" ? "Kontak Kami" : "Contact"}
           </h1>
           <h4 className="text-sm sm:text-base font-semibold text-neutral-500 tracking-wide">
-            Get in touch and let us know how we can help.
+            {language === "id"
+              ? "Hubungi kami dan beri tahu bagaimana kami dapat membantu solusi energi Anda."
+              : "Get in touch and let us know how we can help."}
           </h4>
         </div>
       </section>
@@ -53,7 +55,7 @@ export default function ContactPage() {
           <div className="lg:col-span-6 space-y-8">
             <div>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-[#1d1841] tracking-tight mb-4">
-                Get in touch
+                {language === "id" ? "Hubungi Kami" : "Get in touch"}
               </h2>
               <div className="w-16 h-1 bg-emerald-500 rounded-full mb-8" />
             </div>
@@ -66,7 +68,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h4 className="text-lg font-bold text-[#1d1841] mb-1">
-                    Location
+                    {language === "id" ? "Lokasi Kantor" : "Location"}
                   </h4>
                   <p className="text-neutral-600 text-sm leading-relaxed max-w-md">
                     Head Office PT. Benua Green Energy, Jl. Trocadero Office Park, Ruko Piazza De Europe, Garnier No. 82 Lippo Karawaci, Tangerang, 15139
@@ -81,7 +83,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h4 className="text-lg font-bold text-[#1d1841] mb-1">
-                    Email us
+                    {language === "id" ? "Kirim Email" : "Email us"}
                   </h4>
                   <a
                     href="mailto:sales@benuagreen.com"
@@ -99,7 +101,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h4 className="text-lg font-bold text-[#1d1841] mb-1">
-                    Call us
+                    {language === "id" ? "Hubungi Telepon" : "Call us"}
                   </h4>
                   <a
                     href="tel:+622120022012"
@@ -134,16 +136,20 @@ export default function ContactPage() {
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-10">
             <h2 className="text-3xl sm:text-4xl font-extrabold text-[#1d1841] tracking-tight">
-              Send us a message
+              {language === "id" ? "Kirim Pesan Kepada Kami" : "Send us a message"}
             </h2>
           </div>
 
           {submitted ? (
             <div className="p-10 bg-white rounded-3xl border border-neutral-200 text-center space-y-4 shadow-lg">
               <CheckCircle2 className="w-14 h-14 text-emerald-600 mx-auto" />
-              <h3 className="text-2xl font-bold text-[#1d1841]">Pesan Anda Berhasil Terkirim</h3>
+              <h3 className="text-2xl font-bold text-[#1d1841]">
+                {language === "id" ? "Pesan Anda Berhasil Terkirim" : "Your Message Has Been Sent"}
+              </h3>
               <p className="text-neutral-600 text-sm max-w-md mx-auto">
-                Terima kasih telah menghubungi PT Benua Green Energy. Tim kami akan segera menindaklanjuti pesan Anda.
+                {language === "id"
+                  ? "Terima kasih telah menghubungi PT Benua Green Energy. Tim kami akan segera menindaklanjuti pesan Anda."
+                  : "Thank you for reaching out to PT Benua Green Energy. Our team will get back to you shortly."}
               </p>
               <button
                 onClick={() => {
@@ -152,7 +158,7 @@ export default function ContactPage() {
                 }}
                 className="mt-4 px-6 py-2.5 bg-[#2a1768] text-white text-xs font-bold rounded-full hover:bg-[#3d2391] transition-colors"
               >
-                Kirim Pesan Lain
+                {language === "id" ? "Kirim Pesan Lain" : "Send Another Message"}
               </button>
             </div>
           ) : (
@@ -160,12 +166,12 @@ export default function ContactPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-xs font-bold text-neutral-700 tracking-wide">
-                    Name
+                    {language === "id" ? "Nama Lengkap" : "Name"}
                   </label>
                   <input
                     type="text"
                     required
-                    placeholder="Name"
+                    placeholder={language === "id" ? "Nama Anda" : "Name"}
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     className="w-full px-4 py-3 rounded-xl border border-neutral-300 text-sm focus:outline-none focus:border-[#2a1768] transition-colors"
@@ -173,11 +179,11 @@ export default function ContactPage() {
                 </div>
                 <div className="space-y-2">
                   <label className="text-xs font-bold text-neutral-700 tracking-wide">
-                    Phone
+                    {language === "id" ? "Nomor Telepon / WhatsApp" : "Phone"}
                   </label>
                   <input
                     type="tel"
-                    placeholder="Phone"
+                    placeholder={language === "id" ? "+62 8..." : "Phone"}
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     className="w-full px-4 py-3 rounded-xl border border-neutral-300 text-sm focus:outline-none focus:border-[#2a1768] transition-colors"
@@ -192,7 +198,7 @@ export default function ContactPage() {
                 <input
                   type="email"
                   required
-                  placeholder="Email"
+                  placeholder="name@company.com"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   className="w-full px-4 py-3 rounded-xl border border-neutral-300 text-sm focus:outline-none focus:border-[#2a1768] transition-colors"
@@ -201,12 +207,12 @@ export default function ContactPage() {
 
               <div className="space-y-2">
                 <label className="text-xs font-bold text-neutral-700 tracking-wide">
-                  Subject
+                  {language === "id" ? "Subjek" : "Subject"}
                 </label>
                 <input
                   type="text"
                   required
-                  placeholder="Subject"
+                  placeholder={language === "id" ? "Subjek konsultasi atau produk..." : "Subject"}
                   value={formData.subject}
                   onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                   className="w-full px-4 py-3 rounded-xl border border-neutral-300 text-sm focus:outline-none focus:border-[#2a1768] transition-colors"
@@ -215,11 +221,11 @@ export default function ContactPage() {
 
               <div className="space-y-2">
                 <label className="text-xs font-bold text-neutral-700 tracking-wide">
-                  Message
+                  {language === "id" ? "Pesan" : "Message"}
                 </label>
                 <textarea
                   rows={4}
-                  placeholder="Message"
+                  placeholder={language === "id" ? "Tuliskan kebutuhan atau pertanyaan Anda..." : "Message"}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   className="w-full px-4 py-3 rounded-xl border border-neutral-300 text-sm focus:outline-none focus:border-[#2a1768] transition-colors"
@@ -231,7 +237,7 @@ export default function ContactPage() {
                   type="submit"
                   className="w-full py-3.5 bg-[#2a1768] hover:bg-[#3d2391] text-white font-bold text-sm rounded-xl transition-all duration-200 shadow-md uppercase tracking-wider"
                 >
-                  Send
+                  {language === "id" ? "Kirim Pesan" : "Send"}
                 </button>
               </div>
             </form>

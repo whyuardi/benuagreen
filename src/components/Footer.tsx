@@ -3,27 +3,30 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Mail, Phone, Clock, MapPin, MessageCircle } from "lucide-react";
+import { useLanguage } from "@/lib/i18n";
 
 export function Footer() {
+  const { language } = useLanguage();
+
   const productLinks = [
     { name: "Chiller", href: "/products?category=chiller" },
     { name: "Cooling Tower", href: "/products?category=cooling-tower" },
-    { name: "Steam Accessories", href: "/products?category=steam-accessories" },
-    { name: "Solar Panel", href: "/products?category=solar-panel" },
-    { name: "High Efficiency Pump", href: "/products?category=high-efficiency-pump" },
-    { name: "PPR Pipe & Fittings", href: "/products?category=ppr-pipe-fittings" },
-    { name: "Solar Inverter Optimizer", href: "/products?category=solar-inverter-optimizer" },
-    { name: "Alkaline Water Ionizer", href: "/products?category=alkaline-water-ionizer" },
+    { name: language === "id" ? "Aksesoris Steam & Boiler" : "Steam Accessories", href: "/products?category=steam-accessories" },
+    { name: language === "id" ? "Panel Surya" : "Solar Panel", href: "/products?category=solar-panel" },
+    { name: language === "id" ? "Pompa Efisiensi Tinggi" : "High Efficiency Pump", href: "/products?category=high-efficiency-pump" },
+    { name: language === "id" ? "Pipa PPR & Fitting" : "PPR Pipe & Fittings", href: "/products?category=ppr-pipe-fittings" },
+    { name: language === "id" ? "Inverter Pompa Surya" : "Solar Inverter Optimizer", href: "/products?category=solar-inverter-optimizer" },
+    { name: language === "id" ? "Ionizer Air Alkali" : "Alkaline Water Ionizer", href: "/products?category=alkaline-water-ionizer" },
   ];
 
   const serviceLinks = [
-    "Warranty Replacement Services",
-    "Energy Audit Services",
-    "Commissioning",
-    "Cleaning & Optimization",
-    "Diagnostics Services",
-    "Repair & Maintenance Services",
-    "Installation Services",
+    { name: language === "id" ? "Layanan Garansi Penggantian" : "Warranty Replacement Services", href: "/services" },
+    { name: language === "id" ? "Layanan Audit Energi" : "Energy Audit Services", href: "/services" },
+    { name: language === "id" ? "Komisioning & Uji Coba" : "Commissioning", href: "/services" },
+    { name: language === "id" ? "Pembersihan & Optimalisasi" : "Cleaning & Optimization", href: "/services" },
+    { name: language === "id" ? "Layanan Diagnostik" : "Diagnostics Services", href: "/services" },
+    { name: language === "id" ? "Layanan Perbaikan & Perawatan" : "Repair & Maintenance Services", href: "/services" },
+    { name: language === "id" ? "Layanan Instalasi & Pemasangan" : "Installation Services", href: "/services" },
   ];
 
   return (
@@ -36,7 +39,7 @@ export function Footer() {
           {/* Col 1: About (lg:col-span-3) */}
           <div className="lg:col-span-3 space-y-4">
             <h3 className="text-base font-bold text-[#1d1841] tracking-tight mb-3">
-              About
+              {language === "id" ? "Tentang Kami" : "About"}
             </h3>
             <div className="relative w-20 h-20 mb-3">
               <Image
@@ -47,18 +50,20 @@ export function Footer() {
               />
             </div>
             <p className="text-xs text-neutral-600 leading-relaxed font-normal">
-              Established in 2000 with HQ in Singapore and Jakarta, is a leading advocate for green energy investment and sustainability.
+              {language === "id"
+                ? "Didirikan pada tahun 2000 dengan kantor pusat di Singapura dan Jakarta, merupakan pelopor terdepan dalam investasi energi hijau dan keberlanjutan lingkungan."
+                : "Established in 2000 with HQ in Singapore and Jakarta, is a leading advocate for green energy investment and sustainability."}
             </p>
           </div>
 
           {/* Col 2: Product (lg:col-span-3) */}
           <div className="lg:col-span-3 space-y-3">
             <h3 className="text-base font-bold text-[#1d1841] tracking-tight mb-3">
-              Product
+              {language === "id" ? "Produk" : "Product"}
             </h3>
             <ul className="space-y-2 text-xs">
               {productLinks.map((item) => (
-                <li key={item.name}>
+                <li key={item.href + item.name}>
                   <Link
                     href={item.href}
                     className="text-neutral-600 hover:text-[#281b66] transition-colors"
@@ -73,16 +78,16 @@ export function Footer() {
           {/* Col 3: Services (lg:col-span-3) */}
           <div className="lg:col-span-3 space-y-3">
             <h3 className="text-base font-bold text-[#1d1841] tracking-tight mb-3">
-              Services
+              {language === "id" ? "Layanan" : "Services"}
             </h3>
             <ul className="space-y-2 text-xs">
-              {serviceLinks.map((name) => (
-                <li key={name}>
+              {serviceLinks.map((item) => (
+                <li key={item.name}>
                   <Link
-                    href="/services"
+                    href={item.href}
                     className="text-neutral-600 hover:text-[#281b66] transition-colors"
                   >
-                    {name}
+                    {item.name}
                   </Link>
                 </li>
               ))}
@@ -92,7 +97,7 @@ export function Footer() {
           {/* Col 4: Get in touch (lg:col-span-3) */}
           <div className="lg:col-span-3 space-y-3 text-xs">
             <h3 className="text-base font-bold text-[#1d1841] tracking-tight mb-3">
-              Get in touch
+              {language === "id" ? "Hubungi Kami" : "Get in touch"}
             </h3>
             
             <p className="text-neutral-600 leading-relaxed">
@@ -132,10 +137,10 @@ export function Footer() {
             <div className="pt-2 text-neutral-500 space-y-1">
               <p className="flex items-start gap-2">
                 <Clock className="w-3.5 h-3.5 text-neutral-500 shrink-0 mt-0.5" />
-                <span>Mon - Fri : 08:00 - 17:00</span>
+                <span>{language === "id" ? "Senin - Jumat : 08:00 - 17:00" : "Mon - Fri : 08:00 - 17:00"}</span>
               </p>
-              <p className="pl-5.5">Saturday : 08:00 - 13:00</p>
-              <p className="pl-5.5">Sunday : OFF</p>
+              <p className="pl-5.5">{language === "id" ? "Sabtu : 08:00 - 13:00" : "Saturday : 08:00 - 13:00"}</p>
+              <p className="pl-5.5">{language === "id" ? "Minggu : Tutup" : "Sunday : OFF"}</p>
             </div>
           </div>
 
@@ -144,7 +149,9 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-neutral-200/80 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-neutral-500">
           <p>
-            Copyright © 2025 Benua Green Energy. All rights reserved.
+            {language === "id"
+              ? "Hak Cipta © 2025 Benua Green Energy. Seluruh hak cipta dilindungi."
+              : "Copyright © 2025 Benua Green Energy. All rights reserved."}
           </p>
 
           {/* Social Media Icons */}
@@ -165,17 +172,15 @@ export function Footer() {
 
           {/* Nav Links */}
           <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-            <Link href="/" className="hover:text-[#281b66]">Home</Link>
+            <Link href="/" className="hover:text-[#281b66]">{language === "id" ? "Beranda" : "Home"}</Link>
             <span>•</span>
-            <Link href="/about" className="hover:text-[#281b66]">About</Link>
+            <Link href="/about" className="hover:text-[#281b66]">{language === "id" ? "Tentang Kami" : "About"}</Link>
             <span>•</span>
-            <Link href="/#catalog" className="hover:text-[#281b66]">Products</Link>
+            <Link href="/products" className="hover:text-[#281b66]">{language === "id" ? "Produk" : "Products"}</Link>
             <span>•</span>
-            <Link href="/#services" className="hover:text-[#281b66]">Services</Link>
+            <Link href="/services" className="hover:text-[#281b66]">{language === "id" ? "Layanan" : "Services"}</Link>
             <span>•</span>
-            <Link href="/#ems" className="hover:text-[#281b66]">EMS</Link>
-            <span>•</span>
-            <Link href="/contact" className="hover:text-[#281b66]">Contact</Link>
+            <Link href="/contact" className="hover:text-[#281b66]">{language === "id" ? "Kontak" : "Contact"}</Link>
           </div>
         </div>
 

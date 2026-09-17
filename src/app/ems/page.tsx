@@ -10,38 +10,56 @@ export default function EMSPage() {
 
   const industries = [
     {
-      title: "Offices",
-      desc: "A comfortable office space where light, air and sound work in perfect harmony improves productivity.",
+      title: language === "id" ? "Perkantoran" : "Offices",
+      desc:
+        language === "id"
+          ? "Ruang kerja nyaman di mana pencahayaan, sirkulasi udara, dan temperatur berpadu harmonis untuk meningkatkan produktivitas."
+          : "A comfortable office space where light, air and sound work in perfect harmony improves productivity.",
       image: "/images/benua/086aa691-8f8c-43a3-a157-4371f254f6b6.jpg",
       icon: Building2,
     },
     {
-      title: "Schools",
-      desc: "In classrooms, good air quality improves the engagement and concentration of students.",
+      title: language === "id" ? "Sekolah & Kampus" : "Schools",
+      desc:
+        language === "id"
+          ? "Di ruang kelas, kualitas udara optimal meningkatkan fokus, konsentrasi, dan kenyamanan belajar siswa."
+          : "In classrooms, good air quality improves the engagement and concentration of students.",
       image: "/images/benua/29dc5558-f547-4e8b-8c66-9ff06f25ebe1.jpg",
       icon: GraduationCap,
     },
     {
-      title: "Retail Malls",
-      desc: "A pleasant, enjoyable, clean, and safe environment encourages customers to stay and keeps shop assistants motivated.",
+      title: language === "id" ? "Pusat Perbelanjaan" : "Retail Malls",
+      desc:
+        language === "id"
+          ? "Lingkungan sejuk dan higienis membuat pengunjung betah berbelanja dan meningkatkan kepuasan pengunjung mall."
+          : "A pleasant, enjoyable, clean, and safe environment encourages customers to stay and keeps shop assistants motivated.",
       image: "/images/benua/8f6d8be9-6602-4ca3-814c-84fca53eeee8.jpg",
       icon: Store,
     },
     {
-      title: "Hotels",
-      desc: "Improve your hotel environment.",
+      title: language === "id" ? "Perhotelan" : "Hotels",
+      desc:
+        language === "id"
+          ? "Meningkatkan kenyamanan termal kamar tamu hotel secara presisi dengan efisiensi konsumsi chiller."
+          : "Improve your hotel environment and guest comfort with energy-optimized HVAC controls.",
       image: "/images/benua/96992df8-8fac-4834-b746-14a443b9caa0.jpg",
       icon: Hotel,
     },
     {
-      title: "Hospitals",
-      desc: "A clean, healthy, and comfortable hospital environment has a positive effect on patient satisfaction levels.",
+      title: language === "id" ? "Rumah Sakit" : "Hospitals",
+      desc:
+        language === "id"
+          ? "Lingkungan rumah sakit yang higienis, steril, dan bertemperatur presisi mendukung pemulihan pasien dan standar medis."
+          : "A clean, healthy, and comfortable hospital environment has a positive effect on patient satisfaction levels.",
       image: "/images/benua/d06d392f-e781-450e-a32b-c19f6dc41156.jpg",
       icon: Hospital,
     },
     {
-      title: "Elderly Homes",
-      desc: "In elderly homes, the well-being of the residents and their guests is a constant concern.",
+      title: language === "id" ? "Fasilitas Perawatan" : "Elderly Homes",
+      desc:
+        language === "id"
+          ? "Menjaga stabilitas kualitas udara dan suhu yang aman demi kesehatan serta kenyamanan penghuni panti dan senior care."
+          : "In elderly homes, the well-being of the residents and their guests is a constant concern.",
       image: "/images/benua/d7a6c163-dd27-44a8-9f7c-1dbc82faba37.jpg",
       icon: HeartHandshake,
     },
@@ -103,7 +121,9 @@ export default function EMSPage() {
       {/* ── TOP SPACER & HEADING ── */}
       <section className="mt-[4.25rem] pt-16 pb-12 px-6 sm:px-10 max-w-6xl mx-auto text-center">
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#1d1841] tracking-tight leading-tight max-w-4xl mx-auto">
-          Energy Management System untuk Bangunan Cerdas &amp; Efisien Energi
+          {language === "id"
+            ? "Energy Management System untuk Bangunan Cerdas & Efisien Energi"
+            : "Energy Management System for Smart & Energy-Efficient Buildings"}
         </h1>
         <div className="w-20 h-1 bg-emerald-500 mx-auto mt-6 rounded-full" />
       </section>
@@ -124,10 +144,14 @@ export default function EMSPage() {
                 />
               </div>
               <h2 className="text-xl sm:text-2xl font-bold text-[#1d1841] mb-3">
-                Apa itu Energy Management System (EMS)?
+                {language === "id"
+                  ? "Apa itu Energy Management System (EMS)?"
+                  : "What is an Energy Management System (EMS)?"}
               </h2>
               <p className="text-neutral-600 text-sm leading-relaxed text-justify">
-                Energy Management System (EMS) adalah platform cerdas yang digunakan untuk memantau, menganalisis, dan mengoptimalkan penggunaan energi secara real-time di gedung, pabrik, atau fasilitas industri. Melalui sistem ini, seluruh konsumsi listrik, air, gas, maupun pendingin dapat terpadu dalam satu dashboard digital, sehingga manajemen energi menjadi lebih mudah, akurat, dan efisien.
+                {language === "id"
+                  ? "Energy Management System (EMS) adalah platform cerdas yang digunakan untuk memantau, menganalisis, dan mengoptimalkan penggunaan energi secara real-time di gedung, pabrik, atau fasilitas industri. Melalui sistem ini, seluruh konsumsi listrik, air, gas, maupun pendingin dapat terpadu dalam satu dashboard digital, sehingga manajemen energi menjadi lebih mudah, akurat, dan efisien."
+                  : "An Energy Management System (EMS) is an intelligent IoT platform that monitors, analyzes, and optimizes energy consumption in real time across commercial buildings, production plants, and industrial complexes. Power, water, gas, and chiller metrics are unified into a centralized digital control dashboard."}
               </p>
             </div>
           </div>
@@ -144,10 +168,12 @@ export default function EMSPage() {
                 />
               </div>
               <h2 className="text-xl sm:text-2xl font-bold text-[#1d1841] mb-3">
-                Mengapa Penting?
+                {language === "id" ? "Mengapa Penting?" : "Why is it Essential?"}
               </h2>
               <p className="text-neutral-600 text-sm leading-relaxed text-justify">
-                Tanpa sistem yang terintegrasi, pemantauan energi sering kali bersifat manual dan tidak efisien. EMS membantu organisasi mengidentifikasi pemborosan energi sejak dini, menurunkan biaya operasional, dan mendukung penerapan konsep bangunan hijau (green building) serta target keberlanjutan energi (sustainability goals).
+                {language === "id"
+                  ? "Tanpa sistem yang terintegrasi, pemantauan energi sering kali bersifat manual dan tidak efisien. EMS membantu organisasi mengidentifikasi pemborosan energi sejak dini, menurunkan biaya operasional, dan mendukung penerapan konsep bangunan hijau (green building) serta target keberlanjutan energi (sustainability goals)."
+                  : "Without an integrated system, energy logging is fragmented and manual. EMS empowers decision-makers to detect energy leaks early, drastically slash utility overheads, achieve Green Building certifications, and fulfill corporate ESG sustainability commitments."}
               </p>
             </div>
           </div>
@@ -160,7 +186,9 @@ export default function EMSPage() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#1d1841] tracking-tight">
-              Kenapa menggunakan EasyIO sebagai platform EMS
+              {language === "id"
+                ? "Kenapa menggunakan EasyIO sebagai platform EMS"
+                : "Why Choose EasyIO as Your Enterprise EMS Platform"}
             </h2>
             <div className="w-16 h-1 bg-emerald-500 mx-auto mt-4 rounded-full" />
           </div>
@@ -169,7 +197,9 @@ export default function EMSPage() {
             {/* Left Col */}
             <div className="lg:col-span-6 space-y-6">
               <p className="text-neutral-700 text-sm sm:text-base leading-relaxed text-justify">
-                EasyIO merupakan platform kontrol dan otomasi berbasis IoT yang banyak digunakan pada sistem energi modern karena memiliki fleksibilitas tinggi dan kemudahan integrasi dengan perangkat existing. EasyIO bukan hanya berfungsi sebagai gateway, tetapi sebagai edge controller yang mampu memproses data langsung di level perangkat sehingga lebih stabil dan responsif.
+                {language === "id"
+                  ? "EasyIO merupakan platform kontrol dan otomasi berbasis IoT yang banyak digunakan pada sistem energi modern karena memiliki fleksibilitas tinggi dan kemudahan integrasi dengan perangkat existing. EasyIO bukan hanya berfungsi sebagai gateway, tetapi sebagai edge controller yang mampu memproses data langsung di level perangkat sehingga lebih stabil dan responsif."
+                  : "EasyIO is an enterprise IoT control and building automation platform trusted worldwide for its unprecedented open architecture and multi-protocol flexibility. More than just a gateway, EasyIO executes edge computing directly at the controller level, ensuring zero-downtime reliability."}
               </p>
 
               {/* Brand Logos Row */}
@@ -186,32 +216,56 @@ export default function EMSPage() {
             {/* Right Col */}
             <div className="lg:col-span-6 bg-white p-8 rounded-3xl border border-neutral-200/90 shadow-md">
               <h3 className="text-lg font-bold text-[#1d1841] mb-4">
-                Keunggulan Utama EasyIO:
+                {language === "id" ? "Keunggulan Utama EasyIO:" : "Key Advantages of EasyIO:"}
               </h3>
               <ul className="space-y-3 text-xs sm:text-sm text-neutral-600">
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
-                  <span>Native IoT platform dengan dukungan MQTT dan REST API</span>
+                  <span>
+                    {language === "id"
+                      ? "Native IoT platform dengan dukungan MQTT dan REST API"
+                      : "Native IoT platform with MQTT and REST API out-of-the-box"}
+                  </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
-                  <span>Mendukung BACnet dan Modbus tanpa tambahan converter</span>
+                  <span>
+                    {language === "id"
+                      ? "Mendukung BACnet dan Modbus tanpa tambahan converter"
+                      : "Direct BACnet and Modbus interoperability without extra converters"}
+                  </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
-                  <span>Pengolahan data langsung di controller (edge computing)</span>
+                  <span>
+                    {language === "id"
+                      ? "Pengolahan data langsung di controller (edge computing)"
+                      : "Real-time edge computing on local microcontrollers"}
+                  </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
-                  <span>Dashboard berbasis web tanpa software tambahan lisensi</span>
+                  <span>
+                    {language === "id"
+                      ? "Dashboard berbasis web tanpa software tambahan lisensi"
+                      : "Embedded HTML5 web server with zero recurring license seats"}
+                  </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
-                  <span>Skalabilitas untuk single building hingga multi-site</span>
+                  <span>
+                    {language === "id"
+                      ? "Skalabilitas untuk single building hingga multi-site"
+                      : "Effortless scalability from a single plant to multi-campus setups"}
+                  </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
-                  <span>Remote maintenance sehingga meminimalkan kunjungan onsite</span>
+                  <span>
+                    {language === "id"
+                      ? "Remote maintenance sehingga meminimalkan kunjungan onsite"
+                      : "Secure cloud remote diagnostics minimizing onsite technician calls"}
+                  </span>
                 </li>
               </ul>
             </div>
@@ -223,7 +277,7 @@ export default function EMSPage() {
       <section className="py-24 px-6 sm:px-10 max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[#1d1841] tracking-tight">
-            Industries
+            {language === "id" ? "Sektor Industri" : "Industries"}
           </h2>
           <div className="w-16 h-1 bg-emerald-500 mx-auto mt-4 rounded-full" />
         </div>
@@ -268,7 +322,7 @@ export default function EMSPage() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
             <h2 className="text-3xl sm:text-4xl font-extrabold text-[#1d1841] tracking-tight">
-              Produk
+              {language === "id" ? "Produk Terkait" : "Products"}
             </h2>
             <div className="w-16 h-1 bg-emerald-500 mx-auto mt-4 rounded-full" />
           </div>
@@ -300,7 +354,7 @@ export default function EMSPage() {
                     href={prod.link}
                     className="inline-flex items-center gap-1.5 text-xs font-bold text-[#2a1768] hover:text-emerald-600 transition-colors"
                   >
-                    <span>Read more</span>
+                    <span>{language === "id" ? "Lihat Detail" : "Read more"}</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>

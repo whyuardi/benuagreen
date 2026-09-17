@@ -3,55 +3,70 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { useLanguage } from "@/lib/i18n";
 
 export function FeaturedServices() {
+  const { language } = useLanguage();
+
   const services = [
     {
       id: 1,
-      tag: "Certified Engineering",
-      title: "Installation Services",
+      tag: language === "id" ? "Rekayasa Bersertifikat" : "Certified Engineering",
+      title: language === "id" ? "Layanan Instalasi" : "Installation Services",
       description:
-        "At Benua Green Energy, we pride ourselves on being your trusted partner for professional, reliable, and affordable installation services.",
+        language === "id"
+          ? "Di Benua Green Energy, kami bangga menjadi mitra terpercaya Anda untuk layanan instalasi yang profesional, andal, dan efisien."
+          : "At Benua Green Energy, we pride ourselves on being your trusted partner for professional, reliable, and affordable installation services.",
       image: "/images/benua/29dc5558-f547-4e8b-8c66-9ff06f25ebe1.jpg",
     },
     {
       id: 2,
-      tag: "Thermodynamic Audit",
-      title: "Energy Audit Services",
+      tag: language === "id" ? "Audit Termodinamika" : "Thermodynamic Audit",
+      title: language === "id" ? "Layanan Audit Energi" : "Energy Audit Services",
       description:
-        "At Benua Green Energy, we provide accurate, efficient, and affordable diagnostics services to ensure your systems operate at peak performance.",
+        language === "id"
+          ? "Di Benua Green Energy, kami menyediakan layanan diagnostik yang akurat dan efisien untuk memastikan sistem Anda beroperasi pada performa puncak."
+          : "At Benua Green Energy, we provide accurate, efficient, and affordable diagnostics services to ensure your systems operate at peak performance.",
       image: "/images/benua/8f6d8be9-6602-4ca3-814c-84fca53eeee8.jpg",
     },
     {
       id: 3,
-      tag: "24/7 O&M SLA",
-      title: "Repair & Maintenance Services",
+      tag: "SLA O&M 24/7",
+      title: language === "id" ? "Layanan Perbaikan & Perawatan" : "Repair & Maintenance Services",
       description:
-        "At Benua Green Energy, our dedication to professionalism, reliability, and cost-effectiveness is evident in our comprehensive diagnostics services.",
+        language === "id"
+          ? "Di Benua Green Energy, dedikasi kami terhadap profesionalisme, keandalan, dan efisiensi biaya tercermin dalam layanan pemeliharaan menyeluruh kami."
+          : "At Benua Green Energy, our dedication to professionalism, reliability, and cost-effectiveness is evident in our comprehensive diagnostics services.",
       image: "/images/benua/086aa691-8f8c-43a3-a157-4371f254f6b6.jpg",
     },
     {
       id: 4,
-      tag: "Eco Efficiency",
-      title: "Cleaning & Optimization",
+      tag: language === "id" ? "Efisiensi Eko" : "Eco Efficiency",
+      title: language === "id" ? "Pembersihan & Optimalisasi" : "Cleaning & Optimization",
       description:
-        "At Benua Green Energy, we pride ourselves on being your trusted partner for professional, reliable, and affordable Cleaning & Optimization.",
+        language === "id"
+          ? "Di Benua Green Energy, kami menjadi mitra terpercaya Anda untuk pembersihan dan optimalisasi sistem termal secara profesional dan ramah lingkungan."
+          : "At Benua Green Energy, we pride ourselves on being your trusted partner for professional, reliable, and affordable Cleaning & Optimization.",
       image: "/images/benua/96992df8-8fac-4834-b746-14a443b9caa0.jpg",
     },
     {
       id: 5,
-      tag: "Advanced Telemetry",
-      title: "Diagnostics Services",
+      tag: language === "id" ? "Telemetri Canggih" : "Advanced Telemetry",
+      title: language === "id" ? "Layanan Diagnostik" : "Diagnostics Services",
       description:
-        "At Benua Green Energy, we are driven by our commitment to professionalism, reliability, and affordability, even in our energy audit services.",
+        language === "id"
+          ? "Di Benua Green Energy, komitmen kami terhadap profesionalisme dan akurasi tinggi hadir melalui sistem pemantauan dan diagnostik cerdas."
+          : "At Benua Green Energy, we are driven by our commitment to professionalism, reliability, and affordability, even in our energy audit services.",
       image: "/images/benua/d06d392f-e781-450e-a32b-c19f6dc41156.jpg",
     },
     {
       id: 6,
-      tag: "OEM Standard Warranty",
-      title: "Warranty Replacement Services",
+      tag: language === "id" ? "Garansi Standar OEM" : "OEM Standard Warranty",
+      title: language === "id" ? "Layanan Penggantian Garansi" : "Warranty Replacement Services",
       description:
-        "At Benua Green Energy, our commitment to professionalism, reliability, and affordability extends to our warranty replacement services.",
+        language === "id"
+          ? "Di Benua Green Energy, jaminan mutu dan ketersediaan suku cadang resmi OEM menjamin kontinuitas operasional mesin Anda tanpa hambatan."
+          : "At Benua Green Energy, our commitment to professionalism, reliability, and affordability extends to our warranty replacement services.",
       image: "/images/benua/d7a6c163-dd27-44a8-9f7c-1dbc82faba37.jpg",
     },
   ];
@@ -64,15 +79,21 @@ export function FeaturedServices() {
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#2a1768]/8 text-[#2a1768] text-[11px] font-bold uppercase tracking-wider mb-3">
             <span className="w-1.5 h-1.5 rounded-full bg-[#43b02a]" />
-            <span>Turnkey Engineering & Lifecycle Support</span>
+            <span>
+              {language === "id"
+                ? "Rekayasa Turnkey & Dukungan Siklus Hidup"
+                : "Turnkey Engineering & Lifecycle Support"}
+            </span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-black text-[#1d1841] tracking-tight mb-4">
-            Our Featured Services
+            {language === "id" ? "Layanan Unggulan Kami" : "Our Featured Services"}
           </h2>
           
           <p className="text-[11px] sm:text-xs uppercase tracking-widest text-neutral-500 font-semibold leading-relaxed max-w-2xl mx-auto">
-            WE DELIVER TOP-TIER SERVICES TO DRIVE YOUR SUCCESS. WITH OUR EXPERTISE, WE ARE YOUR PARTNERS IN ACHIEVING YOUR GOALS.
+            {language === "id"
+              ? "KAMI MEMBERIKAN LAYANAN TERBAIK UNTUK MENDUKUNG KESUKSESAN ANDA. DENGAN KEAHLIAN KAMI, KAMI ADALAH MITRA ANDA DALAM MENCAPAI TUJUAN."
+              : "WE DELIVER TOP-TIER SERVICES TO DRIVE YOUR SUCCESS. WITH OUR EXPERTISE, WE ARE YOUR PARTNERS IN ACHIEVING YOUR GOALS."}
           </p>
         </div>
 
@@ -118,7 +139,7 @@ export function FeaturedServices() {
                     href="/contact"
                     className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-[#2a1768] to-[#3a1d94] hover:from-[#38208a] hover:to-[#4e27c7] transition-all duration-300 shadow-md group/btn"
                   >
-                    <span>Learn more</span>
+                    <span>{language === "id" ? "Pelajari lebih lanjut" : "Learn more"}</span>
                     <ArrowRight className="w-3.5 h-3.5 text-emerald-400 group-hover/btn:translate-x-1 transition-transform" />
                   </Link>
                 </div>

@@ -1,8 +1,11 @@
 "use client";
 
-import { Zap, Leaf, TrendingUp } from "lucide-react";
+import { Zap, Leaf } from "lucide-react";
+import { useLanguage } from "@/lib/i18n";
 
 export function CO2ImpactBanner() {
+  const { language } = useLanguage();
+
   return (
     <section className="bg-[#eef2f5] py-6 sm:py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -21,10 +24,14 @@ export function CO2ImpactBanner() {
             </div>
             <div>
               <span className="text-[11px] sm:text-xs font-semibold tracking-widest text-[#43b02a] uppercase block mb-1">
-                Environmental & Sustainability Impact
+                {language === "id"
+                  ? "Dampak Lingkungan & Keberlanjutan"
+                  : "Environmental & Sustainability Impact"}
               </span>
               <p className="text-base sm:text-xl text-neutral-100 font-medium leading-snug">
-                Since 2009, our customers have avoided
+                {language === "id"
+                  ? "Sejak 2009, pelanggan kami telah mereduksi emisi"
+                  : "Since 2009, our customers have avoided"}
               </p>
             </div>
           </div>
@@ -36,7 +43,7 @@ export function CO2ImpactBanner() {
             </div>
             <p className="text-sm sm:text-base font-semibold text-neutral-200 uppercase tracking-wider flex items-center justify-center md:justify-end gap-2">
               <Leaf className="w-4 h-4 text-[#43b02a]" />
-              <span>pounds of CO2.</span>
+              <span>{language === "id" ? "pon emisi CO2." : "pounds of CO2."}</span>
             </p>
           </div>
 

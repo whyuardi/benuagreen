@@ -32,12 +32,12 @@ export function Navbar() {
   const productCategories = [
     { name: "Chiller", href: "/products?category=chiller" },
     { name: "Cooling Tower", href: "/products?category=cooling-tower" },
-    { name: "Steam Accessories", href: "/products?category=steam-accessories" },
-    { name: "Solar Panel", href: "/products?category=solar-panel" },
-    { name: "High Efficiency Pump", href: "/products?category=high-efficiency-pump" },
-    { name: "PPR Pipe & Fittings", href: "/products?category=ppr-pipe-fittings" },
-    { name: "Solar Inverter Optimizer", href: "/products?category=solar-inverter-optimizer" },
-    { name: "Alkaline Water Ionizer", href: "/products?category=alkaline-water-ionizer" },
+    { name: language === "id" ? "Aksesoris Steam & Boiler" : "Steam Accessories", href: "/products?category=steam-accessories" },
+    { name: language === "id" ? "Panel Surya" : "Solar Panel", href: "/products?category=solar-panel" },
+    { name: language === "id" ? "Pompa Efisiensi Tinggi" : "High Efficiency Pump", href: "/products?category=high-efficiency-pump" },
+    { name: language === "id" ? "Pipa PPR & Fitting" : "PPR Pipe & Fittings", href: "/products?category=ppr-pipe-fittings" },
+    { name: language === "id" ? "Inverter Pompa Surya" : "Solar Inverter Optimizer", href: "/products?category=solar-inverter-optimizer" },
+    { name: language === "id" ? "Ionizer Air Alkali" : "Alkaline Water Ionizer", href: "/products?category=alkaline-water-ionizer" },
   ];
 
   return (
@@ -70,13 +70,13 @@ export function Navbar() {
               pathname === "/" ? "text-[#281b66] font-bold" : "text-neutral-700 hover:text-[#281b66]"
             }`}
           >
-            Home
+            {language === "id" ? "Beranda" : "Home"}
           </Link>
           <Link
             href="/about"
             className="text-neutral-700 hover:text-[#281b66] font-medium transition-colors duration-150"
           >
-            About
+            {language === "id" ? "Tentang Kami" : "About"}
           </Link>
 
           {/* Products Link & Dropdown */}
@@ -91,7 +91,7 @@ export function Navbar() {
                 pathname === "/products" ? "text-[#281b66] font-bold" : "text-neutral-700 hover:text-[#281b66]"
               }`}
             >
-              <span>Products</span>
+              <span>{language === "id" ? "Produk" : "Products"}</span>
               <ChevronDown className="w-3.5 h-3.5 text-neutral-500" />
             </Link>
             {productsOpen && (
@@ -100,7 +100,7 @@ export function Navbar() {
                   href="/products"
                   className="block px-4 py-2 text-xs font-bold text-[#1a3a6e] hover:bg-neutral-50 border-b border-neutral-100"
                 >
-                  All Products Catalog →
+                  {language === "id" ? "Katalog Semua Produk →" : "All Products Catalog →"}
                 </Link>
                 {productCategories.map((item) => (
                   <Link
@@ -121,50 +121,52 @@ export function Navbar() {
               pathname === "/contact" ? "text-[#281b66] font-bold" : "text-neutral-700 hover:text-[#281b66]"
             }`}
           >
-            Contact
+            {language === "id" ? "Kontak" : "Contact"}
           </Link>
         </nav>
 
         {/* Right CTA Button & Language Switcher */}
-        <div className="flex items-center gap-3">
-          {/* Language Switcher */}
-          <div className="hidden sm:flex items-center bg-neutral-100 p-0.5 rounded-full border border-neutral-200 text-[11px] font-medium">
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* Language Switcher - visible on all screens */}
+          <div className="flex items-center bg-neutral-100 p-0.5 rounded-full border border-neutral-200 text-[11px] font-medium">
             <button
               onClick={() => setLanguage("id")}
-              className={`px-2 py-0.5 rounded-full transition-all ${
+              className={`px-2 py-0.5 rounded-full transition-all cursor-pointer ${
                 language === "id"
                   ? "bg-white text-[#281b66] shadow-xs font-bold"
                   : "text-neutral-500 hover:text-neutral-900"
               }`}
+              aria-label="Bahasa Indonesia"
             >
               ID
             </button>
             <button
               onClick={() => setLanguage("en")}
-              className={`px-2 py-0.5 rounded-full transition-all ${
+              className={`px-2 py-0.5 rounded-full transition-all cursor-pointer ${
                 language === "en"
                   ? "bg-white text-[#281b66] shadow-xs font-bold"
                   : "text-neutral-500 hover:text-neutral-900"
               }`}
+              aria-label="English"
             >
               EN
             </button>
           </div>
 
-          {/* Pill WhatsApp CTA Button "Get A Qoute" */}
+          {/* Pill WhatsApp CTA Button */}
           <a
             href="https://wa.me/+628176779719"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium text-white bg-[#2a1768] hover:bg-[#38208a] transition-all duration-200 shadow-sm hover:shadow"
+            className="hidden xs:inline-flex items-center justify-center px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-medium text-white bg-[#2a1768] hover:bg-[#38208a] transition-all duration-200 shadow-sm hover:shadow"
           >
-            Get A Qoute
+            {language === "id" ? "Minta Penawaran" : "Get A Quote"}
           </a>
 
           {/* Mobile Menu Trigger */}
           <div className="md:hidden">
             <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
-              <SheetTrigger className="w-9 h-9 border border-neutral-200 rounded-lg flex items-center justify-center text-neutral-700">
+              <SheetTrigger className="w-9 h-9 border border-neutral-200 rounded-lg flex items-center justify-center text-neutral-700 cursor-pointer">
                 <Menu className="w-5 h-5" />
               </SheetTrigger>
               <SheetContent side="right" className="w-[85vw] max-w-xs bg-white p-6">
@@ -181,34 +183,61 @@ export function Navbar() {
                   </SheetTitle>
                 </SheetHeader>
 
-                <div className="flex flex-col space-y-3 pt-6 text-sm">
+                {/* Mobile Language Row */}
+                <div className="flex items-center justify-between py-3 border-b border-neutral-100 text-xs mt-2">
+                  <span className="text-neutral-500 font-medium">Bahasa / Language:</span>
+                  <div className="flex items-center bg-neutral-100 p-0.5 rounded-full border border-neutral-200 text-[11px] font-medium">
+                    <button
+                      onClick={() => setLanguage("id")}
+                      className={`px-2.5 py-0.5 rounded-full transition-all ${
+                        language === "id"
+                          ? "bg-white text-[#281b66] shadow-xs font-bold"
+                          : "text-neutral-500"
+                      }`}
+                    >
+                      ID
+                    </button>
+                    <button
+                      onClick={() => setLanguage("en")}
+                      className={`px-2.5 py-0.5 rounded-full transition-all ${
+                        language === "en"
+                          ? "bg-white text-[#281b66] shadow-xs font-bold"
+                          : "text-neutral-500"
+                      }`}
+                    >
+                      EN
+                    </button>
+                  </div>
+                </div>
+
+                <div className="flex flex-col space-y-3 pt-4 text-sm">
                   <Link
                     href="/"
                     onClick={() => setMobileOpen(false)}
                     className="font-semibold text-[#281b66] py-1"
                   >
-                    Home
+                    {language === "id" ? "Beranda" : "Home"}
                   </Link>
                   <Link
                     href="/about"
                     onClick={() => setMobileOpen(false)}
                     className="text-neutral-700 py-1"
                   >
-                    About
+                    {language === "id" ? "Tentang Kami" : "About"}
                   </Link>
                   <Link
                     href="/products"
                     onClick={() => setMobileOpen(false)}
                     className="text-neutral-700 py-1"
                   >
-                    Products
+                    {language === "id" ? "Produk" : "Products"}
                   </Link>
                   <Link
                     href="/contact"
                     onClick={() => setMobileOpen(false)}
                     className="text-neutral-700 py-1"
                   >
-                    Contact
+                    {language === "id" ? "Kontak" : "Contact"}
                   </Link>
                 </div>
 
@@ -219,7 +248,7 @@ export function Navbar() {
                     rel="noopener noreferrer"
                     className="w-full flex items-center justify-center px-4 py-2.5 rounded-full text-xs font-semibold text-white bg-[#2a1768] shadow-sm"
                   >
-                    Get A Qoute
+                    {language === "id" ? "Minta Penawaran" : "Get A Quote"}
                   </a>
                 </div>
               </SheetContent>

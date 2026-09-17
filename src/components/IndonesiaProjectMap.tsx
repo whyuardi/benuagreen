@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useLanguage } from "@/lib/i18n";
 
 export interface ProjectLocation {
   id: string;
@@ -114,6 +115,7 @@ export const CATEGORY_COLORS: Record<string, string> = {
 };
 
 export function IndonesiaProjectMap() {
+  const { language } = useLanguage();
   const [selectedId, setSelectedId] = useState<string>("indorama");
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [cardKey, setCardKey] = useState(0); // triggers card fade-in on change
@@ -169,13 +171,13 @@ export function IndonesiaProjectMap() {
         {/* Header */}
         <div className="flex items-center justify-between px-4 sm:px-5 pt-4 pb-3.5 border-b border-neutral-100">
           <div>
-            <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-0.5">Project Footprint</p>
-            <h2 className="text-[15px] sm:text-[16px] font-bold text-neutral-900 leading-tight">Peta Proyek Nasional</h2>
+            <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-0.5">{language === "id" ? "Jejak Proyek" : "Project Footprint"}</p>
+            <h2 className="text-[15px] sm:text-[16px] font-bold text-neutral-900 leading-tight">{language === "id" ? "Peta Proyek Nasional" : "National Project Map"}</h2>
           </div>
           <div className="flex items-center gap-2 sm:gap-3">
             <div className="hidden sm:flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-green-500"></span>
-              <span className="text-[11px] text-neutral-400">{PROJECT_LOCATIONS.length} lokasi aktif</span>
+              <span className="text-[11px] text-neutral-400">{PROJECT_LOCATIONS.length} {language === "id" ? "lokasi aktif" : "active sites"}</span>
             </div>
             {/* Prev / Next */}
             <div className="flex items-center gap-1">
@@ -281,7 +283,7 @@ export function IndonesiaProjectMap() {
               <MapComponent selectedId={selectedId} hoveredId={hoveredId} onSelect={handleSelect} />
             ) : (
               <div className="w-full h-full flex items-center justify-center text-neutral-400 text-sm">
-                Memuat peta...
+                {language === "id" ? "Memuat peta..." : "Loading map..."}
               </div>
             )}
 
@@ -317,7 +319,7 @@ export function IndonesiaProjectMap() {
                     className="ml-auto text-[11px] font-semibold hover:opacity-75 transition-opacity"
                     style={{ color }}
                   >
-                    Konsultasi →
+                    {language === "id" ? "Konsultasi →" : "Inquire →"}
                   </Link>
                 </div>
               </div>
@@ -343,7 +345,7 @@ export function IndonesiaProjectMap() {
             className="text-[11px] font-semibold shrink-0 hover:opacity-75 transition-opacity"
             style={{ color }}
           >
-            Konsultasi →
+            {language === "id" ? "Konsultasi →" : "Inquire →"}
           </Link>
         </div>
 

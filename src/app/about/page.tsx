@@ -18,10 +18,12 @@ export default function AboutPage() {
             PT Benua Green Energy
           </span>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-3">
-            About Us
+            {language === "id" ? "Tentang Kami" : "About Us"}
           </h1>
           <p className="text-neutral-300 text-sm sm:text-base max-w-xl">
-            Empowering green energy solutions, sustainability, and technological innovation.
+            {language === "id"
+              ? "Memberdayakan solusi energi hijau, keberlanjutan, dan inovasi teknologi industri terdepan."
+              : "Empowering green energy solutions, sustainability, and technological innovation."}
           </p>
         </div>
         <div className="absolute inset-0 opacity-15 bg-[radial-gradient(#22c55e_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none" />
@@ -35,19 +37,23 @@ export default function AboutPage() {
           <div className="lg:col-span-6 space-y-8">
             <div>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1d1841] tracking-tight mb-4">
-                Who We Are
+                {language === "id" ? "Siapa Kami" : "Who We Are"}
               </h2>
               <p className="text-neutral-600 text-sm sm:text-[15px] leading-relaxed text-justify">
-                BG Group, established in 2000 with HQ in Singapore and Jakarta, is a leading advocate for green energy investment and sustainability. They allocate 10% of annual sales revenue to R&amp;D, embodying a strong commitment to a greener society and social responsibility.
+                {language === "id"
+                  ? "BG Group, didirikan pada tahun 2000 dengan kantor pusat di Singapura dan Jakarta, adalah pelopor terkemuka dalam investasi energi hijau dan keberlanjutan. Kami mengalokasikan 10% dari pendapatan penjualan tahunan untuk Litbang (R&D), mewujudkan komitmen kuat bagi masyarakat yang lebih hijau serta tanggung jawab sosial yang berkelanjutan."
+                  : "BG Group, established in 2000 with HQ in Singapore and Jakarta, is a leading advocate for green energy investment and sustainability. They allocate 10% of annual sales revenue to R&D, embodying a strong commitment to a greener society and social responsibility."}
               </p>
             </div>
 
             <div>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1d1841] tracking-tight mb-4">
-                What We Do
+                {language === "id" ? "Apa yang Kami Lakukan" : "What We Do"}
               </h2>
               <p className="text-neutral-600 text-sm sm:text-[15px] leading-relaxed text-justify">
-                To assist governments in developing economic, energy, and environmental sustainability, PT. Benua Green Energy is pleased to announce Non-Electric Air Conditioning System (LiBr Absorption Chiller) powered by clean and recyclable energies. Our absorption chillers also use non-polluting refrigerant. The company has a continual goal of enhancing energy efficiency and minimizing pollution, reducing investment in dozens of power stations.
+                {language === "id"
+                  ? "Untuk membantu mewujudkan keberlanjutan ekonomi, energi, dan lingkungan hidup, PT Benua Green Energy menghadirkan Sistem Pendingin Non-Elektrik (LiBr Absorption Chiller) yang didukung oleh energi bersih dan terbarukan. Chiller absorpsi kami menggunakan refrigeran ramah lingkungan bebas polusi. Misi berkelanjutan kami adalah meningkatkan efisiensi energi, menekan emisi, dan mereduksi beban investasi daya listrik industri."
+                  : "To assist governments in developing economic, energy, and environmental sustainability, PT. Benua Green Energy is pleased to announce Non-Electric Air Conditioning System (LiBr Absorption Chiller) powered by clean and recyclable energies. Our absorption chillers also use non-polluting refrigerant. The company has a continual goal of enhancing energy efficiency and minimizing pollution, reducing investment in dozens of power stations."}
               </p>
             </div>
           </div>
@@ -64,7 +70,7 @@ export default function AboutPage() {
               />
             </div>
             <h3 className="text-2xl sm:text-3xl font-black text-[#1d1841] tracking-wider mt-6 text-center">
-              23+ Years Experience
+              {language === "id" ? "Pengalaman 23+ Tahun" : "23+ Years Experience"}
             </h3>
           </div>
 
@@ -76,13 +82,17 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-8">
             <span className="text-xs font-bold tracking-widest text-emerald-600 uppercase mb-1.5 block">
-              National Footprint
+              {language === "id" ? "Jejak Nasional" : "National Footprint"}
             </span>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1d1841] tracking-tight">
-              Peta Sebaran Proyek di Seluruh Indonesia
+              {language === "id"
+                ? "Peta Sebaran Proyek di Seluruh Indonesia"
+                : "National Project Footprint Across Indonesia"}
             </h2>
             <p className="text-xs sm:text-sm text-neutral-600 mt-2">
-              Jelajahi instalasi chiller, sistem pompa, dan pemulihan energi kami di berbagai kawasan industri nasional.
+              {language === "id"
+                ? "Jelajahi instalasi chiller, sistem pompa, dan pemulihan energi kami di berbagai kawasan industri nasional."
+                : "Explore our chiller installations, pump networks, and energy recovery systems across Indonesian industrial hubs."}
             </p>
           </div>
           <IndonesiaProjectMap />
@@ -103,10 +113,12 @@ export default function AboutPage() {
               </div>
               <div>
                 <h4 className="text-base font-bold text-[#1d1841] mb-1">
-                  Business fields
+                  {language === "id" ? "Bidang Bisnis" : "Business fields"}
                 </h4>
                 <p className="text-neutral-600 text-xs sm:text-sm leading-relaxed">
-                  PT Benua Green Energy specializes in CCHP (Combined cooling heating and power).
+                  {language === "id"
+                    ? "PT Benua Green Energy berspesialisasi dalam CCHP (Combined Cooling, Heating, and Power) dan sistem HVAC ramah lingkungan."
+                    : "PT Benua Green Energy specializes in CCHP (Combined cooling heating and power)."}
                 </p>
               </div>
             </div>
@@ -118,10 +130,12 @@ export default function AboutPage() {
               </div>
               <div>
                 <h4 className="text-base font-bold text-[#1d1841] mb-1">
-                  Year registered
+                  {language === "id" ? "Tahun Terdaftar" : "Year registered"}
                 </h4>
                 <p className="text-neutral-600 text-xs sm:text-sm leading-relaxed">
-                  PT Benua Green Energy has been registered in 2009.
+                  {language === "id"
+                    ? "PT Benua Green Energy telah resmi terdaftar dan beroperasi di Indonesia sejak tahun 2009."
+                    : "PT Benua Green Energy has been registered in 2009."}
                 </p>
               </div>
             </div>
@@ -133,10 +147,12 @@ export default function AboutPage() {
               </div>
               <div>
                 <h4 className="text-base font-bold text-[#1d1841] mb-1">
-                  Motto
+                  {language === "id" ? "Motto Perusahaan" : "Motto"}
                 </h4>
                 <p className="text-neutral-600 text-xs sm:text-sm leading-relaxed">
-                  55+ Minds, One Vision: Empowering Green Energy Solutions with Our Dedicated Team at Benua Green Energy.
+                  {language === "id"
+                    ? "55+ Pemikiran, Satu Visi: Memberdayakan Solusi Energi Hijau bersama Tim Berdedikasi di Benua Green Energy."
+                    : "55+ Minds, One Vision: Empowering Green Energy Solutions with Our Dedicated Team at Benua Green Energy."}
                 </p>
               </div>
             </div>
@@ -148,10 +164,12 @@ export default function AboutPage() {
               </div>
               <div>
                 <h4 className="text-base font-bold text-[#1d1841] mb-1">
-                  Our Products
+                  {language === "id" ? "Produk Kami" : "Our Products"}
                 </h4>
                 <p className="text-neutral-600 text-xs sm:text-sm leading-relaxed">
-                  Benua Green Energy&apos;s Absorption, Industrial, Centrifugal Chillers, Air Handling Units, and Cooling Towers for Your Cooling Needs.
+                  {language === "id"
+                    ? "Chiller Absorpsi, Chiller Industri & Sentrifugal, AHU, Cooling Tower, dan Sistem Pemipaan PPR untuk kebutuhan industri Anda."
+                    : "Benua Green Energy's Absorption, Industrial, Centrifugal Chillers, Air Handling Units, and Cooling Towers for Your Cooling Needs."}
                 </p>
               </div>
             </div>
@@ -183,10 +201,12 @@ export default function AboutPage() {
               <Eye className="w-8 h-8" />
             </div>
             <h3 className="text-xl font-bold text-[#1d1841] mb-4">
-              Our Vision
+              {language === "id" ? "Visi Kami" : "Our Vision"}
             </h3>
             <p className="text-neutral-600 text-xs sm:text-sm leading-relaxed">
-              PT. Benua Green Energy as a company that provides trade in machinery and equipment. Our company is advanced, modern and independent by developing its competencies based on customer satisfaction.
+              {language === "id"
+                ? "PT Benua Green Energy sebagai perusahaan penyedia mesin dan peralatan industri terkemuka. Perusahaan kami maju, modern, dan mandiri dengan terus mengembangkan kompetensi berdasarkan kepuasan pelanggan."
+                : "PT. Benua Green Energy as a company that provides trade in machinery and equipment. Our company is advanced, modern and independent by developing its competencies based on customer satisfaction."}
             </p>
           </div>
 
@@ -196,10 +216,12 @@ export default function AboutPage() {
               <Target className="w-8 h-8" />
             </div>
             <h3 className="text-xl font-bold text-[#1d1841] mb-4">
-              Our Mision
+              {language === "id" ? "Misi Kami" : "Our Mission"}
             </h3>
             <p className="text-neutral-600 text-xs sm:text-sm leading-relaxed">
-              Improve the company for employees and develop the strength and competitiveness of the company by improving organizational performance and human resources.
+              {language === "id"
+                ? "Meningkatkan kualitas perusahaan bagi karyawan serta mengembangkan daya saing perusahaan secara berkelanjutan melalui optimalisasi kinerja organisasi dan sumber daya manusia."
+                : "Improve the company for employees and develop the strength and competitiveness of the company by improving organizational performance and human resources."}
             </p>
           </div>
 
@@ -209,10 +231,12 @@ export default function AboutPage() {
               <Award className="w-8 h-8" />
             </div>
             <h3 className="text-xl font-bold text-[#1d1841] mb-4">
-              Our Value
+              {language === "id" ? "Nilai-Nilai Kami" : "Our Values"}
             </h3>
             <p className="text-neutral-600 text-xs sm:text-sm leading-relaxed">
-              Our values at PT. Benua Green Energy encompass excellence, innovation, integrity, and a strong customer-centric focus. We foster a culture of empowerment, diversity, environmental responsibility, and community engagement, underpinned by our commitment to independence.
+              {language === "id"
+                ? "Nilai-nilai kami di PT Benua Green Energy mencakup keunggulan, inovasi, integritas, dan fokus pada kepuasan pelanggan. Kami membina budaya pemberdayaan, keberagaman, tanggung jawab lingkungan, dan kepedulian sosial."
+                : "Our values at PT. Benua Green Energy encompass excellence, innovation, integrity, and a strong customer-centric focus. We foster a culture of empowerment, diversity, environmental responsibility, and community engagement, underpinned by our commitment to independence."}
             </p>
           </div>
 
@@ -224,14 +248,16 @@ export default function AboutPage() {
         <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-8 text-center sm:text-left">
           <div className="max-w-2xl">
             <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight leading-snug">
-              Let&apos;s practice environmental awareness to get our globe clean.
+              {language === "id"
+                ? "Mari wujudkan kepedulian lingkungan untuk bumi yang lebih bersih dan berkelanjutan."
+                : "Let's practice environmental awareness to get our globe clean."}
             </h2>
           </div>
           <Link
             href="/contact"
             className="shrink-0 bg-emerald-500 hover:bg-emerald-400 text-white font-bold px-8 py-3.5 rounded-full transition-all shadow-lg hover:shadow-emerald-500/25 text-sm inline-flex items-center gap-2"
           >
-            <span>Get Started</span>
+            <span>{language === "id" ? "Mulai Sekarang" : "Get Started"}</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
