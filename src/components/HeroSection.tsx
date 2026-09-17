@@ -10,14 +10,14 @@ interface HeroSectionProps {
 
 export function HeroSection({ onSelectCategory }: HeroSectionProps) {
   const categories = [
-    { name: "Chiller", active: true, slug: "chillers" },
-    { name: "Cooling Tower", slug: "cooling-air" },
-    { name: "Steam Accessories", slug: "heating-power" },
-    { name: "Solar Panel", slug: "solar-drives" },
-    { name: "High Efficiency Pump", slug: "pumps" },
-    { name: "PPR Pipe & Fittings", slug: "ppr" },
-    { name: "Solar Inverter Optimizer", slug: "inverter" },
-    { name: "Alkaline Water Ionizer", slug: "piping-valves" },
+    { name: "Chiller", slug: "chiller", href: "/products?category=chiller" },
+    { name: "Cooling Tower", slug: "cooling-tower", href: "/products?category=cooling-tower" },
+    { name: "Steam Accessories", slug: "steam-accessories", href: "/products?category=steam-accessories" },
+    { name: "Solar Panel", slug: "solar-panel", href: "/products?category=solar-panel" },
+    { name: "High Efficiency Pump", slug: "high-efficiency-pump", href: "/products?category=high-efficiency-pump" },
+    { name: "PPR Pipe & Fittings", slug: "ppr-pipe-fittings", href: "/products?category=ppr-pipe-fittings" },
+    { name: "Solar Inverter Optimizer", slug: "solar-inverter-optimizer", href: "/products?category=solar-inverter-optimizer" },
+    { name: "Alkaline Water Ionizer", slug: "alkaline-water-ionizer", href: "/products?category=alkaline-water-ionizer" },
   ];
 
   return (
@@ -37,19 +37,15 @@ export function HeroSection({ onSelectCategory }: HeroSectionProps) {
             </div>
 
             <div className="flex flex-col flex-1 divide-y divide-neutral-50 justify-between">
-              {categories.map((cat, idx) => (
+              {categories.map((cat) => (
                 <Link
                   key={cat.name}
-                  href="/#catalog"
+                  href={cat.href}
                   onClick={() => onSelectCategory && onSelectCategory(cat.slug)}
-                  className={`flex items-center justify-between px-5 flex-1 text-xs sm:text-[13px] font-medium transition-colors duration-150 ${
-                    idx === 0
-                      ? "text-[#281b66] font-bold bg-neutral-50/80"
-                      : "text-neutral-700 hover:text-[#281b66] hover:bg-neutral-50/60"
-                  }`}
+                  className="group flex items-center justify-between px-5 flex-1 text-xs sm:text-[13px] font-medium text-neutral-700 hover:text-[#281b66] hover:bg-neutral-50/80 transition-colors duration-150 py-2.5"
                 >
-                  <span>{cat.name}</span>
-                  {cat.active && <ChevronRight className="w-3.5 h-3.5 text-neutral-600" />}
+                  <span className="group-hover:translate-x-0.5 transition-transform">{cat.name}</span>
+                  <ChevronRight className="w-3.5 h-3.5 text-neutral-400 group-hover:text-[#281b66] group-hover:translate-x-0.5 transition-all" />
                 </Link>
               ))}
             </div>

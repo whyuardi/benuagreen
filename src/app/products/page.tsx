@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { ChevronRight, Search, SlidersHorizontal, ArrowRight, Check } from "lucide-react";
 
 interface ProductItem {
@@ -18,14 +19,18 @@ interface ProductItem {
 
 const CATEGORIES = [
   { name: "All Products", slug: "all" },
+  { name: "Chiller", slug: "chiller" },
+  { name: "Cooling Tower", slug: "cooling-tower" },
+  { name: "Steam Accessories", slug: "steam-accessories" },
+  { name: "Solar Panel", slug: "solar-panel" },
+  { name: "High Efficiency Pump", slug: "high-efficiency-pump" },
+  { name: "PPR Pipe & Fittings", slug: "ppr-pipe-fittings" },
+  { name: "Solar Inverter Optimizer", slug: "solar-inverter-optimizer" },
+  { name: "Alkaline Water Ionizer", slug: "alkaline-water-ionizer" },
   { name: "Mini Chiller YCAE", slug: "mini-chiller-ycae" },
   { name: "Mini Chiller YCWE", slug: "mini-chiller-ycwe" },
   { name: "Magnetic Centrifugal Chiller", slug: "magnetic-chiller" },
   { name: "Absorption Chiller", slug: "absorption-chiller" },
-  { name: "High Efficiency Pump", slug: "high-efficiency-pump" },
-  { name: "PPR Pipe & Fittings", slug: "ppr-pipe-fittings" },
-  { name: "Solar Panel & Drives", slug: "solar-panel" },
-  { name: "Cooling Tower", slug: "cooling-tower" },
 ];
 
 const ALL_PRODUCTS: ProductItem[] = [
@@ -201,12 +206,24 @@ const ALL_PRODUCTS: ProductItem[] = [
     description: "Sambungan fitting elektrofusi bertekanan tinggi untuk penyambungan pipa berdiameter besar dengan keandalan maksimal.",
   },
 
-  // Solar Panel & Drives
+  // Solar Panel
+  {
+    id: "solar-pv-modules",
+    name: "Tier-1 High Efficiency Monocrystalline Solar PV Modules",
+    category: "Solar Panel",
+    categorySlug: "solar-panel",
+    image: "/images/products/prod_1.png",
+    specs: ["Module Efficiency 22.5%+", "N-Type TOPCon Cells", "Anti-PID & Salt Mist Certified"],
+    capacity: "550W - 670W",
+    description: "Modul surya fotovoltaik monokristalin efisiensi tinggi bergaransi performa 25 tahun untuk aplikasi industri dan PLTS atap komersial.",
+  },
+
+  // Solar Inverter Optimizer
   {
     id: "solar-drive-vfd",
     name: "Solar VFD Inverter Pump Optimizer",
-    category: "Solar Panel & Drives",
-    categorySlug: "solar-panel",
+    category: "Solar Inverter Optimizer",
+    categorySlug: "solar-inverter-optimizer",
     image: "/images/products/prod_13.png",
     specs: ["MPPT Tracking 99.2%", "Battery-Free Direct Solar Drive", "Automatic Grid Switching"],
     capacity: "0.75 - 110 kW",
@@ -224,16 +241,93 @@ const ALL_PRODUCTS: ProductItem[] = [
     capacity: "50 - 1,000 TR",
     description: "Menara pendingin sirkuit tertutup untuk memastikan air kondenser chiller tetap bersih dari kotoran udara.",
   },
+  {
+    id: "cooling-tower-crossflow",
+    name: "Industrial Cross-Flow Evaporative Cooling Tower",
+    category: "Cooling Tower",
+    categorySlug: "cooling-tower",
+    image: "/images/products/prod_1.png",
+    specs: ["High Efficiency PVC Film Fill", "Low Drift Loss Design", "Axial Aero Fan"],
+    capacity: "100 - 1,500 TR",
+    description: "Menara pendingin cross-flow evaporatif dengan efisiensi pertukaran kalor optimal untuk fasilitas pabrik dan pendingin chiller.",
+  },
+
+  // Steam Accessories
+  {
+    id: "steam-trap-biomass",
+    name: "Thermodynamic & Float Steam Traps / Heat Exchangers",
+    category: "Steam Accessories",
+    categorySlug: "steam-accessories",
+    image: "/images/products/prod_3.png",
+    specs: ["Zero Live Steam Loss", "Stainless Steel SS316 Disc", "Rating PN16 - PN40"],
+    capacity: "Max Temp 350°C",
+    description: "Steam trap presisi dan penukar panas uap untuk boiler biomassa, steam drum, dan siklus chiller absorpsi hemat energi.",
+  },
+
+  // Alkaline Water Ionizer
+  {
+    id: "alkaline-water-ionizer",
+    name: "Industrial Alkaline Water Ionizer & Electrolysis System",
+    category: "Alkaline Water Ionizer",
+    categorySlug: "alkaline-water-ionizer",
+    image: "/images/products/prod_7.png",
+    specs: ["Platinum Titanium Electrodes", "Continuous Flow Electrolysis", "High ORP Reduction"],
+    capacity: "Flow 500 - 5,000 L/h",
+    description: "Sistem elektrolisis air ionisasi alkali industri untuk netralisasi keasaman, sanitasi ramah lingkungan, dan efisiensi pengolahan air proses.",
+  },
 ];
 
-export default function ProductsPage() {
-  const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const [searchQuery, setSearchQuery] = useState<string>("");
+function ProductsContent() {
+  const searchParams = useSearchParams();
+  const categoryParam = searchParams.get("category");
+  const searchParam = searchParams.get("search");
+  const productParam = searchParams.get("product");
+
+  const [selectedCategory, setSelectedCategory] = useState<string>(categoryParam || "all");
+  const [searchQuery, setSearchQuery] = useState<string>(searchParam || "");
   const [activeModalProduct, setActiveModalProduct] = useState<ProductItem | null>(null);
+
+  useEffect(() => {
+    if (categoryParam) {
+      setSelectedCategory(categoryParam);
+    }
+  }, [categoryParam]);
+
+  useEffect(() => {
+    if (searchParam) {
+      setSearchQuery(searchParam);
+    }
+  }, [searchParam]);
+
+  useEffect(() => {
+    if (productParam) {
+      const found = ALL_PRODUCTS.find((p) => p.id === productParam);
+      if (found) {
+        setActiveModalProduct(found);
+      }
+    }
+  }, [productParam]);
 
   const filteredProducts = useMemo(() => {
     return ALL_PRODUCTS.filter((item) => {
-      const matchCategory = selectedCategory === "all" || item.categorySlug === selectedCategory;
+      let matchCategory = selectedCategory === "all";
+      if (!matchCategory) {
+        if (selectedCategory === "chiller" || selectedCategory === "chillers") {
+          matchCategory = item.categorySlug.includes("chiller");
+        } else if (selectedCategory === "pumps") {
+          matchCategory = item.categorySlug === "high-efficiency-pump";
+        } else if (selectedCategory === "ppr") {
+          matchCategory = item.categorySlug === "ppr-pipe-fittings";
+        } else if (selectedCategory === "cooling-air") {
+          matchCategory = item.categorySlug === "cooling-tower";
+        } else if (selectedCategory === "heating-power") {
+          matchCategory = item.categorySlug === "steam-accessories";
+        } else if (selectedCategory === "solar-drives") {
+          matchCategory = item.categorySlug === "solar-panel" || item.categorySlug === "solar-inverter-optimizer";
+        } else {
+          matchCategory = item.categorySlug === selectedCategory;
+        }
+      }
       const matchSearch =
         searchQuery === "" ||
         item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -241,6 +335,17 @@ export default function ProductsPage() {
       return matchCategory && matchSearch;
     });
   }, [selectedCategory, searchQuery]);
+
+  const getCategoryCount = (slug: string) => {
+    if (slug === "all") return ALL_PRODUCTS.length;
+    if (slug === "chiller" || slug === "chillers") {
+      return ALL_PRODUCTS.filter((p) => p.categorySlug.includes("chiller")).length;
+    }
+    if (slug === "solar-panel" || slug === "solar-drives") {
+      return ALL_PRODUCTS.filter((p) => p.categorySlug === "solar-panel" || p.categorySlug === "solar-inverter-optimizer").length;
+    }
+    return ALL_PRODUCTS.filter((p) => p.categorySlug === slug).length;
+  };
 
   return (
     <main className="flex-grow bg-[#fcfdfc] text-neutral-800 font-sans pb-24">
@@ -309,9 +414,7 @@ export default function ProductsPage() {
                         <span className={`text-[10px] px-2 py-0.5 rounded-full ${
                           isActive ? "bg-white/20 text-white" : "bg-neutral-100 text-neutral-500"
                         }`}>
-                          {cat.slug === "all"
-                            ? ALL_PRODUCTS.length
-                            : ALL_PRODUCTS.filter((p) => p.categorySlug === cat.slug).length}
+                          {getCategoryCount(cat.slug)}
                         </span>
                       </button>
                     </li>
@@ -507,5 +610,19 @@ export default function ProductsPage() {
         </div>
       )}
     </main>
+  );
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen pt-28 text-center text-neutral-500 font-medium">
+          Memuat katalog produk...
+        </div>
+      }
+    >
+      <ProductsContent />
+    </Suspense>
   );
 }

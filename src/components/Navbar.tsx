@@ -30,14 +30,14 @@ export function Navbar() {
   }, []);
 
   const productCategories = [
-    { name: "Chiller", href: "/products" },
-    { name: "Cooling Tower", href: "/products" },
-    { name: "Steam Accessories", href: "/products" },
-    { name: "Solar Panel", href: "/products" },
-    { name: "High Efficiency Pump", href: "/products" },
-    { name: "PPR Pipe & Fittings", href: "/products" },
-    { name: "Solar Inverter Optimizer", href: "/products" },
-    { name: "Alkaline Water Ionizer", href: "/products" },
+    { name: "Chiller", href: "/products?category=chiller" },
+    { name: "Cooling Tower", href: "/products?category=cooling-tower" },
+    { name: "Steam Accessories", href: "/products?category=steam-accessories" },
+    { name: "Solar Panel", href: "/products?category=solar-panel" },
+    { name: "High Efficiency Pump", href: "/products?category=high-efficiency-pump" },
+    { name: "PPR Pipe & Fittings", href: "/products?category=ppr-pipe-fittings" },
+    { name: "Solar Inverter Optimizer", href: "/products?category=solar-inverter-optimizer" },
+    { name: "Alkaline Water Ionizer", href: "/products?category=alkaline-water-ionizer" },
   ];
 
   return (

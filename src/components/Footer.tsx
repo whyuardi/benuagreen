@@ -6,14 +6,14 @@ import { Mail, Phone, Clock, MapPin, MessageCircle } from "lucide-react";
 
 export function Footer() {
   const productLinks = [
-    "Chiller",
-    "Cooling Tower",
-    "Steam Accessories",
-    "Solar Panel",
-    "High Efficiency Pump",
-    "PPR Pipe & Fittings",
-    "Solar Inverter Optimizer",
-    "Alkaline Water Ionizer",
+    { name: "Chiller", href: "/products?category=chiller" },
+    { name: "Cooling Tower", href: "/products?category=cooling-tower" },
+    { name: "Steam Accessories", href: "/products?category=steam-accessories" },
+    { name: "Solar Panel", href: "/products?category=solar-panel" },
+    { name: "High Efficiency Pump", href: "/products?category=high-efficiency-pump" },
+    { name: "PPR Pipe & Fittings", href: "/products?category=ppr-pipe-fittings" },
+    { name: "Solar Inverter Optimizer", href: "/products?category=solar-inverter-optimizer" },
+    { name: "Alkaline Water Ionizer", href: "/products?category=alkaline-water-ionizer" },
   ];
 
   const serviceLinks = [
@@ -57,13 +57,13 @@ export function Footer() {
               Product
             </h3>
             <ul className="space-y-2 text-xs">
-              {productLinks.map((name) => (
-                <li key={name}>
+              {productLinks.map((item) => (
+                <li key={item.name}>
                   <Link
-                    href="/products"
+                    href={item.href}
                     className="text-neutral-600 hover:text-[#281b66] transition-colors"
                   >
-                    {name}
+                    {item.name}
                   </Link>
                 </li>
               ))}
